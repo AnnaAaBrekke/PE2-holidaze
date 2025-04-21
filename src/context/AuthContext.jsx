@@ -6,7 +6,7 @@
 
 // ---> after filling in the form this will happen:
 
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { API_BASE_URL, API_HEADERS } from "../../constants";
 
 const REGISTER_URL = `${API_BASE_URL}/auth/register`;
@@ -48,9 +48,11 @@ export const AuthProvider = ({ children }) => {
     setError(null);
 
     try {
+      console.log("FormData sent to API:", formData);
+
       const response = await fetch(REGISTER_URL, {
         method: "POST",
-        headers: { ...API_HEADERS },
+        headers: API_HEADERS,
         body: JSON.stringify(formData),
       });
 
@@ -74,7 +76,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(LOGIN_URL, {
         method: "POST",
-        headers: { ...API_HEADERS },
+        headers: API_HEADERS,
         body: JSON.stringify({ email, password }),
       });
 
@@ -121,4 +123,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export default AuthContext;
+export const useAuth = () => useContext(AuthContext);
