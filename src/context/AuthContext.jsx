@@ -96,6 +96,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    const confirmLogout = window.confirm("Are you sure you want to log out?"); // Custom modal later
+    if (!confirmLogout) return;
+
     localStorage.removeItem("user");
     localStorage.removeItem("accessToken");
     setUser(null);
