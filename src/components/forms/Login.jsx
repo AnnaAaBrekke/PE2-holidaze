@@ -24,9 +24,9 @@ const LoginForm = () => {
     const result = await login(formData);
     if (result) {
       alert(
-        `Logged in successfully as a ${formData.venueManager ? "Venue Manager" : "Customer"}!`,
+        `Logged in successfully as a ${result.data.venueManager ? "Venue Manager" : "Customer"}!`,
       );
-      if (result.data?.venueManager === true) {
+      if (result.data?.venueManager) {
         navigate("/manager");
       } else {
         navigate("/");
