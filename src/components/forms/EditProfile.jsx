@@ -11,6 +11,7 @@ const EditProfileForm = ({ onClose }) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -19,6 +20,8 @@ const EditProfileForm = ({ onClose }) => {
       bio: user?.bio || "",
     },
   });
+
+  const newAvatarImg = watch("url");
 
   const onSubmitForm = async (formData) => {
     setLoading(true);
@@ -46,6 +49,28 @@ const EditProfileForm = ({ onClose }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmitForm)}>
+      {/* Avatar Preview*/}
+
+      <div className="flex gap-4 mt-4 items-center">
+        <div>
+          <p className="text-sm">Current Avatar</p>
+          <img
+            src={user?.avatar?.url || "https://placehold.co/150"}
+            alt="Current avatar"
+            className="h-24 w-24 rounded-full border"
+          />
+        </div>
+
+        <div>
+          <p className="text-sm">New Avatar Preview</p>
+          <img
+            src={newAvatarImg || "https://placehold.co/150?text=Preview"}
+            alt="New avatar preview"
+            className="h-24 w-24 rounded-full border"
+          />
+        </div>
+      </div>
+
       <div>
         <label>Avatar URL</label>
         <input {...register("url", { required: "URL is required" })} />
@@ -53,8 +78,9 @@ const EditProfileForm = ({ onClose }) => {
       </div>
 
       <div>
-        <label>Alt Text</label>
-        <input {...register("alt")} />
+        <label>Avatar Alt</label>
+        <input {...register("alt", { required: "Alt is required" })} />
+        {errors.alt && <p>{errors.alt.message}</p>}
       </div>
 
       <div>
