@@ -9,7 +9,7 @@ const useVenue = (id) => {
   useEffect(() => {
     const fetchVenue = async () => {
       try {
-        const result = await apiFetch(`/venues/${id}`);
+        const result = await apiFetch(`/venues/${id}?_bookings=true`);
         setVenue(result.data);
       } catch (error) {
         setError(error.message);

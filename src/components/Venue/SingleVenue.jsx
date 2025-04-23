@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useVenue from "../../hooks/useVenue";
 import { FaDollarSign, FaParking, FaPaw, FaStar } from "react-icons/fa";
 import { MdFreeBreakfast, MdLocationPin, MdWifi } from "react-icons/md";
+import VenueCalendar from "./VenueCalender";
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -97,6 +98,10 @@ const SingleVenue = () => {
         <button className="w-full bg-[#0F6474] text-white font-podkova text-lg font-semibold py-3 rounded-lg hover:bg-[#0c4e5a] transition">
           Create Booking
         </button>
+      </div>
+
+      <div className="mt-5">
+        <VenueCalendar bookings={venue.bookings} />
       </div>
     </div>
   );
