@@ -1,5 +1,17 @@
 import { Link } from "react-router-dom";
 import useVenues from "../../hooks/useVenues";
+import {
+  MdFreeBreakfast,
+  MdGroup,
+  MdLocationOn,
+  MdLocationPin,
+  MdMap,
+  MdWifi,
+} from "react-icons/md";
+import { FaDollarSign, FaParking, FaPaw } from "react-icons/fa";
+import { GiPriceTag } from "react-icons/gi";
+import { BiDollar } from "react-icons/bi";
+import { PiNeedle } from "react-icons/pi";
 
 const VenueList = () => {
   const { venues, loading, error } = useVenues();
@@ -9,11 +21,11 @@ const VenueList = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-10">Top-Rated Venues</h2>
+      <h2 className="text-3xl font-bold text-center mb-10">Venues</h2>
 
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {[...venues]
-          .sort((a, b) => b.rating - a.rating)
+          .sort((a, b) => b.created - a.created)
           .map((venue) => (
             <div
               key={venue.id}
@@ -28,7 +40,8 @@ const VenueList = () => {
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#08323B99] to-transparent px-4 py-3 text-white">
                   <p className="text-lg font-podkova">
-                    📍 {venue.location.city}, {venue.location.country}
+                    <MdLocationPin /> {venue.location.city},{" "}
+                    {venue.location.country}
                   </p>
                 </div>
               </div>
@@ -52,27 +65,33 @@ const VenueList = () => {
                 </div>
 
                 {/* Info */}
-                <p className="text-sm mb-3">👥 Max Guests: {venue.maxGuests}</p>
+                <p className="text-sm mb-3">
+                  <MdGroup /> Max Guests: {venue.maxGuests}
+                </p>
 
                 {/* Tags */}
                 <div className="flex gap-2 flex-wrap mb-4">
                   {venue.meta?.wifi && (
                     <span className="bg-blue-100/40 text-sm px-3 py-1 rounded-lg">
+                      <MdWifi />
                       Free Wifi
                     </span>
                   )}
                   {venue.meta?.breakfast && (
                     <span className="bg-blue-100/40 text-sm px-3 py-1 rounded-lg">
+                      <MdFreeBreakfast />
                       Free Breakfast
                     </span>
                   )}
                   {venue.meta?.parking && (
                     <span className="bg-blue-100/40 text-sm px-3 py-1 rounded-lg">
+                      <FaParking />
                       Parking
                     </span>
                   )}
                   {venue.meta?.pets && (
                     <span className="bg-blue-100/40 text-sm px-3 py-1 rounded-lg">
+                      <FaPaw />
                       Pets allowed
                     </span>
                   )}
@@ -80,7 +99,7 @@ const VenueList = () => {
 
                 {/* Price */}
                 <div className="bg-[#E0F9F6] text-black px-4 py-2 rounded-md w-fit text-sm font-medium mb-3">
-                  💰 Price: ${venue.price}
+                  <FaDollarSign /> Price: ${venue.price}
                 </div>
               </div>
             </div>
