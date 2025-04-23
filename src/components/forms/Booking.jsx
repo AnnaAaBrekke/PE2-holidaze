@@ -1,0 +1,1 @@
+const BookingForm = ({ onClose }) => {};
