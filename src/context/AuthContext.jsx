@@ -7,7 +7,8 @@
 // ---> after filling in the form this will happen:
 
 import { createContext, useContext, useState } from "react";
-import { API_BASE_URL, API_HEADERS } from "../../constants";
+import { API_BASE_URL } from "../../constants";
+import apiFetch from "../utils/apiFetch";
 
 const REGISTER_URL = `${API_BASE_URL}/auth/register`;
 const LOGIN_URL = `${API_BASE_URL}/auth/login?_holidaze=true`;
@@ -48,18 +49,11 @@ export const AuthProvider = ({ children }) => {
     setError(null);
 
     try {
-      console.log("FormData sent to API:", formData);
-
-      const response = await fetch(REGISTER_URL, {
+      const result = await apiFetch("/auth/register", {
         method: "POST",
-        headers: API_HEADERS,
-        body: JSON.stringify(formData),
+        body: formData,
+        baseUrl: API_BASE_URL,
       });
-
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error("Registered Failed");
-      }
 
       return result;
     } catch (error) {
@@ -74,16 +68,11 @@ export const AuthProvider = ({ children }) => {
     setError(null);
 
     try {
-      const response = await fetch(LOGIN_URL, {
+      const result = await apiFetch("/auth/login?_holidaze=true", {
         method: "POST",
-        headers: API_HEADERS,
-        body: JSON.stringify({ email, password }),
+        body: { email, password },
+        baseUrl: API_BASE_URL,
       });
-
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
 
       const accessToken = result.data.accessToken;
       saveAuth(result.data, accessToken);
