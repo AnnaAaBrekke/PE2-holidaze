@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import apiFetch from "../utils/apiFetch";
 
-const useVenues = () => {
-  const [venues, setVenues] = useState([]);
+const useVenue = (id) => {
+  const [venue, setVenue] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const loadVenues = async () => {
+    const fetchVenue = async () => {
       try {
-        const result = await apiFetch("/venues");
-        setVenues(result.data);
+        const result = await apiFetch(`/venues/${id}`);
+        setVenue(result.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -18,10 +18,10 @@ const useVenues = () => {
       }
     };
 
-    loadVenues();
-  }, []);
+    fetchVenue();
+  }, [id]);
 
-  return { venues, loading, error };
+  return { venue, loading, error };
 };
 
-export default useVenues;
+export default useVenue;

@@ -3,17 +3,12 @@ import useVenues from "../../hooks/useVenues";
 import {
   MdFreeBreakfast,
   MdGroup,
-  MdLocationOn,
   MdLocationPin,
-  MdMap,
   MdWifi,
 } from "react-icons/md";
 import { FaDollarSign, FaParking, FaPaw } from "react-icons/fa";
-import { GiPriceTag } from "react-icons/gi";
-import { BiDollar } from "react-icons/bi";
-import { PiNeedle } from "react-icons/pi";
 
-const VenueList = () => {
+const VenueCard = () => {
   const { venues, loading, error } = useVenues();
 
   if (loading) return <p className="text-center mt-8">Loading venues...</p>;
@@ -109,4 +104,4 @@ const VenueList = () => {
   );
 };
 
-export default VenueList;
+export default VenueCard;
