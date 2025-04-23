@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_HEADERS } from "../../constants";
+import { API_URL, API_HEADERS } from "../../constants"; // Assuming API_URL is the default
 
 const apiFetch = async (
   endpoint,
@@ -8,6 +8,7 @@ const apiFetch = async (
     token,
     customHeaders = {},
     skipDefaultHeaders = false,
+    baseUrl = API_URL,
   } = {},
 ) => {
   const headers = {
@@ -23,7 +24,7 @@ const apiFetch = async (
   };
 
   try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+    const response = await fetch(`${baseUrl}${endpoint}`, options);
     const result = await response.json();
 
     if (!response.ok) {
@@ -32,7 +33,7 @@ const apiFetch = async (
 
     return result;
   } catch (error) {
-    console.error(`[apiFetch][${method} ${endpoint}]`, err.message);
+    console.error(`[apiFetch][${method} ${endpoint}]`, error.message);
     throw error;
   }
 };

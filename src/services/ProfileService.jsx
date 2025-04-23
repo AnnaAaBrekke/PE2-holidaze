@@ -4,7 +4,7 @@ const updateProfile = async (formData) => {
   const { name, url, alt, bio, token } = formData;
 
   try {
-    return await apiFetch(`/holidaze/profiles/${name}`, {
+    return await apiFetch(`/profiles/${name}`, {
       method: "PUT",
       token,
       body: {

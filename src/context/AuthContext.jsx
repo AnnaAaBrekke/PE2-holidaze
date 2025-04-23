@@ -7,7 +7,7 @@
 // ---> after filling in the form this will happen:
 
 import { createContext, useContext, useState } from "react";
-import { API_BASE_URL, API_HEADERS } from "../../constants";
+import { API_BASE_URL } from "../../constants";
 import apiFetch from "../utils/apiFetch";
 
 const REGISTER_URL = `${API_BASE_URL}/auth/register`;
@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
       const result = await apiFetch("/auth/register", {
         method: "POST",
         body: formData,
+        baseUrl: API_BASE_URL,
       });
 
       return result;
@@ -70,6 +71,7 @@ export const AuthProvider = ({ children }) => {
       const result = await apiFetch("/auth/login?_holidaze=true", {
         method: "POST",
         body: { email, password },
+        baseUrl: API_BASE_URL,
       });
 
       const accessToken = result.data.accessToken;
