@@ -26,6 +26,12 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         mediaAlt: venue.media?.[0]?.alt || "",
         city: venue.location?.city || "",
         country: venue.location?.country || "",
+        meta: {
+          wifi: venue.meta?.wifi || false,
+          parking: venue.meta?.parking || false,
+          breakfast: venue.meta?.breakfast || false,
+          pets: venue.meta?.pets || false,
+        },
       });
     }
   }, [mode, venue, reset]);
@@ -48,6 +54,12 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
       location: {
         city: formData.city,
         country: formData.country,
+      },
+      meta: {
+        wifi: formData.meta?.wifi || false,
+        parking: formData.meta?.parking || false,
+        breakfast: formData.meta?.breakfast || false,
+        pets: formData.meta?.pets || false,
       },
     };
 
@@ -158,6 +170,59 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             {...register("country", { required: "Country is required" })}
           />
         </div>
+
+        <div className="mb-4">
+          <label className="form-label d-block">Amenities</label>
+
+          <div className="form-check">
+            <input
+              type="checkbox"
+              id="wifi"
+              className="form-check-input"
+              {...register("meta.wifi")}
+            />
+            <label className="form-check-label" htmlFor="wifi">
+              Free Wifi
+            </label>
+          </div>
+
+          <div className="form-check">
+            <input
+              type="checkbox"
+              id="parking"
+              className="form-check-input"
+              {...register("meta.parking")}
+            />
+            <label className="form-check-label" htmlFor="parking">
+              Parking
+            </label>
+          </div>
+
+          <div className="form-check">
+            <input
+              type="checkbox"
+              id="breakfast"
+              className="form-check-input"
+              {...register("meta.breakfast")}
+            />
+            <label className="form-check-label" htmlFor="breakfast">
+              Free Breakfast
+            </label>
+          </div>
+
+          <div className="form-check">
+            <input
+              type="checkbox"
+              id="pets"
+              className="form-check-input"
+              {...register("meta.pets")}
+            />
+            <label className="form-check-label" htmlFor="pets">
+              Pets Allowed
+            </label>
+          </div>
+        </div>
+
         {/* Submit */}
         <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading

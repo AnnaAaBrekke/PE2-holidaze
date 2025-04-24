@@ -101,7 +101,7 @@ const SingleVenue = () => {
       <div className="flex items-center gap-2 bg-[#E0F9F6] px-4 py-2 rounded-md w-fit mb-6">
         <FaDollarSign />
         <span className="text-sm font-podkova text-[#101010]">
-          Price p/night: ${venue.price}
+          Price p/night: {venue.price}
         </span>
       </div>
 

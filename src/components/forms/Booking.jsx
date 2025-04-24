@@ -14,7 +14,7 @@ const BookingForm = ({
   onClose,
   onBookingCreated,
 }) => {
-  const { token, user, isManager } = useAuth();
+  const { token, user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -52,7 +52,7 @@ const BookingForm = ({
         venueId,
       });
 
-      onBookingCreated?.(); // 🧼 Simply trigger refetch in parent
+      onBookingCreated?.(); 
       onClose?.();
       alert("Booking Created. A booking confirmation is sent to your email.");
       reset();
@@ -79,9 +79,9 @@ const BookingForm = ({
             Register
           </Link>
         </div>
-      ) : isManager && user.name === ownerName ? (
+      ) : user.name === ownerName ? (
         <div className="alert alert-warning text-center mt-3">
-          <MdWarningAmber /> Venue managers cannot book their own venues.
+          <MdWarningAmber /> You cannot book your own venue.
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
