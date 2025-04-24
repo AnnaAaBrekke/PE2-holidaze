@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { useMemo, useState } from "react";
-import createBooking from "../../services/BookingService";
 import getBookedDates from "../../utils/getBookedDates";
 import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
+import { createBooking } from "../../services/BookingService";
 
 const BookingForm = ({
   venueId,

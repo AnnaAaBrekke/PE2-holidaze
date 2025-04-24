@@ -1,6 +1,12 @@
 import apiFetch from "../utils/apiFetch";
 
-const createBooking = async ({ dateFrom, dateTo, guests, venueId, token }) => {
+export const createBooking = async ({
+  dateFrom,
+  dateTo,
+  guests,
+  venueId,
+  token,
+}) => {
   try {
     console.log("Sending booking data:", { dateFrom, dateTo, guests, venueId });
 
@@ -20,4 +26,14 @@ const createBooking = async ({ dateFrom, dateTo, guests, venueId, token }) => {
   }
 };
 
-export default createBooking;
+export const getUserBookings = async (name, token) => {
+  try {
+    return await apiFetch(`/profiles/${name}/bookings?_venue=true`, {
+      method: "GET",
+      token,
+    });
+  } catch (error) {
+    console.error("Error fetching user bookings:", error.message);
+    throw error;
+  }
+};
