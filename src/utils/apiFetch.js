@@ -20,11 +20,16 @@ const apiFetch = async (
   const options = {
     method,
     headers,
-    ...(body && { body: JSON.stringify(body) }),
+    ...(body &&
+      method !== "GET" &&
+      method !== "DELETE" && { body: JSON.stringify(body) }),
   };
 
   try {
     const response = await fetch(`${baseUrl}${endpoint}`, options);
+
+    if (response.status === 204) return true;
+
     const result = await response.json();
 
     if (!response.ok) {
