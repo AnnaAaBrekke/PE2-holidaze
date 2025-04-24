@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { MdLocationPin } from "react-icons/md";
+import { MdDateRange, MdLocationPin } from "react-icons/md";
 import { useAuth } from "../context/AuthContext";
 import { getUserBookings } from "../services/BookingService";
 import { GiConfirmed } from "react-icons/gi";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { FaUsers } from "react-icons/fa";
 
 const UserBookings = () => {
   const { user, token } = useAuth();
@@ -90,13 +91,15 @@ const UserBookings = () => {
 
                 {/* Booking Dates */}
                 <div className="absolute top-[480px] left-[18px] bg-[#E0F9F6] px-3 py-2 rounded-[8px] text-sm flex items-center gap-2 font-podkova">
-                  🗓 {new Date(booking.dateFrom).toLocaleDateString()} →{" "}
+                  <MdDateRange className="text-black" />
+                  {new Date(booking.dateFrom).toLocaleDateString()} →{" "}
                   {new Date(booking.dateTo).toLocaleDateString()}
                 </div>
 
                 {/* Guest Count */}
-                <div className="absolute top-[482px] left-[186px] bg-blue-100/40 px-3 py-1 rounded-[8px] text-sm flex items-center gap-4 font-podkova">
-                  👥 {booking.guests}
+                <div className="absolute top-[482px] left-[186px] bg-blue-100/40 px-3 py-1 rounded-[8px] text-sm flex items-center gap-2 font-podkova">
+                  <FaUsers className="text-black" />
+                  {booking.guests}
                 </div>
 
                 {/* Confirmed label */}

@@ -5,6 +5,7 @@ import getBookedDates from "../../utils/getBookedDates";
 import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
 import { createBooking } from "../../services/BookingService";
+import { MdWarningAmber } from "react-icons/md";
 
 const BookingForm = ({
   venueId,
@@ -80,7 +81,7 @@ const BookingForm = ({
         </div>
       ) : isManager && user.name === ownerName ? (
         <div className="alert alert-warning text-center mt-3">
-          ⚠️ Venue managers cannot book their own venues.
+          <MdWarningAmber /> Venue managers cannot book their own venues.
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
