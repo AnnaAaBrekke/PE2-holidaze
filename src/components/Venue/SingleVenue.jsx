@@ -2,10 +2,23 @@ import { useParams } from "react-router-dom";
 import useVenue from "../../hooks/useVenue";
 import { FaDollarSign, FaParking, FaPaw, FaStar } from "react-icons/fa";
 import { MdFreeBreakfast, MdLocationPin, MdWifi } from "react-icons/md";
+import VenueCalendar from "./VenueCalender";
+import { useEffect, useRef, useState } from "react";
+import BookingForm from "../forms/Booking";
 
 const SingleVenue = () => {
   const { id } = useParams();
-  const { venue, loading, error } = useVenue(id);
+  const { venue, loading, error, refetch } = useVenue(id);
+  const [showForm, setShowForm] = useState(false);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    if (showForm && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [showForm]);
+
+  const handleOpenBookingForm = () => setShowForm((prev) => !prev);
 
   if (loading) return <p className="text-center">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -94,10 +107,33 @@ const SingleVenue = () => {
 
       {/* Create Booking */}
       <div className="w-full text-center">
-        <button className="w-full bg-[#0F6474] text-white font-podkova text-lg font-semibold py-3 rounded-lg hover:bg-[#0c4e5a] transition">
-          Create Booking
+        <button
+          onClick={handleOpenBookingForm}
+          className="w-full bg-[#0F6474] text-white font-podkova text-lg font-semibold py-3 rounded-lg hover:bg-[#0c4e5a] transition"
+        >
+          {showForm ? "Close" : "Create Booking"}
         </button>
+
+        {showForm && (
+          <div
+            ref={formRef}
+            className="transition-all duration-500 ease-in-out animate-fade-in"
+          >
+            <BookingForm
+              venueId={venue.id}
+              bookings={venue.bookings}
+              ownerName={venue.owner?.name}
+              onBookingCreated={refetch}
+              onClose={() => setShowForm(false)}
+            />
+          </div>
+        )}
       </div>
+      {!showForm && (
+        <div className="mt-5">
+          <VenueCalendar bookings={venue.bookings} />
+        </div>
+      )}
     </div>
   );
 };

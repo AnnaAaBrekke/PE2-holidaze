@@ -1,4 +1,4 @@
-import { API_URL, API_HEADERS } from "../../constants"; // Assuming API_URL is the default
+import { API_URL, API_HEADERS } from "../../constants";
 
 const apiFetch = async (
   endpoint,
