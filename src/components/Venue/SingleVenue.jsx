@@ -8,7 +8,7 @@ import BookingForm from "../forms/Booking";
 
 const SingleVenue = () => {
   const { id } = useParams();
-  const { venue, loading, error } = useVenue(id);
+  const { venue, loading, error, refetch } = useVenue(id);
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
 
@@ -122,6 +122,8 @@ const SingleVenue = () => {
             <BookingForm
               venueId={venue.id}
               bookings={venue.bookings}
+              ownerName={venue.owner?.name}
+              onBookingCreated={refetch}
               onClose={() => setShowForm(false)}
             />
           </div>

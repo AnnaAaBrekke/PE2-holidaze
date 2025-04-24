@@ -6,12 +6,18 @@ import getBookedDates from "../../utils/getBookedDates";
 import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
 
-const BookingForm = ({ venueId, bookings = [], ownerName, onClose }) => {
+const BookingForm = ({
+  venueId,
+  bookings = [],
+  ownerName,
+  onClose,
+  onBookingCreated,
+}) => {
   const { token, user, isManager } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [newBooking, setNewBooking] = useState(bookings);
-  const bookedDates = useMemo(() => getBookedDates(newBooking), [newBooking]);
+
+  const bookedDates = useMemo(() => getBookedDates(bookings), [bookings]);
 
   const {
     register,
@@ -45,13 +51,7 @@ const BookingForm = ({ venueId, bookings = [], ownerName, onClose }) => {
         venueId,
       });
 
-      setNewBooking((prev) => [
-        ...prev,
-        {
-          dateFrom: dateFrom.toISOString(),
-          dateTo: dateTo.toISOString(),
-        },
-      ]);
+      onBookingCreated?.(); // 🧼 Simply trigger refetch in parent
       onClose?.();
       alert("Booking Created. A booking confirmation is sent to your email.");
       reset();
@@ -105,7 +105,7 @@ const BookingForm = ({ venueId, bookings = [], ownerName, onClose }) => {
             />
             {errors.email && <p>{errors.email.message}</p>}
 
-            <div>
+            <div className="mt-4">
               <label>Select Date Range</label>
               <Calendar
                 selectRange
@@ -121,22 +121,30 @@ const BookingForm = ({ venueId, bookings = [], ownerName, onClose }) => {
                 }
               />
               {(!dateFrom || !dateTo) && (
-                <p>Please pick a start and end date</p>
+                <p className="text-sm text-red-500">
+                  Please pick a start and end date
+                </p>
               )}
             </div>
 
-            <label>Guests</label>
+            <label className="mt-4">Guests</label>
             <input
               type="number"
               {...register("guests", { required: true, min: 1 })}
             />
-            {errors.guests && <p>Guest is required</p>}
+            {errors.guests && (
+              <p className="text-sm text-red-500">Guest is required</p>
+            )}
           </div>
 
-          {error && <p>{error}</p>}
+          {error && <p className="text-sm text-red-600">{error}</p>}
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Booking.." : "Book now"}
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn btn-primary w-full mt-4"
+          >
+            {loading ? "Booking..." : "Book Now"}
           </button>
         </form>
       )}
