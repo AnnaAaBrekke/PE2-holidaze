@@ -14,6 +14,14 @@ const ManagerDashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
 
+  if (!user?.venueManager) {
+    return (
+      <div className="alert alert-danger mt-4 text-center">
+        Only venue managers can access the Manager Dashboard.
+      </div>
+    );
+  }
+
   // Load venues on mount
   useEffect(() => {
     const fetchVenues = async () => {

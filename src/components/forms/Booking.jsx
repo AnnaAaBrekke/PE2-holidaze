@@ -52,9 +52,11 @@ const BookingForm = ({
         venueId,
       });
 
-      onBookingCreated?.(); 
+      onBookingCreated?.();
       onClose?.();
-      alert("Booking Created. A booking confirmation is sent to your email.");
+      alert(
+        "Booking Created. A booking confirmation is sent to your email. And check it out under `My bookings`",
+      );
       reset();
     } catch (error) {
       setError(error.message);
