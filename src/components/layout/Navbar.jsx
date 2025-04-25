@@ -1,55 +1,53 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
+import {
+  FaArrowLeft,
+  FaHome,
+  FaInfoCircle,
+  FaUser,
+  FaSignOutAlt,
+  FaRegUser,
+} from "react-icons/fa";
+import { GoSidebarCollapse } from "react-icons/go";
+import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
 
 const Navbar = () => {
-  const { user, isAuthenticated } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { user, logout, isAuthenticated } = useAuth();
 
   return (
-    <nav className="bg-white border-b shadow-sm px-6 py-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <nav className="bg-white border-b shadow-sm px-6 py-4 relative">
+      <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         {/* Left Nav */}
-        <div className="flex gap-4">
-          <Link to="/" className="text-gray-700 hover:text-black font-medium">
-            Home
-          </Link>
-          <Link
-            to="/profile"
-            className="text-gray-700 hover:text-black font-medium"
-          >
-            Profile
-          </Link>
-          <Link
-            to="/bookings"
-            className="text-gray-700 hover:text-black font-medium"
-          >
-            My Bookings
-          </Link>
-          <Link
-            to="/manager"
-            className="text-gray-700 hover:text-black font-medium"
-          >
-            Manager
-          </Link>
-          <Link
-            to="/about"
-            className="text-gray-700 hover:text-black font-medium"
-          >
-            About
-          </Link>
+        <div className="flex items-center gap-4">
+          <button onClick={() => setSidebarOpen(true)}>
+            <GoSidebarCollapse className="size-6 hover:size-8" />
+          </button>
+        </div>
+
+        {/* Centered Logo */}
+        <div className="absolute left-1/2 -translate-x-1/2 text-lg font-bold text-yellow-600">
+          <Link to="/">Holidaze</Link>
         </div>
 
         {/* Right Nav */}
-        <div className="flex gap-4 items-center">
+        <div className="flex items-center gap-4">
           {isAuthenticated ? (
             <>
-              <span className="text-sm text-gray-600">Hi, {user?.name}</span>
-              <Link to="/profile" className="btn">
+              <div className="text-right">
+                <h5 className="font-semibold text-gray-800">{user?.name}</h5>
+                <p className="text-sm text-gray-500">
+                  {user?.venueManager ? "Venue Manager" : "Customer"}
+                </p>
+              </div>
+              <Link to="/profile">
                 <img
                   src={user?.avatar.url}
                   alt={user?.avatar.alt}
-                  className="rounded-full w-auto h-16"
+                  className="rounded-full w-12 h-12 hover:shadow-xl"
                 />
-              </Link>{" "}
+              </Link>
             </>
           ) : (
             <>
@@ -66,6 +64,110 @@ const Navbar = () => {
                 Register
               </Link>
             </>
+          )}
+        </div>
+      </div>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform transition-transform duration-300 ease-in-out flex flex-col ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* Close Button */}
+        <button
+          onClick={() => setSidebarOpen(false)}
+          className="absolute top-4 right-4 text-gray-600 hover:text-black"
+        >
+          <FaArrowLeft size={20} />
+        </button>
+
+        {/* Sidebar Content */}
+        <div className="mt-12 flex-1 flex flex-col overflow-y-auto">
+          {/* Profile Card */}
+          {isAuthenticated && (
+            <div className="bg-gray-100 p-4 rounded-lg shadow mb-6 flex flex-col items-center text-center">
+              <img
+                src={user?.avatar.url}
+                alt={user?.avatar.alt}
+                className="rounded-full w-24 h-24 mb-3 object-cover"
+              />
+              <h5 className="font-semibold text-gray-800">{user?.name}</h5>
+              <p className="text-sm text-gray-500 mb-4">
+                {user?.venueManager ? "Venue Manager" : "Customer"}
+              </p>
+
+              <div className="w-full space-y-2">
+                <Link
+                  to="/profile"
+                  onClick={() => setSidebarOpen(false)}
+                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
+                >
+                  <FaRegUser className="size-5" /> View Profile
+                </Link>
+                {user?.venueManager && (
+                  <Link
+                    to="/manager"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
+                  >
+                    <RiHomeGearLine className="size-5" /> Venues
+                  </Link>
+                )}
+                <Link
+                  to="/bookings"
+                  onClick={() => setSidebarOpen(false)}
+                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
+                >
+                  <RiHomeHeartLine className="size-5" /> My Bookings
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* General Navigation */}
+          <ul className="space-y-4">
+            <li>
+              <Link
+                to="/"
+                onClick={() => setSidebarOpen(false)}
+                className="flex pl-4 items-center gap-2 text-gray-700 hover:text-blue-600"
+              >
+                <FaHome className="size-5" /> Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                onClick={() => setSidebarOpen(false)}
+                className="flex pl-4 items-center gap-2 text-gray-700 hover:text-blue-600"
+              >
+                <FaInfoCircle className="size-5" /> About Us
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Footer: Logout or Create Account */}
+        <div className="mt-auto pt-6 border-t">
+          {!isAuthenticated ? (
+            <Link
+              to="/register"
+              onClick={() => setSidebarOpen(false)}
+              className="flex items-center pl-4 gap-2 text-gray-700 hover:text-blue-600 text-md"
+            >
+              <FaUser className="size-5" /> Create Account
+            </Link>
+          ) : (
+            <button
+              onClick={() => {
+                logout();
+                setSidebarOpen(false);
+              }}
+              className="flex items-center pl-4 gap-2 text-red-600 hover:text-red-800 text-md"
+            >
+              <FaSignOutAlt className="size-5" /> Logout
+            </button>
           )}
         </div>
       </div>
