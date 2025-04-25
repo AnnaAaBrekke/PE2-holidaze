@@ -67,6 +67,7 @@ const ManagerDashboard = () => {
       const success = await deleteVenue(venue.id, token);
       if (success) {
         setVenues((prev) => prev.filter((v) => v.id !== venue.id));
+        alert("Deleted successfully!");
       }
     } catch (error) {
       console.error("Delete failed:", error.message);
