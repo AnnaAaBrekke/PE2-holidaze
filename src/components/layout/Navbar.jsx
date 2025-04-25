@@ -7,9 +7,10 @@ import {
   FaInfoCircle,
   FaUser,
   FaSignOutAlt,
+  FaRegUser,
 } from "react-icons/fa";
 import { GoSidebarCollapse } from "react-icons/go";
-import { BiSolidHome } from "react-icons/bi";
+import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -69,7 +70,7 @@ const Navbar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform transition-transform duration-300 ease-in-out flex flex-col justify-between ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform transition-transform duration-300 ease-in-out flex flex-col ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -81,8 +82,8 @@ const Navbar = () => {
           <FaArrowLeft size={20} />
         </button>
 
-        {/* Content */}
-        <div className="mt-12">
+        {/* Sidebar Content */}
+        <div className="mt-12 flex-1 flex flex-col overflow-y-auto">
           {/* Profile Card */}
           {isAuthenticated && (
             <div className="bg-gray-100 p-4 rounded-lg shadow mb-6 flex flex-col items-center text-center">
@@ -96,14 +97,13 @@ const Navbar = () => {
                 {user?.venueManager ? "Venue Manager" : "Customer"}
               </p>
 
-              {/* Profile action links */}
               <div className="w-full space-y-2">
                 <Link
                   to="/profile"
                   onClick={() => setSidebarOpen(false)}
                   className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
                 >
-                  <FaUser /> View Profile
+                  <FaRegUser className="size-5" /> View Profile
                 </Link>
                 {user?.venueManager && (
                   <Link
@@ -111,7 +111,7 @@ const Navbar = () => {
                     onClick={() => setSidebarOpen(false)}
                     className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
                   >
-                    <BiSolidHome /> My Venues
+                    <RiHomeGearLine className="size-5" /> Venues
                   </Link>
                 )}
                 <Link
@@ -119,7 +119,7 @@ const Navbar = () => {
                   onClick={() => setSidebarOpen(false)}
                   className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
                 >
-                  <BiSolidHome /> My Bookings
+                  <RiHomeHeartLine className="size-5" /> My Bookings
                 </Link>
               </div>
             </div>
@@ -133,7 +133,7 @@ const Navbar = () => {
                 onClick={() => setSidebarOpen(false)}
                 className="flex pl-4 items-center gap-2 text-gray-700 hover:text-blue-600"
               >
-                <FaHome /> Home
+                <FaHome className="size-5" /> Home
               </Link>
             </li>
             <li>
@@ -142,36 +142,34 @@ const Navbar = () => {
                 onClick={() => setSidebarOpen(false)}
                 className="flex pl-4 items-center gap-2 text-gray-700 hover:text-blue-600"
               >
-                <FaInfoCircle /> About Us
+                <FaInfoCircle className="size-5" /> About Us
               </Link>
             </li>
           </ul>
-
-          {!isAuthenticated && (
-            <div className="mt-4">
-              <Link
-                to="/register"
-                onClick={() => setSidebarOpen(false)}
-                className="flex items-center gap-2 text-gray-700 hover:text-blue-600 text-sm"
-              >
-                <FaUser /> Create Account
-              </Link>
-            </div>
-          )}
         </div>
 
-        {/* Logout at the very bottom */}
-        {isAuthenticated && (
-          <button
-            onClick={() => {
-              logout();
-              setSidebarOpen(false);
-            }}
-            className="flex items-center pl-4 gap-2 text-red-600 hover:text-red-800 text-md mt-6"
-          >
-            <FaSignOutAlt /> Logout
-          </button>
-        )}
+        {/* Footer: Logout or Create Account */}
+        <div className="mt-auto pt-6 border-t">
+          {!isAuthenticated ? (
+            <Link
+              to="/register"
+              onClick={() => setSidebarOpen(false)}
+              className="flex items-center pl-4 gap-2 text-gray-700 hover:text-blue-600 text-md"
+            >
+              <FaUser className="size-5" /> Create Account
+            </Link>
+          ) : (
+            <button
+              onClick={() => {
+                logout();
+                setSidebarOpen(false);
+              }}
+              className="flex items-center pl-4 gap-2 text-red-600 hover:text-red-800 text-md"
+            >
+              <FaSignOutAlt className="size-5" /> Logout
+            </button>
+          )}
+        </div>
       </div>
     </nav>
   );
