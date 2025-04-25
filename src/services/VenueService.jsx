@@ -24,8 +24,11 @@ export const deleteVenue = async (id, token) => {
 };
 
 export const getManagerVenues = async (name, token) => {
-  return await apiFetch(`/profiles/${name}/venues?_owner=true&_bookings=true`, {
-    method: "GET",
-    token,
-  });
+  return await apiFetch(
+    `/profiles/${name}/venues?_owner=true&_bookings=true&_customer=true`,
+    {
+      method: "GET",
+      token,
+    },
+  );
 };

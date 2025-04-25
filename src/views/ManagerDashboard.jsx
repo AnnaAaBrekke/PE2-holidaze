@@ -3,6 +3,7 @@ import { getManagerVenues, deleteVenue } from "../services/VenueService";
 import { useAuth } from "../context/AuthContext";
 import VenueForm from "../components/forms/Venue";
 import VenueCard from "../components/Venue/VenueCard";
+import VenueBookingsTable from "../components/Table";
 
 const ManagerDashboard = () => {
   const { user, token } = useAuth();
@@ -116,16 +117,27 @@ const ManagerDashboard = () => {
       ) : venues.length === 0 ? (
         <p className="text-center text-gray-500">No venues created yet.</p>
       ) : (
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+        <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2 justify-items-center">
           {venues.map((venue) => (
-            <VenueCard
+            <div
               key={venue.id}
-              venue={venue}
-              isManager
-              onEdit={() => handleEditClick(venue)}
-              onDelete={() => handleDeleteClick(venue)}
-              isDeleting={isDeleting}
-            />
+              className="w-full flex justify-center items-start"
+            >
+              <div className="flex flex-col sm:flex-row gap-6 w-full max-w-5xl">
+                <div className="flex-1">
+                  <VenueCard
+                    venue={venue}
+                    isManager
+                    onEdit={() => handleEditClick(venue)}
+                    onDelete={() => handleDeleteClick(venue)}
+                    isDeleting={isDeleting}
+                  />
+                </div>
+                <div className="flex-1">
+                  <VenueBookingsTable bookings={venue.bookings} />
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       )}

@@ -15,7 +15,7 @@ const VenueCard = ({
   isDeleting = false,
 }) => {
   return (
-    <div className="relative w-full max-w-[323px] bg-white rounded-xl shadow-lg overflow-hidden transition hover:shadow-xl duration-300">
+    <div className="relative w-full max-w-[323px] min-h-[620px] bg-white rounded-xl shadow-lg overflow-hidden transition hover:shadow-xl duration-300">
       {/* Image */}
       <div className="relative h-[395px] w-full">
         <img
@@ -25,7 +25,9 @@ const VenueCard = ({
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#08323B99] to-transparent px-4 py-3 text-white">
           <p className="text-lg font-podkova flex items-center gap-1">
-            <MdLocationPin /> {venue.location.city}, {venue.location.country}
+            <MdLocationPin />
+            {venue.location?.city || "Unknown City"},{" "}
+            {venue.location?.country || "Unknown Country"}
           </p>
         </div>
       </div>
