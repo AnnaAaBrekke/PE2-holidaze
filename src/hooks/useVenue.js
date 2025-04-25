@@ -10,7 +10,7 @@ const useVenue = (id) => {
     setLoading(true);
     setError("");
     try {
-      const result = await apiFetch(`/venues/${id}?_bookings=true`);
+      const result = await apiFetch(`/venues/${id}?_owner=true&_bookings=true`);
       setVenue(result.data);
     } catch (error) {
       setError(error.message);

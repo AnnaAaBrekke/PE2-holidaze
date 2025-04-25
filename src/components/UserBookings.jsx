@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { MdDateRange, MdLocationPin } from "react-icons/md";
 import { useAuth } from "../context/AuthContext";
 import { getUserBookings } from "../services/BookingService";
-import { GiConfirmed } from "react-icons/gi";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
 
