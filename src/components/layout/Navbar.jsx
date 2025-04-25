@@ -17,27 +17,34 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white border-b shadow-sm px-6 py-4 relative">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         {/* Left Nav */}
         <div className="flex items-center gap-4">
           <button onClick={() => setSidebarOpen(true)}>
-            <GoSidebarCollapse size={20} />
+            <GoSidebarCollapse className="size-6 hover:size-8" />
           </button>
-          <div className="text-lg font-bold">
-            <Link to="/">LOGO</Link>
-          </div>
+        </div>
+
+        {/* Centered Logo */}
+        <div className="absolute left-1/2 -translate-x-1/2 text-lg font-bold text-yellow-600">
+          <Link to="/">Holidaze</Link>
         </div>
 
         {/* Right Nav */}
         <div className="flex items-center gap-4">
           {isAuthenticated ? (
             <>
-              <span className="text-sm text-gray-600">Hi, {user?.name}</span>
+              <div className="text-right">
+                <h5 className="font-semibold text-gray-800">{user?.name}</h5>
+                <p className="text-sm text-gray-500">
+                  {user?.venueManager ? "Venue Manager" : "Customer"}
+                </p>
+              </div>
               <Link to="/profile">
                 <img
                   src={user?.avatar.url}
                   alt={user?.avatar.alt}
-                  className="rounded-full w-12 h-12"
+                  className="rounded-full w-12 h-12 hover:shadow-xl"
                 />
               </Link>
             </>
