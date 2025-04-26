@@ -3,9 +3,9 @@ import Swal from "sweetalert2";
 const baseSwal = Swal.mixin({
   customClass: {
     confirmButton:
-      "bg-[#0F6474] text-[#E0F9F6] font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none",
+      "bg-[#0F6474] text-[#E0F9F6] font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none m-0.5",
     cancelButton:
-      "bg-[#0F6474] text-[#E0F9F6] font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none",
+      "bg-[#A3CED6] text-[#0F6474] font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#8FBAC2] focus:outline-none m-0.5", // lighter blue
     popup: "rounded-2xl p-6",
     title: "text-xl font-bold",
     htmlContainer: "text-base",
@@ -15,12 +15,12 @@ const baseSwal = Swal.mixin({
 
 export async function confirmAction(message = "Are you sure?") {
   const result = await baseSwal.fire({
-    title: "Please Confirm",
     text: message,
     icon: "warning",
     showCancelButton: true,
-    confirmButtonText: "Yes",
     cancelButtonText: "Cancel",
+    confirmButtonText: "Yes",
+    reverseButtons: true,
   });
 
   return result.isConfirmed;
