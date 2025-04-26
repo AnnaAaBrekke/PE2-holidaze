@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
 import {
@@ -15,6 +15,20 @@ import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logout, isAuthenticated } = useAuth();
+  const location = useLocation();
+
+  const linkClasses = (path) => {
+    const isHome = path === "/";
+    const isActive = isHome
+      ? location.pathname === "/"
+      : location.pathname.startsWith(path);
+
+    return `flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 p-2 rounded transition-all ${
+      isActive
+        ? "font-bold text-blue-600 border-l-4 border-blue-600 sm:pl-2 bg-blue-50"
+        : "text-gray-700 hover:text-blue-600"
+    }`;
+  };
 
   return (
     <nav className="bg-white border-b shadow-sm px-6 py-4 relative">
@@ -103,7 +117,7 @@ const Navbar = () => {
                 <Link
                   to="/profile"
                   onClick={() => setSidebarOpen(false)}
-                  className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 text-gray-700 hover:text-blue-600"
+                  className={linkClasses("/profile")}
                 >
                   <FaRegUser className="size-5" />
                   <span className="hidden sm:inline">View Profile</span>
@@ -112,7 +126,7 @@ const Navbar = () => {
                   <Link
                     to="/manager"
                     onClick={() => setSidebarOpen(false)}
-                    className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 text-gray-700 hover:text-blue-600"
+                    className={linkClasses("/manager")}
                   >
                     <RiHomeGearLine className="size-5" />
                     <span className="hidden sm:inline">Venues</span>
@@ -121,7 +135,7 @@ const Navbar = () => {
                 <Link
                   to="/bookings"
                   onClick={() => setSidebarOpen(false)}
-                  className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 text-gray-700 hover:text-blue-600"
+                  className={linkClasses("/bookings")}
                 >
                   <RiHomeHeartLine className="size-5" />
                   <span className="hidden sm:inline">My Bookings</span>
@@ -136,7 +150,7 @@ const Navbar = () => {
               <Link
                 to="/"
                 onClick={() => setSidebarOpen(false)}
-                className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 text-gray-700 hover:text-blue-600"
+                className={linkClasses("/")}
               >
                 <FaHome className="size-5" />
                 <span className="hidden sm:inline">Home</span>
@@ -146,7 +160,7 @@ const Navbar = () => {
               <Link
                 to="/about"
                 onClick={() => setSidebarOpen(false)}
-                className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 text-gray-700 hover:text-blue-600"
+                className={linkClasses("/about")}
               >
                 <FaInfoCircle className="size-5" />
                 <span className="hidden sm:inline">About Us</span>
@@ -161,7 +175,7 @@ const Navbar = () => {
             <Link
               to="/register"
               onClick={() => setSidebarOpen(false)}
-              className="flex flex-col sm:flex-row items-center justify-center sm:justify-start pl-0 sm:pl-4 gap-1 sm:gap-2 text-gray-700 hover:text-blue-600 text-md"
+              className={linkClasses("/register")}
             >
               <FaUser className="size-5" />
               <span className="hidden sm:inline">Create Account</span>
