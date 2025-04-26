@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { createVenue, updateVenue } from "../../services/VenueService";
+import { confirmAction, showSuccess } from "../../utils/notifications";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
@@ -37,6 +38,13 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   }, [mode, venue, reset]);
 
   const onSubmitVenueForm = async (formData) => {
+    const confirmed = confirmAction(
+      `Are you sure you want to proceed to ${mode === "edit" ? "update" : "create"} this venue?`,
+    );
+    if (!confirmed) {
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -70,10 +78,13 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
           : await createVenue(venueFormData, token);
 
       onVenueSaved?.(result.data);
-      alert(`Venue ${mode === "edit" ? "updated" : "created"} successfully!`);
+      showSuccess(
+        `Venue ${mode === "edit" ? "updated" : "created"} successfully`,
+      );
       reset();
     } catch (error) {
       setError(error.message);
+      showAlert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }

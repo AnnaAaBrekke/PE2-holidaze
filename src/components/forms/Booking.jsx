@@ -6,6 +6,11 @@ import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
 import { createBooking } from "../../services/BookingService";
 import { MdWarningAmber } from "react-icons/md";
+import {
+  confirmAction,
+  showAlert,
+  showSuccess,
+} from "../../utils/notifications";
 
 const BookingForm = ({
   venueId,
@@ -40,6 +45,13 @@ const BookingForm = ({
       return;
     }
 
+    const confirmed = confirmAction(
+      "Are you sure you want to create this booking?",
+    );
+    if (!confirmed) {
+      return;
+    }
+
     setLoading(true);
     setError("");
     try {
@@ -54,12 +66,11 @@ const BookingForm = ({
 
       onBookingCreated?.();
       onClose?.();
-      alert(
-        "Booking Created. A booking confirmation is sent to your email. And check it out under `My bookings`",
-      );
+      showSuccess("Booking Created. Check your email and 'My bookings'!");
       reset();
     } catch (error) {
       setError(error.message);
+      showAlert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
