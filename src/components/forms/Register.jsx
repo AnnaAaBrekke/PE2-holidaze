@@ -29,7 +29,7 @@ const RegisterForm = () => {
     const result = await registerUser(formData);
     if (result) {
       await showSuccess(
-        `Registered successfully as a ${formData.venueManager ? "Venue Manager" : "Customer"}`,
+        `Registered successfully as a: ${formData.venueManager ? "Venue Manager" : "Customer"}`,
       );
       reset();
       navigate("/login");

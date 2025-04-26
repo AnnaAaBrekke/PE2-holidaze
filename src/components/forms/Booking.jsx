@@ -46,7 +46,7 @@ const BookingForm = ({
     }
 
     const confirmed = await confirmAction(
-      "Are you sure you want to create this booking?",
+      "This will create a new booking. Do you want to continue?",
     );
     if (!confirmed) {
       return;

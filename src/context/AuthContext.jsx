@@ -10,9 +10,7 @@ import { createContext, useContext, useState } from "react";
 import { API_BASE_URL } from "../../constants";
 import apiFetch from "../utils/apiFetch";
 import { confirmAction } from "../utils/notifications";
-
-const REGISTER_URL = `${API_BASE_URL}/auth/register`;
-const LOGIN_URL = `${API_BASE_URL}/auth/login?_holidaze=true`;
+import { friendlyError } from "../utils/errorMessages,js";
 
 // This creates a context object that React will use to pass down auth-related data through the component tree — without props.
 
@@ -58,7 +56,8 @@ export const AuthProvider = ({ children }) => {
 
       return result;
     } catch (error) {
-      setError(error.message);
+      console.error("Register error:", error.message);
+      setError(friendlyError(error.message));
     } finally {
       setLoading(false);
     }
@@ -79,7 +78,8 @@ export const AuthProvider = ({ children }) => {
       saveAuth(result.data, accessToken);
       return result;
     } catch (error) {
-      setError(error.message);
+      console.error("Login error:", error.message);
+      setError(friendlyError(error.message));
     } finally {
       setLoading(false);
     }

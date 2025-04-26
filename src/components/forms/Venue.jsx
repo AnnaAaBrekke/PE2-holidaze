@@ -39,7 +39,8 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
   const onSubmitVenueForm = async (formData) => {
     const confirmed = await confirmAction(
-      `Are you sure you want to proceed to ${mode === "edit" ? "update" : "create"} this venue?`,
+      `This will ${mode === "edit" ? "update" : "create"} the venue. Do you want to continue?
+`,
     );
     if (!confirmed) {
       return;

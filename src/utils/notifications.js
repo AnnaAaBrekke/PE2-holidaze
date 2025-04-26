@@ -16,7 +16,7 @@ const baseSwal = Swal.mixin({
 export async function confirmAction(message = "Are you sure?") {
   const result = await baseSwal.fire({
     text: message,
-    icon: "warning",
+    icon: "question",
     showCancelButton: true,
     cancelButtonText: "Cancel",
     confirmButtonText: "Yes",
