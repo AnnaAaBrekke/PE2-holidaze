@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import updateProfile from "../../services/ProfileService";
 import { useState } from "react";
+import { showAlert, showSuccess } from "../../utils/notifications";
 
 const EditProfileForm = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -25,6 +26,7 @@ const EditProfileForm = ({ onClose }) => {
 
   const onSubmitForm = async (formData) => {
     setLoading(true);
+
     try {
       const result = await updateProfile({
         name: user.name,
@@ -38,10 +40,11 @@ const EditProfileForm = ({ onClose }) => {
       };
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
+      await showSuccess("Updated profile");
       onClose?.();
-      alert("Profile Updated");
     } catch (error) {
       setError(error.message);
+      await showAlert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }

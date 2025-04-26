@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import apiFetch from "../utils/apiFetch";
+import { friendlyError } from "../utils/errorMessages,js";
 
 const useVenue = (id) => {
   const [venue, setVenue] = useState(null);
@@ -13,7 +14,7 @@ const useVenue = (id) => {
       const result = await apiFetch(`/venues/${id}?_owner=true&_bookings=true`);
       setVenue(result.data);
     } catch (error) {
-      setError(error.message);
+      setError(friendlyError(error.message));
     } finally {
       setLoading(false);
     }

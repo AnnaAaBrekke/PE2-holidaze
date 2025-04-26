@@ -9,6 +9,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { showSuccess } from "../../utils/notifications";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();
@@ -27,8 +28,8 @@ const RegisterForm = () => {
   const onSubmitForm = async (formData) => {
     const result = await registerUser(formData);
     if (result) {
-      alert(
-        `Registered successfully as a ${formData.venueManager ? "Venue Manager" : "Customer"}!`,
+      await showSuccess(
+        `Registered successfully as a: ${formData.venueManager ? "Venue Manager" : "Customer"}`,
       );
       reset();
       navigate("/login");

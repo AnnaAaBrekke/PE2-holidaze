@@ -9,6 +9,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { showSuccess } from "../../utils/notifications";
 
 const LoginForm = () => {
   const { login, loading, error } = useAuth();
@@ -23,8 +24,8 @@ const LoginForm = () => {
   const onSubmitForm = async (formData) => {
     const result = await login(formData);
     if (result) {
-      alert(
-        `Logged in successfully as a ${result.data.venueManager ? "Venue Manager" : "Customer"}!`,
+      await showSuccess(
+        `Logged in successfully as a: ${result.data.venueManager ? "Venue Manager" : "Customer"}`,
       );
       if (result.data?.venueManager) {
         navigate("/manager");

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import apiFetch from "../utils/apiFetch";
+import { friendlyError } from "../utils/errorMessages,js";
 
 const useVenues = () => {
   const [venues, setVenues] = useState([]);
@@ -12,7 +13,7 @@ const useVenues = () => {
         const result = await apiFetch("/venues");
         setVenues(result.data);
       } catch (error) {
-        setError(error.message);
+        setError(friendlyError(error.message));
       } finally {
         setLoading(false);
       }

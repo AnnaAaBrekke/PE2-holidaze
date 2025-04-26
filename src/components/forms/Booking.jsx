@@ -6,6 +6,11 @@ import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
 import { createBooking } from "../../services/BookingService";
 import { MdWarningAmber } from "react-icons/md";
+import {
+  confirmAction,
+  showAlert,
+  showSuccess,
+} from "../../utils/notifications";
 
 const BookingForm = ({
   venueId,
@@ -40,6 +45,13 @@ const BookingForm = ({
       return;
     }
 
+    const confirmed = await confirmAction(
+      "This will create a new booking. Do you want to continue?",
+    );
+    if (!confirmed) {
+      return;
+    }
+
     setLoading(true);
     setError("");
     try {
@@ -54,12 +66,32 @@ const BookingForm = ({
 
       onBookingCreated?.();
       onClose?.();
-      alert(
-        "Booking Created. A booking confirmation is sent to your email. And check it out under `My bookings`",
-      );
+
+      const formattedFrom = new Date(dateFrom).toLocaleDateString();
+      const formattedTo = new Date(dateTo).toLocaleDateString();
+      await showSuccess(`
+        <div style="position: relative; width: 100%; max-width: 480px; text-align: center; font-family: 'Podkova', serif;">
+          
+          <div style="margin-bottom: 1.5rem;">
+            <h2 style="font-size: 24px; font-weight: 700; color: #101010; margin-bottom: 0.5rem;">BOOKING CONFIRMED!</h2>
+            <div style="width: 60px; height: 6px; background: #AFCDA2; margin: 0 auto 1rem auto; border-radius: 3px;"></div>
+          </div>
+      
+          <div style="font-size: 20px; font-weight: 400; color: #101010; margin-bottom: 1rem;">
+            ${formattedFrom} - ${formattedTo}
+          </div>
+      
+          <div style="font-size: 22px; font-weight: 400; color: #939393; margin-top: 1rem;">
+            A booking confirmation is sent to your email and you find it under 'My bookings'!
+          </div>
+      
+        </div>
+      `);
+
       reset();
     } catch (error) {
       setError(error.message);
+      await showAlert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }

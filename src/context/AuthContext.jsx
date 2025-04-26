@@ -9,9 +9,8 @@
 import { createContext, useContext, useState } from "react";
 import { API_BASE_URL } from "../../constants";
 import apiFetch from "../utils/apiFetch";
-
-const REGISTER_URL = `${API_BASE_URL}/auth/register`;
-const LOGIN_URL = `${API_BASE_URL}/auth/login?_holidaze=true`;
+import { confirmAction } from "../utils/notifications";
+import { friendlyError } from "../utils/errorMessages,js";
 
 // This creates a context object that React will use to pass down auth-related data through the component tree — without props.
 
@@ -57,7 +56,8 @@ export const AuthProvider = ({ children }) => {
 
       return result;
     } catch (error) {
-      setError(error.message);
+      console.error("Register error:", error.message);
+      setError(friendlyError(error.message));
     } finally {
       setLoading(false);
     }
@@ -78,14 +78,17 @@ export const AuthProvider = ({ children }) => {
       saveAuth(result.data, accessToken);
       return result;
     } catch (error) {
-      setError(error.message);
+      console.error("Login error:", error.message);
+      setError(friendlyError(error.message));
     } finally {
       setLoading(false);
     }
   };
 
-  const logout = () => {
-    const confirmLogout = window.confirm("Are you sure you want to log out?"); // Custom modal later
+  const logout = async () => {
+    const confirmLogout = await confirmAction(
+      "Are you sure you want to log out?",
+    );
     if (!confirmLogout) return;
 
     localStorage.removeItem("user");
