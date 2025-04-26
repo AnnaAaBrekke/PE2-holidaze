@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import VenueForm from "../components/forms/Venue";
 import VenueCard from "../components/Venue/VenueCard";
 import VenueBookingsTable from "../components/Table";
+import { confirmAction, showAlert, showSuccess } from "../utils/notifications";
 
 const ManagerDashboard = () => {
   const { user, token } = useAuth();
@@ -59,7 +60,7 @@ const ManagerDashboard = () => {
   };
 
   const handleDeleteClick = async (venue) => {
-    const confirmDelete = window.confirm(`Delete "${venue.name}"?`);
+    const confirmDelete = await confirmAction(`Delete "${venue.name}"?`);
     if (!confirmDelete) return;
 
     setIsDeleting(true);
@@ -67,10 +68,11 @@ const ManagerDashboard = () => {
       const success = await deleteVenue(venue.id, token);
       if (success) {
         setVenues((prev) => prev.filter((v) => v.id !== venue.id));
-        alert("Deleted successfully!");
+        await showSuccess("Deleted successfully!");
       }
     } catch (error) {
       console.error("Delete failed:", error.message);
+      await showAlert(`Error ${error.message}`);
     } finally {
       setIsDeleting(false);
     }

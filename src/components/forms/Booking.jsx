@@ -45,7 +45,7 @@ const BookingForm = ({
       return;
     }
 
-    const confirmed = confirmAction(
+    const confirmed = await confirmAction(
       "Are you sure you want to create this booking?",
     );
     if (!confirmed) {
@@ -66,11 +66,32 @@ const BookingForm = ({
 
       onBookingCreated?.();
       onClose?.();
-      showSuccess("Booking Created. Check your email and 'My bookings'!");
+
+      const formattedFrom = new Date(dateFrom).toLocaleDateString();
+      const formattedTo = new Date(dateTo).toLocaleDateString();
+      await showSuccess(`
+        <div style="position: relative; width: 100%; max-width: 480px; text-align: center; font-family: 'Podkova', serif;">
+          
+          <div style="margin-bottom: 1.5rem;">
+            <h2 style="font-size: 24px; font-weight: 700; color: #101010; margin-bottom: 0.5rem;">BOOKING CONFIRMED!</h2>
+            <div style="width: 60px; height: 6px; background: #AFCDA2; margin: 0 auto 1rem auto; border-radius: 3px;"></div>
+          </div>
+      
+          <div style="font-size: 20px; font-weight: 400; color: #101010; margin-bottom: 1rem;">
+            ${formattedFrom} - ${formattedTo}
+          </div>
+      
+          <div style="font-size: 22px; font-weight: 400; color: #939393; margin-top: 1rem;">
+            A booking confirmation is sent to your email and you find it under 'My bookings'!
+          </div>
+      
+        </div>
+      `);
+
       reset();
     } catch (error) {
       setError(error.message);
-      showAlert(`Error: ${error.message}`);
+      await showAlert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }

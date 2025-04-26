@@ -28,7 +28,7 @@ const RegisterForm = () => {
   const onSubmitForm = async (formData) => {
     const result = await registerUser(formData);
     if (result) {
-      showSuccess(
+      await showSuccess(
         `Registered successfully as a ${formData.venueManager ? "Venue Manager" : "Customer"}`,
       );
       reset();

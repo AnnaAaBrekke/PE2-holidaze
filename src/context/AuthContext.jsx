@@ -9,6 +9,7 @@
 import { createContext, useContext, useState } from "react";
 import { API_BASE_URL } from "../../constants";
 import apiFetch from "../utils/apiFetch";
+import { confirmAction } from "../utils/notifications";
 
 const REGISTER_URL = `${API_BASE_URL}/auth/register`;
 const LOGIN_URL = `${API_BASE_URL}/auth/login?_holidaze=true`;
@@ -84,8 +85,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    const confirmLogout = window.confirm("Are you sure you want to log out?"); // Custom modal later
+  const logout = async () => {
+    const confirmLogout = await confirmAction(
+      "Are you sure you want to log out?",
+    );
     if (!confirmLogout) return;
 
     localStorage.removeItem("user");

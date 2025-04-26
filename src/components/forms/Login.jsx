@@ -24,7 +24,7 @@ const LoginForm = () => {
   const onSubmitForm = async (formData) => {
     const result = await login(formData);
     if (result) {
-      showSuccess(
+      await showSuccess(
         `Logged in successfully as a ${result.data.venueManager ? "Venue Manager" : "Customer"}`,
       );
       if (result.data?.venueManager) {

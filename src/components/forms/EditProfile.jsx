@@ -2,11 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import updateProfile from "../../services/ProfileService";
 import { useState } from "react";
-import {
-  confirmAction,
-  showAlert,
-  showSuccess,
-} from "../../utils/notifications";
+import { showAlert, showSuccess } from "../../utils/notifications";
 
 const EditProfileForm = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -29,14 +25,8 @@ const EditProfileForm = ({ onClose }) => {
   const newAvatarImg = watch("url");
 
   const onSubmitForm = async (formData) => {
-    const confirmed = confirmAction(
-      "Are you sure you want to update your profile?",
-    );
-    if (!confirmed) {
-      return;
-    }
-
     setLoading(true);
+
     try {
       const result = await updateProfile({
         name: user.name,
@@ -50,11 +40,11 @@ const EditProfileForm = ({ onClose }) => {
       };
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
+      await showSuccess("Updated profile");
       onClose?.();
-      showSuccess("Profile Updated");
     } catch (error) {
       setError(error.message);
-      showAlert(`Error: ${error.message}`);
+      await showAlert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }

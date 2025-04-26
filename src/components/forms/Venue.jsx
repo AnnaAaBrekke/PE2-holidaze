@@ -38,7 +38,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   }, [mode, venue, reset]);
 
   const onSubmitVenueForm = async (formData) => {
-    const confirmed = confirmAction(
+    const confirmed = await confirmAction(
       `Are you sure you want to proceed to ${mode === "edit" ? "update" : "create"} this venue?`,
     );
     if (!confirmed) {
@@ -78,13 +78,13 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
           : await createVenue(venueFormData, token);
 
       onVenueSaved?.(result.data);
-      showSuccess(
+      await showSuccess(
         `Venue ${mode === "edit" ? "updated" : "created"} successfully`,
       );
       reset();
     } catch (error) {
       setError(error.message);
-      showAlert(`Error: ${error.message}`);
+      await showAlert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
