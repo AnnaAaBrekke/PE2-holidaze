@@ -20,7 +20,10 @@ const VenueBookingsTable = ({ bookings = [] }) => {
             <tr key={tableId} className="bg-white hover:bg-gray-50 transition">
               <td className="px-12 py-4 flex items-center gap-3 border border-gray-200">
                 <img
-                  src={booking.customer.avatar?.url}
+                  src={
+                    booking.customer.avatar?.url ||
+                    "https://plus.unsplash.com/premium_photo-1682308170035-ec5ef069ee10?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGF2YXRhciUyMGZha2V8ZW58MHx8MHx8fDA%3D"
+                  }
                   alt={booking.customer.avatar?.alt || "Customer Avatar"}
                   className="w-8 h-8 rounded-full object-cover border"
                 />

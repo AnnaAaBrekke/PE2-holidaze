@@ -16,9 +16,11 @@ const EditProfileForm = ({ onClose }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      url: user?.avatar?.url || "",
-      alt: user?.avatar?.alt || "",
-      bio: user?.bio || "",
+      url:
+        user?.avatar?.url ||
+        "https://plus.unsplash.com/premium_photo-1682308170035-ec5ef069ee10?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGF2YXRhciUyMGZha2V8ZW58MHx8MHx8fDA%3D",
+      alt: user?.avatar?.alt || "Avatar",
+      bio: user?.bio || "Bio",
     },
   });
 
@@ -58,7 +60,10 @@ const EditProfileForm = ({ onClose }) => {
         <div>
           <p className="text-sm">Current Avatar</p>
           <img
-            src={user?.avatar?.url || "https://placehold.co/150"}
+            src={
+              user?.avatar?.url ||
+              "https://plus.unsplash.com/premium_photo-1682308170035-ec5ef069ee10?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGF2YXRhciUyMGZha2V8ZW58MHx8MHx8fDA%3D"
+            }
             alt="Current avatar"
             className="h-24 w-24 rounded-full border"
           />

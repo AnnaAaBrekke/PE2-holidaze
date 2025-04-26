@@ -23,8 +23,11 @@ const Profile = () => {
       {isAuthenticated ? (
         <div className="bg-gray-100 p-4 rounded-lg shadow mb-6 flex flex-col items-center text-center">
           <img
-            src={user?.avatar?.url || "https://placehold.co/150"}
-            alt={user?.avatar?.alt || user?.name}
+            src={
+              user?.avatar?.url ||
+              "https://plus.unsplash.com/premium_photo-1682308170035-ec5ef069ee10?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGF2YXRhciUyMGZha2V8ZW58MHx8MHx8fDA%3D"
+            }
+            alt={user?.avatar?.alt || "Avatar"}
             className="h-32 w-32 rounded-full"
           />
           <h2 className="font-semibold text-gray-800">{user?.name}</h2>
