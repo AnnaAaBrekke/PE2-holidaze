@@ -1,12 +1,8 @@
-import { useState } from "react";
 import useVenues from "../../hooks/useVenues";
 import VenueCard from "./VenueCard";
-import { DebounceInput } from "react-debounce-input";
 
-const VenuesList = () => {
+const VenuesList = ({ searchNameDesc, searchCountry }) => {
   const { venues, loading, error } = useVenues();
-  const [searchNameDesc, setSearchNameDesc] = useState("");
-  const [searchCountry, setSearchCountry] = useState("");
 
   const nameDescLower = searchNameDesc.toLowerCase();
   const countryLower = searchCountry.toLowerCase();
@@ -29,25 +25,6 @@ const VenuesList = () => {
 
   return (
     <div>
-      <div className="flex">
-        <DebounceInput
-          minLength={2}
-          debounceTimeout={300}
-          onChange={(e) => setSearchCountry(e.target.value)}
-          value={searchCountry}
-          placeholder="Search by country..."
-          className="border border-gray w-220 m-2 p-2"
-        />
-        <DebounceInput
-          minLength={2}
-          debounceTimeout={300}
-          onChange={(e) => setSearchNameDesc(e.target.value)}
-          value={searchNameDesc}
-          placeholder="Search venues..."
-          className="border border-gray w-full m-2 p-2"
-        />
-      </div>
-
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {filteredVenues.length > 0 ? (
           filteredVenues.map((venue) => (
