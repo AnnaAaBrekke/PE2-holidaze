@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import apiFetch from "../utils/apiFetch";
 import { friendlyError } from "../utils/errorMessages";
 
-const useVenues = (page = 1, limit = 12) => {
+const useVenues = (
+  page = 1,
+  limit = 12,
+  sort = "created",
+  sortOrder = "desc",
+) => {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -11,7 +16,9 @@ const useVenues = (page = 1, limit = 12) => {
     const fetchVenues = async () => {
       try {
         setLoading(true);
-        const result = await apiFetch(`/venues?limit=${limit}&page=${page}`);
+        const result = await apiFetch(
+          `/venues?limit=${limit}&page=${page}&sort=${sort}&sortOrder=${sortOrder}`,
+        );
         setVenues(result.data);
       } catch (error) {
         setError(friendlyError(error.message));
@@ -21,7 +28,7 @@ const useVenues = (page = 1, limit = 12) => {
     };
 
     fetchVenues();
-  }, [page, limit]);
+  }, [page, limit, sort, sortOrder]);
 
   return { venues, loading, error };
 };
