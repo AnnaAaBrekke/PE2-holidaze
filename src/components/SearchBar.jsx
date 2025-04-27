@@ -1,36 +1,40 @@
-import { DebounceInput } from "react-debounce-input";
+import Select from "react-select";
 
-const SearchBar = ({
-  searchNameDescInput,
-  setSearchNameDescInput,
-  searchCountryInput,
-  setSearchCountryInput,
-  handleSearch,
-}) => {
+const SearchBar = ({ countryOptions, setSearchNameDesc, setSearchCountry }) => {
+  const handleCountryChange = (selectedOption) => {
+    if (selectedOption) {
+      setSearchCountry(selectedOption.value);
+    } else {
+      setSearchCountry("");
+    }
+  };
+
+  const handleVenueChange = (e) => {
+    setSearchNameDesc(e.target.value);
+  };
+
   return (
-    <div className="flex justify-between m-1">
-      <DebounceInput
-        minLength={2}
-        debounceTimeout={300}
-        onChange={(e) => setSearchCountryInput(e.target.value)}
-        value={searchCountryInput}
-        placeholder="Search by country..."
-        className="border border-gray w-220 m-2 p-2"
-      />
-      <DebounceInput
-        minLength={2}
-        debounceTimeout={300}
-        onChange={(e) => setSearchNameDescInput(e.target.value)}
-        value={searchNameDescInput}
-        placeholder="Search venues..."
-        className="border border-gray w-2/3 m-2 p-2"
-      />
-      <button
-        onClick={handleSearch}
-        className="bg-[#0F6474] text-[#E0F9F6] shadow-md rounded px-2 font-podkova font-semibold"
-      >
-        Search
-      </button>
+    <div className="flex flex-col items-center m-4">
+      <div className="flex flex-col md:flex-row justify-between w-full max-w-5xl">
+        {/* Country Search */}
+        <div className="flex-1 m-2">
+          <Select
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder="Search by country..."
+            isClearable
+            className="text-sm"
+          />
+        </div>
+
+        {/* Venue Name Search */}
+        <input
+          type="text"
+          onChange={handleVenueChange}
+          placeholder="Search venues..."
+          className="border border-gray-300 w-full md:w-2/3 m-2 p-2 rounded text-sm"
+        />
+      </div>
     </div>
   );
 };

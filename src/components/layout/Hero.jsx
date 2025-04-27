@@ -1,24 +1,34 @@
+import useVenues from "../../hooks/useVenues";
 import SearchBar from "../SearchBar";
 
-const Hero = ({
-  searchNameDescInput,
-  setSearchNameDescInput,
-  searchCountryInput,
-  setSearchCountryInput,
-  handleSearch,
-}) => {
+const Hero = ({ setSearchNameDesc, setSearchCountry }) => {
+  const { venues } = useVenues();
+
+  // Create unique country options
+  const countryOptions = venues
+    .map((venue) => ({
+      value: venue.location.country,
+      label: venue.location.country,
+    }))
+    .filter(
+      (option, index, self) =>
+        index === self.findIndex((o) => o.value === option.value),
+    );
+
   return (
-    <>
-      <div>
+    <div className="bg-gray-100 py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <h1 className="text-4xl font-bold text-center mb-6">
+          Find Your Perfect Venue
+        </h1>
+
         <SearchBar
-          searchNameDescInput={searchNameDescInput}
-          setSearchNameDescInput={setSearchNameDescInput}
-          searchCountryInput={searchCountryInput}
-          setSearchCountryInput={setSearchCountryInput}
-          handleSearch={handleSearch}
+          countryOptions={countryOptions}
+          setSearchNameDesc={setSearchNameDesc}
+          setSearchCountry={setSearchCountry}
         />
       </div>
-    </>
+    </div>
   );
 };
 
