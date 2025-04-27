@@ -5,29 +5,46 @@ import { DebounceInput } from "react-debounce-input";
 
 const VenuesList = () => {
   const { venues, loading, error } = useVenues();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchNameDesc, setSearchNameDesc] = useState("");
+  const [searchCountry, setSearchCountry] = useState("");
 
-  const searchLowerCase = searchTerm.toLowerCase();
+  const nameDescLower = searchNameDesc.toLowerCase();
+  const countryLower = searchCountry.toLowerCase();
 
-  const filteredVenues = venues.filter(({ name = "", description = "" }) => {
-    return (
-      name.toLowerCase().includes(searchLowerCase) ||
-      description.toLowerCase().includes(searchLowerCase)
-    );
-  });
+  const filteredVenues = venues.filter(
+    ({ name = "", description = "", location = {} }) => {
+      const country = location?.country?.toLowerCase() || "";
+
+      const matchNameDesc =
+        name.toLowerCase().includes(nameDescLower) ||
+        description.toLowerCase().includes(nameDescLower);
+      const matchCountry = country.includes(countryLower);
+
+      return matchNameDesc && matchCountry;
+    },
+  );
 
   if (loading) return <p>Loading venues...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
-      <div>
+      <div className="flex">
         <DebounceInput
           minLength={2}
           debounceTimeout={300}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search Venues..."
-          className="border border-gray w-full m-2"
+          onChange={(e) => setSearchCountry(e.target.value)}
+          value={searchCountry}
+          placeholder="Search by country..."
+          className="border border-gray w-220 m-2 p-2"
+        />
+        <DebounceInput
+          minLength={2}
+          debounceTimeout={300}
+          onChange={(e) => setSearchNameDesc(e.target.value)}
+          value={searchNameDesc}
+          placeholder="Search venues..."
+          className="border border-gray w-full m-2 p-2"
         />
       </div>
 
