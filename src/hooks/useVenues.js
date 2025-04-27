@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import apiFetch from "../utils/apiFetch";
-import { friendlyError } from "../utils/errorMessages,js";
+import { friendlyError } from "../utils/errorMessages";
 
 const useVenues = () => {
   const [venues, setVenues] = useState([]);
