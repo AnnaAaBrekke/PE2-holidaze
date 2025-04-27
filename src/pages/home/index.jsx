@@ -11,6 +11,7 @@ const Home = () => {
       <Hero
         setSearchNameDesc={setSearchNameDesc}
         setSearchCountry={setSearchCountry}
+        searchNameDesc={searchNameDesc}
       />
       <main>
         <VenuesList

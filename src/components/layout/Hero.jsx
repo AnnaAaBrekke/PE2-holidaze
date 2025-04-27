@@ -1,7 +1,7 @@
 import useVenues from "../../hooks/useVenues";
 import SearchBar from "../SearchBar";
 
-const Hero = ({ setSearchNameDesc, setSearchCountry }) => {
+const Hero = ({ setSearchNameDesc, setSearchCountry, searchNameDesc }) => {
   const { venues } = useVenues();
 
   // Create unique country options
@@ -26,6 +26,7 @@ const Hero = ({ setSearchNameDesc, setSearchCountry }) => {
           countryOptions={countryOptions}
           setSearchNameDesc={setSearchNameDesc}
           setSearchCountry={setSearchCountry}
+          searchNameDesc={searchNameDesc}
         />
       </div>
     </div>
