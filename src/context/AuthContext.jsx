@@ -10,7 +10,7 @@ import { createContext, useContext, useState } from "react";
 import { API_BASE_URL } from "../../constants";
 import apiFetch from "../utils/apiFetch";
 import { confirmAction } from "../utils/notifications";
-import { friendlyError } from "../utils/errorMessages,js";
+import { friendlyError } from "../utils/errorMessages.js";
 
 // This creates a context object that React will use to pass down auth-related data through the component tree — without props.
 
