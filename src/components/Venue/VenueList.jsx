@@ -1,8 +1,10 @@
-import useVenues from "../../hooks/useVenues";
+import { useState } from "react";
 import VenueCard from "./VenueCard";
+import useVenues from "../../hooks/useVenues";
 
 const VenuesList = ({ searchNameDesc, searchCountry }) => {
-  const { venues, loading, error } = useVenues();
+  const [page, setPage] = useState(1);
+  const { venues, loading, error } = useVenues(page);
 
   const nameDescLower = searchNameDesc.toLowerCase();
   const countryLower = searchCountry.toLowerCase();
@@ -20,11 +22,19 @@ const VenuesList = ({ searchNameDesc, searchCountry }) => {
     },
   );
 
+  const handleNextPage = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPage((prev) => (prev > 1 ? prev - 1 : 1));
+  };
+
   if (loading) return <p>Loading venues...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {filteredVenues.length > 0 ? (
           filteredVenues.map((venue) => (
@@ -33,6 +43,23 @@ const VenuesList = ({ searchNameDesc, searchCountry }) => {
         ) : (
           <p>No venues found.</p>
         )}
+      </div>
+
+      {/* Pagination buttons */}
+      <div className="flex gap-4 mt-6">
+        <button
+          onClick={handlePrevPage}
+          className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+        <button
+          onClick={handleNextPage}
+          className="bg-[#0F6474] text-[#E0F9F6] px-4 py-2 rounded hover:bg-[#0c4e5a]"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
