@@ -5,6 +5,7 @@ import VenueForm from "../components/forms/Venue";
 import VenueCard from "../components/Venue/VenueCard";
 import VenueBookingsTable from "../components/Table";
 import { confirmAction, showAlert, showSuccess } from "../utils/notifications";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 const ManagerDashboard = () => {
   const { user, token } = useAuth();
@@ -116,7 +117,7 @@ const ManagerDashboard = () => {
       <h2 className="text-2xl font-semibold mb-6">Your Venues</h2>
 
       {loading ? (
-        <p className="text-center text-gray-500">Loading venues...</p>
+        <SkeletonLoader type="dashboard" />
       ) : venues.length === 0 ? (
         <p className="text-center text-gray-500">No venues created yet.</p>
       ) : (

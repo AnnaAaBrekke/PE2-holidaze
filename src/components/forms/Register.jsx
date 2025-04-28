@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
+import SkeletonLoader from "../SkeletonLoader";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();
@@ -35,6 +36,10 @@ const RegisterForm = () => {
       navigate("/login");
     }
   };
+
+  if (loading) {
+    return <SkeletonLoader type="register" />;
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} noValidate>

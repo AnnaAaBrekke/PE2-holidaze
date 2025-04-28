@@ -5,6 +5,7 @@ import { MdFreeBreakfast, MdLocationPin, MdWifi } from "react-icons/md";
 import VenueCalendar from "./VenueCalender";
 import { useEffect, useRef, useState } from "react";
 import BookingForm from "../forms/Booking";
+import SkeletonLoader from "../SkeletonLoader";
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -20,14 +21,14 @@ const SingleVenue = () => {
 
   const handleOpenBookingForm = () => setShowForm((prev) => !prev);
 
-  if (loading) return <p className="text-center">Loading...</p>;
+  if (loading) return <SkeletonLoader type="card" count={1} layout="block" />;
   if (error) return <p className="text-center text-red-500">{error}</p>;
   if (!venue) return <p className="text-center">Venue not found.</p>;
 
   return (
     <div className="max-w-xl mx-auto p-6 relative">
       {/* Venue Image */}
-      <div className="w-full h-[395px] rounded-xl overflow-hidden mb-6">
+      <div className="w-full h-[400px] rounded-xl overflow-hidden mb-6">
         <img
           src={venue.media[0]?.url || "https://placehold.co/600x400"}
           alt={venue.media[0]?.alt || venue.name}

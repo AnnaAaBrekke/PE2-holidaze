@@ -1,6 +1,7 @@
 import { useState } from "react";
 import VenueCard from "./VenueCard";
 import useVenues from "../../hooks/useVenues";
+import SkeletonLoader from "../SkeletonLoader";
 
 const VenuesList = ({ searchNameDesc, searchCountry }) => {
   const [page, setPage] = useState(1);
@@ -30,7 +31,7 @@ const VenuesList = ({ searchNameDesc, searchCountry }) => {
     setPage((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
-  if (loading) return <p>Loading venues...</p>;
+  if (loading) return <SkeletonLoader type="card" count={12} />;
   if (error) return <p>Error: {error}</p>;
 
   return (
