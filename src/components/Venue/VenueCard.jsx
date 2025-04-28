@@ -49,9 +49,8 @@ const VenueCard = ({
                 }
               `}
             </style>
-
-            {venue.media.map((item, index) => (
-              <SwiperSlide key={index}>
+            {venue.media.map((item, idx) => (
+              <SwiperSlide key={`${item.url}-${idx}`}>
                 <img
                   src={item.url}
                   alt={item.alt || venue.name}
@@ -123,7 +122,7 @@ const VenueCard = ({
         </div>
 
         <div className="bg-[#E0F9F6] px-4 py-2 rounded-md text-sm w-fit font-medium mb-3">
-          <RiCoinsFill className="inline" />  Price p/night: ${venue.price}
+          <RiCoinsFill className="inline" /> Price p/night: ${venue.price}
         </div>
 
         {isManager && (

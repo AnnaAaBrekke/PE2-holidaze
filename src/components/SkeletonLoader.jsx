@@ -74,7 +74,7 @@ const SkeletonLoader = ({ count = 6, layout = "grid", type = "card" }) => {
   return (
     <div className={containerClass}>
       {Array.from({ length: count }).map((_, index) => (
-        <div key={index}>{renderSkeleton()}</div>
+        <div key={`skeleton-key-${index}`}>{renderSkeleton()}</div>
       ))}
     </div>
   );
