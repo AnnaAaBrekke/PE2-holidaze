@@ -1,15 +1,11 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { createVenue, updateVenue } from "../../services/VenueService";
 import { confirmAction, showSuccess } from "../../utils/notifications";
+import { useEffect } from "react";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [previewImage, setPreviewImage] = useState("");
-
   const {
     register,
     handleSubmit,
@@ -18,7 +14,8 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
-  const mediaUrlValue = watch("mediaUrl");
+  const mediaUrls = watch(["mediaUrl1", "mediaUrl2", "mediaUrl3", "mediaUrl4"]);
+  const previewImages = mediaUrls.filter((url) => url); // derived directly
 
   useEffect(() => {
     if (mode === "edit" && venue) {
@@ -27,7 +24,10 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         description: venue.description || "",
         price: venue.price || "",
         maxGuests: venue.maxGuests || "",
-        mediaUrl: venue.media?.[0]?.url || "",
+        mediaUrl1: venue.media?.[0]?.url || "",
+        mediaUrl2: venue.media?.[1]?.url || "",
+        mediaUrl3: venue.media?.[2]?.url || "",
+        mediaUrl4: venue.media?.[3]?.url || "",
         mediaAlt: venue.media?.[0]?.alt || "",
         city: venue.location?.city || "",
         country: venue.location?.country || "",
@@ -41,20 +41,11 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
     }
   }, [mode, venue, reset]);
 
-  useEffect(() => {
-    setPreviewImage(mediaUrlValue);
-  }, [mediaUrlValue]);
-
   const onSubmitVenueForm = async (formData) => {
     const confirmed = await confirmAction(
       `This will ${mode === "edit" ? "update" : "create"} the venue. Do you want to continue?`,
     );
-    if (!confirmed) {
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
+    if (!confirmed) return;
 
     const venueFormData = {
       name: formData.name,
@@ -62,11 +53,16 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
       price: Number(formData.price),
       maxGuests: Number(formData.maxGuests),
       media: [
-        {
-          url: formData.mediaUrl,
+        formData.mediaUrl1,
+        formData.mediaUrl2,
+        formData.mediaUrl3,
+        formData.mediaUrl4,
+      ]
+        .filter((url) => url)
+        .map((url) => ({
+          url,
           alt: formData.name,
-        },
-      ],
+        })),
       location: {
         city: formData.city,
         country: formData.country,
@@ -91,10 +87,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
       );
       reset();
     } catch (error) {
-      setError(error.message);
-      await showAlert(`Error: ${error.message}`);
-    } finally {
-      setLoading(false);
+      console.error(error);
     }
   };
 
@@ -104,6 +97,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         {mode === "edit" ? "Edit Venue" : "Create Venue"}
       </h2>
       <h3>Fill in form</h3>
+
       <form onSubmit={handleSubmit(onSubmitVenueForm)} noValidate>
         {/* Basic Fields */}
         <div className="mb-3">
@@ -157,44 +151,52 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
           )}
         </div>
 
-        {/* Live Preview */}
-        {previewImage && (
-          <div className="mb-3">
-            <label className="form-label">Image Preview:</label>
-            <div>
-              <img
-                src={previewImage}
-                alt="Preview"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "300px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                }}
-              />
+        {/* Image Previews */}
+        {previewImages.length > 0 && (
+          <div className="mb-6">
+            <label className="form-label">Image Previews:</label>
+            <div className="grid grid-cols-2 gap-4 mt-2">
+              {previewImages.map((url, idx) => (
+                <img
+                  key={idx}
+                  src={url}
+                  alt={`Preview ${idx + 1}`}
+                  className="w-full h-40 object-cover rounded-lg border"
+                />
+              ))}
             </div>
           </div>
         )}
 
         {/* Media Inputs */}
         <div className="mb-3">
-          <label className="form-label">Image URL*</label>
+          <label>Main Image URL*</label>
           <input
-            className={`form-control ${errors.mediaUrl ? "is-invalid" : ""}`}
-            {...register("mediaUrl", { required: "Image URL is required" })}
+            className={`form-control ${errors.mediaUrl1 ? "is-invalid" : ""}`}
+            {...register("mediaUrl1", {
+              required: "Main Image URL is required",
+            })}
           />
-          {errors.mediaUrl && (
-            <div className="invalid-feedback">{errors.mediaUrl.message}</div>
-          )}
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Image Alt Text</label>
-          <input className="form-control" {...register("mediaAlt")} />
+          <label>Image URL 2 (optional)</label>
+          <input className="form-control" {...register("mediaUrl2")} />
         </div>
 
         <div className="mb-3">
-          <label className="form-label">City*</label>
+          <label>Image URL 3 (optional)</label>
+          <input className="form-control" {...register("mediaUrl3")} />
+        </div>
+
+        <div className="mb-3">
+          <label>Image URL 4 (optional)</label>
+          <input className="form-control" {...register("mediaUrl4")} />
+        </div>
+
+        {/* Other fields */}
+        <div className="mb-3">
+          <label>City*</label>
           <input
             className={`form-control ${errors.city ? "is-invalid" : ""}`}
             {...register("city", { required: "City is required" })}
@@ -202,16 +204,16 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Country*</label>
+          <label>Country*</label>
           <input
             className={`form-control ${errors.country ? "is-invalid" : ""}`}
             {...register("country", { required: "Country is required" })}
           />
         </div>
 
+        {/* Amenities */}
         <div className="mb-4">
           <label className="form-label d-block">Amenities</label>
-
           <div className="form-check">
             <input
               type="checkbox"
@@ -223,7 +225,6 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
               Free Wifi
             </label>
           </div>
-
           <div className="form-check">
             <input
               type="checkbox"
@@ -235,7 +236,6 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
               Parking
             </label>
           </div>
-
           <div className="form-check">
             <input
               type="checkbox"
@@ -247,7 +247,6 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
               Free Breakfast
             </label>
           </div>
-
           <div className="form-check">
             <input
               type="checkbox"
@@ -262,17 +261,9 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         </div>
 
         {/* Submit */}
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading
-            ? mode === "edit"
-              ? "Updating..."
-              : "Creating..."
-            : mode === "edit"
-              ? "Update Venue"
-              : "Create Venue"}
+        <button type="submit" className="btn btn-primary">
+          {mode === "edit" ? "Update Venue" : "Create Venue"}
         </button>
-
-        {error && <p className="text-danger mt-3">{error}</p>}
       </form>
     </div>
   );
