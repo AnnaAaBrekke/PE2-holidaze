@@ -3,7 +3,6 @@ import { useAuth } from "../../context/AuthContext";
 import { createVenue, updateVenue } from "../../services/VenueService";
 import { confirmAction, showSuccess } from "../../utils/notifications";
 import { useEffect } from "react";
-
 import { Input, Checkbox } from "@material-tailwind/react";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
@@ -103,102 +102,123 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         noValidate
       >
         {/* Name */}
-        <Input
-          label="Name*"
-          {...register("name", { required: "Name is required" })}
-          error={!!errors.name}
-        />
-        {errors.name && (
-          <p className="text-red-500 text-xs">{errors.name.message}</p>
-        )}
-
-        {/* Description */}
-        <textarea
-          placeholder="Description*"
-          {...register("description", { required: "Description is required" })}
-          className="border p-2 w-full rounded-md"
-        />
-        {errors.description && (
-          <p className="text-red-500 text-xs">{errors.description.message}</p>
-        )}
-
-        {/* Rating */}
-        <Input
-          label="Rating (0-5)"
-          type="number"
-          {...register("rating", {
-            min: { value: 0, message: "Min rating is 0" },
-            max: { value: 5, message: "Max rating is 5" },
-          })}
-          error={!!errors.rating}
-        />
-        {errors.rating && (
-          <p className="text-red-500 text-xs">{errors.rating.message}</p>
-        )}
-
-        {/* Price */}
-        <Input
-          label="Price*"
-          type="number"
-          {...register("price", { required: "Price is required", min: 0 })}
-          error={!!errors.price}
-        />
-        {errors.price && (
-          <p className="text-red-500 text-xs">{errors.price.message}</p>
-        )}
-
-        {/* Max Guests */}
-        <Input
-          label="Max Guests*"
-          type="number"
-          {...register("maxGuests", {
-            required: "Max guests required",
-            min: 1,
-          })}
-          error={!!errors.maxGuests}
-        />
-        {errors.maxGuests && (
-          <p className="text-red-500 text-xs">{errors.maxGuests.message}</p>
-        )}
-
-        {/* Images */}
-        <div className="grid grid-cols-2 gap-4">
-          {previewImages.map((url, idx) => (
-            <img
-              key={idx}
-              src={url}
-              alt={`Preview ${idx + 1}`}
-              className="w-full h-40 object-cover rounded-lg"
-            />
-          ))}
+        <div>
+          <label>Name*</label>
+          <Input {...register("name", { required: "Name is required" })} />
+          {errors.name && (
+            <p className="text-red-500 text-xs">{errors.name.message}</p>
+          )}
         </div>
 
-        <Input
-          label="Main Image URL*"
-          {...register("mediaUrl1", { required: true })}
-        />
-        <Input label="Image URL 2 (optional)" {...register("mediaUrl2")} />
-        <Input label="Image URL 3 (optional)" {...register("mediaUrl3")} />
-        <Input label="Image URL 4 (optional)" {...register("mediaUrl4")} />
+        {/* Description */}
+        <div>
+          <label>Description*</label>
+          <textarea
+            {...register("description", {
+              required: "Description is required",
+            })}
+            className="border p-2 w-full rounded-md"
+          />
+          {errors.description && (
+            <p className="text-red-500 text-xs">{errors.description.message}</p>
+          )}
+        </div>
 
-        {/* Location */}
-        <Input
-          label="City*"
-          {...register("city", { required: "City is required" })}
-          error={!!errors.city}
-        />
-        {errors.city && (
-          <p className="text-red-500 text-xs">{errors.city.message}</p>
+        {/* Rating */}
+        <div>
+          <label>Rating (0-5)</label>
+          <Input
+            type="number"
+            {...register("rating", {
+              min: { value: 0, message: "Minimum rating is 0" },
+              max: { value: 5, message: "Maximum rating is 5" },
+            })}
+          />
+          {errors.rating && (
+            <p className="text-red-500 text-xs">{errors.rating.message}</p>
+          )}
+        </div>
+
+        {/* Price */}
+        <div>
+          <label>Price*</label>
+          <Input
+            type="number"
+            {...register("price", { required: "Price is required", min: 0 })}
+          />
+          {errors.price && (
+            <p className="text-red-500 text-xs">{errors.price.message}</p>
+          )}
+        </div>
+
+        {/* Max Guests */}
+        <div>
+          <label>Max Guests*</label>
+          <Input
+            type="number"
+            {...register("maxGuests", {
+              required: "Max guests required",
+              min: 1,
+            })}
+          />
+          {errors.maxGuests && (
+            <p className="text-red-500 text-xs">{errors.maxGuests.message}</p>
+          )}
+        </div>
+
+        {/* Image Previews */}
+        {previewImages.length > 0 && (
+          <div className="grid grid-cols-2 gap-4">
+            {previewImages.map((url, idx) => (
+              <img
+                key={idx}
+                src={url}
+                alt={`Preview ${idx + 1}`}
+                className="w-full h-40 object-cover rounded-lg"
+              />
+            ))}
+          </div>
         )}
 
-        <Input
-          label="Country*"
-          {...register("country", { required: "Country is required" })}
-          error={!!errors.country}
-        />
-        {errors.country && (
-          <p className="text-red-500 text-xs">{errors.country.message}</p>
-        )}
+        {/* Image URLs */}
+        <div>
+          <label>Main Image URL*</label>
+          <Input
+            {...register("mediaUrl1", { required: "Main image URL required" })}
+          />
+        </div>
+        <div>
+          <label>Image URL 2 (optional)</label>
+          <Input {...register("mediaUrl2")} />
+        </div>
+        <div>
+          <label>Image URL 3 (optional)</label>
+          <Input {...register("mediaUrl3")} />
+        </div>
+        <div>
+          <label>Image URL 4 (optional)</label>
+          <Input {...register("mediaUrl4")} />
+        </div>
+
+        {/* City */}
+        <div>
+          <label>City*</label>
+          <Input {...register("city", { required: "City is required" })} />
+          {errors.city && (
+            <p className="text-red-500 text-xs">{errors.city.message}</p>
+          )}
+        </div>
+
+        {/* Country */}
+        <div>
+          <label>Country*</label>
+          <Input
+            {...register("country", { required: "Country is required" })}
+          />
+          {errors.country && (
+            <p className="text-red-500 text-xs">{errors.country.message}</p>
+          )}
+        </div>
 
         {/* Amenities */}
         <div className="grid grid-cols-2">
@@ -208,10 +228,10 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
           <Checkbox label="Pets Allowed" {...register("meta.pets")} />
         </div>
 
-        {/* Submit */}
+        {/* Submit Button */}
         <button
           type="submit"
-          className="bg-[#0F6474] text-[#E0F9F6]  w-full font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none m-0.5"
+          className="bg-[#0F6474] text-[#E0F9F6] w-full font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none"
         >
           {mode === "edit" ? "Update Venue" : "Create Venue"}
         </button>
