@@ -4,6 +4,8 @@ import { createVenue, updateVenue } from "../../services/VenueService";
 import { confirmAction, showSuccess } from "../../utils/notifications";
 import { useEffect } from "react";
 
+import { Input, Checkbox, Button } from "@material-tailwind/react";
+
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
   const {
@@ -15,7 +17,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   } = useForm({ mode: "onChange" });
 
   const mediaUrls = watch(["mediaUrl1", "mediaUrl2", "mediaUrl3", "mediaUrl4"]);
-  const previewImages = mediaUrls.filter((url) => url); // derived directly
+  const previewImages = mediaUrls.filter((url) => url);
 
   useEffect(() => {
     if (mode === "edit" && venue) {
@@ -29,7 +31,6 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         mediaUrl2: venue.media?.[1]?.url || "",
         mediaUrl3: venue.media?.[2]?.url || "",
         mediaUrl4: venue.media?.[3]?.url || "",
-        mediaAlt: venue.media?.[0]?.alt || "",
         city: venue.location?.city || "",
         country: venue.location?.country || "",
         meta: {
@@ -61,10 +62,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         formData.mediaUrl4,
       ]
         .filter((url) => url)
-        .map((url) => ({
-          url,
-          alt: formData.name,
-        })),
+        .map((url) => ({ url, alt: formData.name })),
       location: {
         city: formData.city,
         country: formData.country,
@@ -94,194 +92,127 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   };
 
   return (
-    <div className="container">
-      <h2 className="mb-4">
+    <div className="container mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">
         {mode === "edit" ? "Edit Venue" : "Create Venue"}
       </h2>
-      <h3>Fill in form</h3>
 
-      <form onSubmit={handleSubmit(onSubmitVenueForm)} noValidate>
-        {/* Basic Fields */}
-        <div className="mb-3">
-          <label className="form-label">Name*</label>
-          <input
-            className={`form-control ${errors.name ? "is-invalid" : ""}`}
-            {...register("name", { required: "Name is required" })}
-          />
-          {errors.name && (
-            <div className="invalid-feedback">{errors.name.message}</div>
-          )}
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Description*</label>
-          <textarea
-            className={`form-control ${errors.description ? "is-invalid" : ""}`}
-            {...register("description", {
-              required: "Description is required",
-            })}
-          />
-          {errors.description && (
-            <div className="invalid-feedback">{errors.description.message}</div>
-          )}
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Rating (0-5)</label>
-          <input
-            type="number"
-            step="0.1"
-            min="0"
-            max="5"
-            className={`form-control ${errors.rating ? "is-invalid" : ""}`}
-            {...register("rating", {
-              min: { value: 0, message: "Rating must be at least 0" },
-              max: { value: 5, message: "Rating cannot be more than 5" },
-            })}
-          />
-          {errors.rating && (
-            <div className="invalid-feedback">{errors.rating.message}</div>
-          )}
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Price*</label>
-          <input
-            type="number"
-            className={`form-control ${errors.price ? "is-invalid" : ""}`}
-            {...register("price", { required: "Price is required", min: 0 })}
-          />
-          {errors.price && (
-            <div className="invalid-feedback">{errors.price.message}</div>
-          )}
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Max Guests*</label>
-          <input
-            type="number"
-            className={`form-control ${errors.maxGuests ? "is-invalid" : ""}`}
-            {...register("maxGuests", {
-              required: "Max guests is required",
-              min: 1,
-            })}
-          />
-          {errors.maxGuests && (
-            <div className="invalid-feedback">{errors.maxGuests.message}</div>
-          )}
-        </div>
-
-        {/* Image Previews */}
-        {previewImages.length > 0 && (
-          <div className="mb-6">
-            <label className="form-label">Image Previews:</label>
-            <div className="grid grid-cols-2 gap-4 mt-2">
-              {previewImages.map((url, idx) => (
-                <img
-                  key={idx}
-                  src={url}
-                  alt={`Preview ${idx + 1}`}
-                  className="w-full h-40 object-cover rounded-lg border"
-                />
-              ))}
-            </div>
-          </div>
+      <form
+        onSubmit={handleSubmit(onSubmitVenueForm)}
+        className="space-y-6"
+        noValidate
+      >
+        {/* Name */}
+        <Input
+          label="Name*"
+          {...register("name", { required: "Name is required" })}
+          error={!!errors.name}
+        />
+        {errors.name && (
+          <p className="text-red-500 text-xs">{errors.name.message}</p>
         )}
 
-        {/* Media Inputs */}
-        <div className="mb-3">
-          <label>Main Image URL*</label>
-          <input
-            className={`form-control ${errors.mediaUrl1 ? "is-invalid" : ""}`}
-            {...register("mediaUrl1", {
-              required: "Main Image URL is required",
-            })}
-          />
+        {/* Description */}
+        <textarea
+          placeholder="Description*"
+          {...register("description", { required: "Description is required" })}
+          className="border p-2 w-full rounded-md"
+        />
+        {errors.description && (
+          <p className="text-red-500 text-xs">{errors.description.message}</p>
+        )}
+
+        {/* Rating */}
+        <Input
+          label="Rating (0-5)"
+          type="number"
+          {...register("rating", {
+            min: { value: 0, message: "Min rating is 0" },
+            max: { value: 5, message: "Max rating is 5" },
+          })}
+          error={!!errors.rating}
+        />
+        {errors.rating && (
+          <p className="text-red-500 text-xs">{errors.rating.message}</p>
+        )}
+
+        {/* Price */}
+        <Input
+          label="Price*"
+          type="number"
+          {...register("price", { required: "Price is required", min: 0 })}
+          error={!!errors.price}
+        />
+        {errors.price && (
+          <p className="text-red-500 text-xs">{errors.price.message}</p>
+        )}
+
+        {/* Max Guests */}
+        <Input
+          label="Max Guests*"
+          type="number"
+          {...register("maxGuests", {
+            required: "Max guests required",
+            min: 1,
+          })}
+          error={!!errors.maxGuests}
+        />
+        {errors.maxGuests && (
+          <p className="text-red-500 text-xs">{errors.maxGuests.message}</p>
+        )}
+
+        {/* Images */}
+        <div className="grid grid-cols-2 gap-4">
+          {previewImages.map((url, idx) => (
+            <img
+              key={idx}
+              src={url}
+              alt={`Preview ${idx + 1}`}
+              className="w-full h-40 object-cover rounded-lg"
+            />
+          ))}
         </div>
 
-        <div className="mb-3">
-          <label>Image URL 2 (optional)</label>
-          <input className="form-control" {...register("mediaUrl2")} />
-        </div>
+        <Input
+          label="Main Image URL*"
+          {...register("mediaUrl1", { required: true })}
+        />
+        <Input label="Image URL 2 (optional)" {...register("mediaUrl2")} />
+        <Input label="Image URL 3 (optional)" {...register("mediaUrl3")} />
+        <Input label="Image URL 4 (optional)" {...register("mediaUrl4")} />
 
-        <div className="mb-3">
-          <label>Image URL 3 (optional)</label>
-          <input className="form-control" {...register("mediaUrl3")} />
-        </div>
+        {/* Location */}
+        <Input
+          label="City*"
+          {...register("city", { required: "City is required" })}
+          error={!!errors.city}
+        />
+        {errors.city && (
+          <p className="text-red-500 text-xs">{errors.city.message}</p>
+        )}
 
-        <div className="mb-3">
-          <label>Image URL 4 (optional)</label>
-          <input className="form-control" {...register("mediaUrl4")} />
-        </div>
-
-        {/* Other fields */}
-        <div className="mb-3">
-          <label>City*</label>
-          <input
-            className={`form-control ${errors.city ? "is-invalid" : ""}`}
-            {...register("city", { required: "City is required" })}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Country*</label>
-          <input
-            className={`form-control ${errors.country ? "is-invalid" : ""}`}
-            {...register("country", { required: "Country is required" })}
-          />
-        </div>
+        <Input
+          label="Country*"
+          {...register("country", { required: "Country is required" })}
+          error={!!errors.country}
+        />
+        {errors.country && (
+          <p className="text-red-500 text-xs">{errors.country.message}</p>
+        )}
 
         {/* Amenities */}
-        <div className="mb-4">
-          <label className="form-label d-block">Amenities</label>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              id="wifi"
-              className="form-check-input"
-              {...register("meta.wifi")}
-            />
-            <label className="form-check-label" htmlFor="wifi">
-              Free Wifi
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              id="parking"
-              className="form-check-input"
-              {...register("meta.parking")}
-            />
-            <label className="form-check-label" htmlFor="parking">
-              Parking
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              id="breakfast"
-              className="form-check-input"
-              {...register("meta.breakfast")}
-            />
-            <label className="form-check-label" htmlFor="breakfast">
-              Free Breakfast
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              id="pets"
-              className="form-check-input"
-              {...register("meta.pets")}
-            />
-            <label className="form-check-label" htmlFor="pets">
-              Pets Allowed
-            </label>
-          </div>
+        <div className="grid grid-cols-2">
+          <Checkbox label="Free Wifi" {...register("meta.wifi")} />
+          <Checkbox label="Parking" {...register("meta.parking")} />
+          <Checkbox label="Free Breakfast" {...register("meta.breakfast")} />
+          <Checkbox label="Pets Allowed" {...register("meta.pets")} />
         </div>
 
         {/* Submit */}
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="bg-[#0F6474] text-[#E0F9F6]  w-full font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none m-0.5"
+        >
           {mode === "edit" ? "Update Venue" : "Create Venue"}
         </button>
       </form>
