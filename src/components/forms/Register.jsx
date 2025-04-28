@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
 import { Input, Checkbox } from "@material-tailwind/react";
+import { ClipLoader } from "react-spinners";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();
@@ -137,13 +138,19 @@ const RegisterForm = () => {
         </label>
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
         disabled={loading}
         className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
       >
-        {loading ? "Registering..." : "Register"}
+        {loading ? (
+          <>
+            <ClipLoader size={20} color="#ffffff" />
+            <span className="ml-2">Registering...</span>
+          </>
+        ) : (
+          "Register"
+        )}
       </button>
 
       {/* Error display */}

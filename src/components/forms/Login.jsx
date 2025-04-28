@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
 import { Input } from "@material-tailwind/react";
+import { ClipLoader } from "react-spinners";
 
 const LoginForm = () => {
   const { login, loading, error } = useAuth();
@@ -84,7 +85,14 @@ const LoginForm = () => {
         disabled={loading}
         className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
       >
-        {loading ? "Logging in..." : "Login"}
+        {loading ? (
+          <>
+            <ClipLoader size={20} color="#ffffff" />
+            <span className="ml-2">Logging in...</span>
+          </>
+        ) : (
+          "Login"
+        )}
       </button>
 
       {error && <p className="text-red-500 text-sm mt-2">{error}</p>}

@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { createVenue, updateVenue } from "../../services/VenueService";
 import { confirmAction, showSuccess } from "../../utils/notifications";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Input, Checkbox } from "@material-tailwind/react";
+import { ClipLoader } from "react-spinners";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -75,6 +77,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
     };
 
     try {
+      setLoading(true);
       const result =
         mode === "edit"
           ? await updateVenue(venueId, venueFormData, token)
@@ -87,6 +90,8 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
       reset();
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -232,8 +237,15 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         <button
           type="submit"
           className="bg-[#0F6474] text-[#E0F9F6] w-full font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none"
+          disabled={loading}
         >
-          {mode === "edit" ? "Update Venue" : "Create Venue"}
+          {loading ? (
+            <ClipLoader />
+          ) : mode === "edit" ? (
+            "Update Venue"
+          ) : (
+            "Create Venue"
+          )}
         </button>
       </form>
     </div>

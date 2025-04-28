@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import updateProfile from "../../services/ProfileService";
 import { useState } from "react";
 import { showAlert, showSuccess } from "../../utils/notifications";
+import { ClipLoader } from "react-spinners";
 
 const EditProfileForm = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -99,8 +100,19 @@ const EditProfileForm = ({ onClose }) => {
 
       {error && <p className="text-red-500">{error}</p>}
 
-      <button type="submit" disabled={loading}>
-        {loading ? "Updating..." : "Update Profile"}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-2 bg-blue-400 text-white rounded hover:bg-blue-700 transition"
+      >
+        {loading ? (
+          <>
+            <ClipLoader size={20} color="#ffffff" />
+            <span className="ml-2">Updating...</span>
+          </>
+        ) : (
+          "Update Profile"
+        )}
       </button>
     </form>
   );
