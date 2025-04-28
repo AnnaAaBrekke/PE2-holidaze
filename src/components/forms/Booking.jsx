@@ -11,7 +11,6 @@ import {
   showAlert,
   showSuccess,
 } from "../../utils/notifications";
-import { Input } from "@material-tailwind/react";
 
 const BookingForm = ({
   venueId,
@@ -122,7 +121,7 @@ const BookingForm = ({
         <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
           <div>
             <label htmlFor="email">Email</label>
-            <Input
+            <input
               id="email"
               type="email"
               placeholder="Your email"
@@ -164,7 +163,7 @@ const BookingForm = ({
             </div>
 
             <label className="mt-4">Guests</label>
-            <Input
+            <input
               type="number"
               {...register("guests", { required: true, min: 1 })}
             />

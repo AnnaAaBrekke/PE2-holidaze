@@ -38,78 +38,118 @@ const RegisterForm = () => {
     <form
       onSubmit={handleSubmit(onSubmitForm)}
       noValidate
-      className="space-y-4"
+      className="space-y-6"
     >
       <h2 className="text-2xl font-bold mb-4">Register</h2>
 
-      <Input
-        label="Username*"
-        {...register("name", {
-          required: "Name is required",
-          pattern: {
-            value: /^[a-zA-Z0-9_]+$/,
-            message:
-              "Username must not contain punctuation except underscores.",
-          },
-        })}
-        error={!!errors.name}
-      />
-      {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+      {/* Username */}
+      <div>
+        <label htmlFor="name" className="block mb-1 font-medium">
+          Username*
+        </label>
+        <Input
+          id="name"
+          {...register("name", {
+            required: "Name is required",
+            pattern: {
+              value: /^[a-zA-Z0-9_]+$/,
+              message:
+                "Username must not contain punctuation except underscores.",
+            },
+          })}
+          error={!!errors.name}
+        />
+        {errors.name && (
+          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+        )}
+      </div>
 
-      <Input
-        label="Email*"
-        type="email"
-        {...register("email", {
-          required: "Email is required",
-          pattern: {
-            value: /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
-            message: "Email must be a valid stud.noroff.no address.",
-          },
-        })}
-        error={!!errors.email}
-      />
-      {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+      {/* Email */}
+      <div>
+        <label htmlFor="email" className="block mb-1 font-medium">
+          Email*
+        </label>
+        <Input
+          id="email"
+          type="email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
+              message: "Email must be a valid stud.noroff.no address.",
+            },
+          })}
+          error={!!errors.email}
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+        )}
+      </div>
 
-      <Input
-        label="Password*"
-        type="password"
-        {...register("password", {
-          required: "Password is required",
-          minLength: {
-            value: 8,
-            message: "Password must be at least 8 characters",
-          },
-        })}
-        error={!!errors.password}
-      />
-      {errors.password && (
-        <p className="text-red-500">{errors.password.message}</p>
-      )}
+      {/* Password */}
+      <div>
+        <label htmlFor="password" className="block mb-1 font-medium">
+          Password*
+        </label>
+        <Input
+          id="password"
+          type="password"
+          {...register("password", {
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters",
+            },
+          })}
+          error={!!errors.password}
+        />
+        {errors.password && (
+          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+        )}
+      </div>
 
-      <Input
-        label="Repeat Password*"
-        type="password"
-        {...register("password_repeat", {
-          validate: (value) => value === password || "Passwords do not match.",
-        })}
-        error={!!errors.password_repeat}
-      />
-      {errors.password_repeat && (
-        <p className="text-red-500">{errors.password_repeat.message}</p>
-      )}
+      {/* Repeat Password */}
+      <div>
+        <label htmlFor="password_repeat" className="block mb-1 font-medium">
+          Repeat Password*
+        </label>
+        <Input
+          id="password_repeat"
+          type="password"
+          {...register("password_repeat", {
+            validate: (value) =>
+              value === password || "Passwords do not match.",
+          })}
+          error={!!errors.password_repeat}
+        />
+        {errors.password_repeat && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.password_repeat.message}
+          </p>
+        )}
+      </div>
 
-      <Checkbox
-        label="Register as Venue Manager"
-        {...register("venueManager")}
-      />
+      {/* Venue Manager Checkbox */}
+      <div className="flex items-center gap-2">
+        <Checkbox id="venueManager" {...register("venueManager")} />
+        <label htmlFor="venueManager" className="text-sm font-medium">
+          Register as Venue Manager
+        </label>
+      </div>
 
-      <button type="submit" disabled={loading}>
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+      >
         {loading ? "Registering..." : "Register"}
       </button>
 
-      {error && <p className="text-red-500 mt-2">{error}</p>}
+      {/* Error display */}
+      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
-      <p className="mt-4">
+      <p className="mt-4 text-sm text-center">
         Already have an account?{" "}
         <Link to="/login" className="text-blue-500 underline">
           Login here
