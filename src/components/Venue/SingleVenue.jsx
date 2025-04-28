@@ -102,8 +102,7 @@ const SingleVenue = () => {
       <div className="flex items-center gap-2 mb-4">
         <MdLocationPin className="text-[#4C4DDC] text-lg" />
         <p className="text-sm text-[#939393] font-podkova">
-          {venue.location.address || ""}, {venue.location.city},{" "}
-          {venue.location.country}
+          {venue.location.city}, {venue.location.country}
         </p>
       </div>
 
