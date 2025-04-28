@@ -18,6 +18,7 @@ const BookingForm = ({
   ownerName,
   onClose,
   onBookingCreated,
+  price,
   maxGuests,
 }) => {
   const { token, user } = useAuth();
@@ -40,6 +41,12 @@ const BookingForm = ({
 
   const [dateRange, setDateRange] = useState([null, null]);
   const [dateFrom, dateTo] = dateRange;
+
+  const numberOfNights =
+    dateFrom && dateTo
+      ? Math.ceil((dateTo - dateFrom) / (1000 * 60 * 60 * 24))
+      : 0;
+  const totalPrice = numberOfNights * (price || 0);
 
   const onSubmitForm = async (bookingFormData) => {
     if (!dateFrom || !dateTo) {
@@ -64,6 +71,7 @@ const BookingForm = ({
         guests: Number(bookingFormData.guests),
         token,
         venueId,
+        totalPrice,
       });
 
       onBookingCreated?.();
@@ -177,6 +185,13 @@ const BookingForm = ({
             />
             {errors.guests && (
               <p className="text-sm text-red-500">{errors.guests.message}</p>
+            )}
+
+            {numberOfNights > 0 && (
+              <div>
+                <p>Total Nights: {numberOfNights}</p>
+                <p>Total Price: ${totalPrice} </p>
+              </div>
             )}
           </div>
 
