@@ -8,13 +8,17 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
 
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
+
+  const mediaUrlValue = watch("mediaUrl");
 
   useEffect(() => {
     if (mode === "edit" && venue) {
@@ -37,10 +41,13 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
     }
   }, [mode, venue, reset]);
 
+  useEffect(() => {
+    setPreviewImage(mediaUrlValue);
+  }, [mediaUrlValue]);
+
   const onSubmitVenueForm = async (formData) => {
     const confirmed = await confirmAction(
-      `This will ${mode === "edit" ? "update" : "create"} the venue. Do you want to continue?
-`,
+      `This will ${mode === "edit" ? "update" : "create"} the venue. Do you want to continue?`,
     );
     if (!confirmed) {
       return;
@@ -92,7 +99,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   };
 
   return (
-    <div className="container ">
+    <div className="container">
       <h2 className="mb-4">
         {mode === "edit" ? "Edit Venue" : "Create Venue"}
       </h2>
@@ -149,6 +156,25 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             <div className="invalid-feedback">{errors.maxGuests.message}</div>
           )}
         </div>
+
+        {/* Live Preview */}
+        {previewImage && (
+          <div className="mb-3">
+            <label className="form-label">Image Preview:</label>
+            <div>
+              <img
+                src={previewImage}
+                alt="Preview"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "300px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                }}
+              />
+            </div>
+          </div>
+        )}
 
         {/* Media Inputs */}
         <div className="mb-3">
