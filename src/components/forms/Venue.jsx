@@ -4,7 +4,7 @@ import { createVenue, updateVenue } from "../../services/VenueService";
 import { confirmAction, showSuccess } from "../../utils/notifications";
 import { useEffect } from "react";
 
-import { Input, Checkbox, Button } from "@material-tailwind/react";
+import { Input, Checkbox } from "@material-tailwind/react";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
