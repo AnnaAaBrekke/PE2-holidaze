@@ -5,13 +5,14 @@ import {
   MdLocationPin,
   MdWifi,
 } from "react-icons/md";
-import { FaDollarSign, FaParking, FaPaw } from "react-icons/fa";
+import { FaParking, FaPaw } from "react-icons/fa";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { RiCoinsFill } from "react-icons/ri";
 
 const VenueCard = ({
   venue,
@@ -122,7 +123,7 @@ const VenueCard = ({
         </div>
 
         <div className="bg-[#E0F9F6] px-4 py-2 rounded-md text-sm w-fit font-medium mb-3">
-          <FaDollarSign className="inline" /> ${venue.price}
+          <RiCoinsFill className="inline" />  Price p/night: ${venue.price}
         </div>
 
         {isManager && (

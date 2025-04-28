@@ -141,7 +141,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Price */}
         <div>
-          <label>Price*</label>
+          <label>Price per night*</label>
           <Input
             type="number"
             {...register("price", { required: "Price is required", min: 0 })}

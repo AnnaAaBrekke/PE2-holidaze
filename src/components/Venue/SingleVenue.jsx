@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import useVenue from "../../hooks/useVenue";
-import { FaDollarSign, FaParking, FaPaw, FaStar } from "react-icons/fa";
+import { FaParking, FaPaw, FaStar } from "react-icons/fa";
 import { MdFreeBreakfast, MdLocationPin, MdWifi } from "react-icons/md";
 import VenueCalendar from "./VenueCalender";
 import { useEffect, useRef, useState } from "react";
@@ -11,6 +11,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { RiCoinsFill } from "react-icons/ri";
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -143,9 +144,9 @@ const SingleVenue = () => {
 
       {/* Price */}
       <div className="flex items-center gap-2 bg-[#E0F9F6] px-4 py-2 rounded-md w-fit mb-6">
-        <FaDollarSign />
+        <RiCoinsFill />
         <span className="text-sm font-podkova text-[#101010]">
-          Price p/night: {venue.price}
+          Price p/night: ${venue.price}
         </span>
       </div>
 
