@@ -22,6 +22,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
       reset({
         name: venue.name || "",
         description: venue.description || "",
+        rating: venue.rating || 0,
         price: venue.price || "",
         maxGuests: venue.maxGuests || "",
         mediaUrl1: venue.media?.[0]?.url || "",
@@ -50,6 +51,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
     const venueFormData = {
       name: formData.name,
       description: formData.description,
+      rating: Number(formData.rating) || 0,
       price: Number(formData.price),
       maxGuests: Number(formData.maxGuests),
       media: [
@@ -121,6 +123,24 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
           />
           {errors.description && (
             <div className="invalid-feedback">{errors.description.message}</div>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Rating (0-5)</label>
+          <input
+            type="number"
+            step="0.1"
+            min="0"
+            max="5"
+            className={`form-control ${errors.rating ? "is-invalid" : ""}`}
+            {...register("rating", {
+              min: { value: 0, message: "Rating must be at least 0" },
+              max: { value: 5, message: "Rating cannot be more than 5" },
+            })}
+          />
+          {errors.rating && (
+            <div className="invalid-feedback">{errors.rating.message}</div>
           )}
         </div>
 
