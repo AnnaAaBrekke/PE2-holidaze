@@ -1,4 +1,5 @@
 import apiFetch from "../utils/apiFetch";
+import { friendlyError } from "../utils/errorMessages";
 
 const updateProfile = async (formData) => {
   const { name, url, alt, bio, token } = formData;
@@ -17,7 +18,7 @@ const updateProfile = async (formData) => {
     });
   } catch (error) {
     console.error("Error updating profile:", error.message);
-    throw error;
+    throw new Error(friendlyError(error.message));
   }
 };
 

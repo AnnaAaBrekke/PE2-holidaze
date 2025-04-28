@@ -168,6 +168,7 @@ const SingleVenue = () => {
               bookings={venue.bookings}
               ownerName={venue.owner?.name}
               onBookingCreated={refetch}
+              maxGuests={venue.maxGuests}
               onClose={() => setShowForm(false)}
             />
           </div>

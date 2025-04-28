@@ -18,6 +18,7 @@ const BookingForm = ({
   ownerName,
   onClose,
   onBookingCreated,
+  maxGuests,
 }) => {
   const { token, user } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -33,6 +34,7 @@ const BookingForm = ({
   } = useForm({
     defaultValues: {
       guests: 2,
+      email: user?.email || "",
     },
   });
 
@@ -125,21 +127,22 @@ const BookingForm = ({
               id="email"
               type="email"
               placeholder="Your email"
-              autoComplete="email"
-              aria-invalid={errors.email ? "true" : "false"}
               {...register("email", {
                 required: "Email is required",
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
-                  message: "The email must be a valid stud.noroff.no address.",
+                  message: "Must be a stud.noroff.no email address",
                 },
                 validate: (value) =>
                   value === user?.email ||
-                  "This email must match your registered email",
+                  "Email must match your registered email",
               })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
 
+            {/* Calendar Date Picker */}
             <div className="mt-4">
               <label>Select Date Range</label>
               <Calendar
@@ -149,11 +152,6 @@ const BookingForm = ({
                 tileDisabled={({ date }) =>
                   bookedDates.includes(date.toDateString()) || date < new Date()
                 }
-                tileClassName={({ date }) =>
-                  bookedDates.includes(date.toDateString())
-                    ? "booked-date"
-                    : "available-date"
-                }
               />
               {(!dateFrom || !dateTo) && (
                 <p className="text-sm text-red-500">
@@ -162,13 +160,23 @@ const BookingForm = ({
               )}
             </div>
 
-            <label className="mt-4">Guests</label>
+            <label className="mt-4" htmlFor="guests">
+              Guests
+            </label>
             <input
+              id="guests"
               type="number"
-              {...register("guests", { required: true, min: 1 })}
+              {...register("guests", {
+                required: "Guest count is required",
+                min: { value: 1, message: "At least 1 guest" },
+                max: {
+                  value: maxGuests || 10, // fallback max if missing
+                  message: `Cannot book more than ${maxGuests} guests`,
+                },
+              })}
             />
             {errors.guests && (
-              <p className="text-sm text-red-500">Guest is required</p>
+              <p className="text-sm text-red-500">{errors.guests.message}</p>
             )}
           </div>
 
