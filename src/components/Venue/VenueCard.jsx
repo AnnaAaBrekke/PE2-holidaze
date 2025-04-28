@@ -7,6 +7,12 @@ import {
 } from "react-icons/md";
 import { FaDollarSign, FaParking, FaPaw } from "react-icons/fa";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const VenueCard = ({
   venue,
   onEdit,
@@ -16,13 +22,52 @@ const VenueCard = ({
 }) => {
   return (
     <div className="relative w-full max-w-[323px] min-h-[620px] bg-white rounded-xl shadow-lg overflow-hidden transition hover:shadow-xl duration-300">
-      {/* Image */}
+      {/* Image / Swiper */}
       <div className="relative h-[395px] w-full">
-        <img
-          src={venue.media[0]?.url || "https://placehold.co/600x400"}
-          alt={venue.media[0]?.alt || venue.name}
-          className="w-full h-full object-cover rounded-t-xl"
-        />
+        {venue.media.length > 1 ? (
+          <Swiper
+            modules={[Navigation, Pagination]}
+            navigation
+            pagination={{ clickable: true }}
+            loop={true}
+            className="h-full rounded-t-xl"
+          >
+            <style>
+              {`
+                .swiper-button-next,
+                .swiper-button-prev {
+                  color: white;
+                }
+                .swiper-pagination-bullet {
+                  background-color: white;
+                  opacity: 0.7;
+                }
+                .swiper-pagination-bullet-active {
+                  background-color: white;
+                  opacity: 1;
+                }
+              `}
+            </style>
+
+            {venue.media.map((item, index) => (
+              <SwiperSlide key={index}>
+                <img
+                  src={item.url}
+                  alt={item.alt || venue.name}
+                  className="w-full h-full object-cover rounded-t-xl"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <img
+            src={venue.media[0]?.url || "https://placehold.co/600x400"}
+            alt={venue.media[0]?.alt || venue.name}
+            className="w-full h-full object-cover rounded-t-xl"
+          />
+        )}
+
+        {/* Location Overlay */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#08323B99] to-transparent px-4 py-3 text-white">
           <p className="text-lg font-podkova flex items-center gap-1">
             <MdLocationPin />

@@ -1,11 +1,3 @@
-// Import UseForm from React-hook-form
-// Create the form layout
-// Form fields required with regEx- pattern - validation
-// HandleSubmit Form onSubmit
-// UseAuth AuthProvider
-// reset, loading, error
-// Navigate
-
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
