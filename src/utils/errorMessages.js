@@ -19,5 +19,5 @@ export function friendlyError(message) {
   if (message.toLowerCase().includes("not found")) {
     return "The requested venue could not be found.";
   }
-  return "Something went wrong. Please try again later.";
+  return "Something went wrong. Please try again.";
 }
