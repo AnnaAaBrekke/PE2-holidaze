@@ -5,6 +5,12 @@ import { MdFreeBreakfast, MdLocationPin, MdWifi } from "react-icons/md";
 import VenueCalendar from "./VenueCalender";
 import { useEffect, useRef, useState } from "react";
 import BookingForm from "../forms/Booking";
+import SkeletonLoader from "../SkeletonLoader";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -20,19 +26,57 @@ const SingleVenue = () => {
 
   const handleOpenBookingForm = () => setShowForm((prev) => !prev);
 
-  if (loading) return <p className="text-center">Loading...</p>;
+  if (loading) return <SkeletonLoader type="card" count={1} layout="block" />;
   if (error) return <p className="text-center text-red-500">{error}</p>;
   if (!venue) return <p className="text-center">Venue not found.</p>;
 
   return (
     <div className="max-w-xl mx-auto p-6 relative">
-      {/* Venue Image */}
-      <div className="w-full h-[395px] rounded-xl overflow-hidden mb-6">
-        <img
-          src={venue.media[0]?.url || "https://placehold.co/600x400"}
-          alt={venue.media[0]?.alt || venue.name}
-          className="w-full h-full object-cover"
-        />
+      <div className="w-full h-[400px] rounded-xl overflow-hidden mb-6">
+        {venue.media.length > 1 ? (
+          <Swiper
+            modules={[Navigation, Pagination]}
+            navigation
+            pagination={{ clickable: true }}
+            loop={true}
+            className="h-full"
+          >
+            <style>
+              {`
+      .swiper-button-next,
+      .swiper-button-prev {
+        color: white;
+      }
+
+      .swiper-pagination-bullet {
+        background-color: white;
+        opacity: 0.7;
+      }
+
+      .swiper-pagination-bullet-active {
+        background-color: white;
+        opacity: 1;
+      }
+    `}
+            </style>
+
+            {venue.media.map((item, index) => (
+              <SwiperSlide key={index}>
+                <img
+                  src={item.url}
+                  alt={item.alt || venue.name}
+                  className="w-full h-full object-cover"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <img
+            src={venue.media[0]?.url || "https://placehold.co/600x400"}
+            alt={venue.media[0]?.alt || venue.name}
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
 
       {/* Name + Price + Rating */}
@@ -124,6 +168,7 @@ const SingleVenue = () => {
               bookings={venue.bookings}
               ownerName={venue.owner?.name}
               onBookingCreated={refetch}
+              maxGuests={venue.maxGuests}
               onClose={() => setShowForm(false)}
             />
           </div>

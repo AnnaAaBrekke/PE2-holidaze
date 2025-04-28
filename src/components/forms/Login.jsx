@@ -1,24 +1,18 @@
-// Import UseForm from React-hook-form
-// Create the form layout
-// Form fields required with regEx- pattern - validation
-// HandleSubmit Form onSubmit
-// UseAuth AuthProvider
-// reset, loading, error
-// Navigate
-
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
+import SkeletonLoader from "../SkeletonLoader";
+import { Input } from "@material-tailwind/react";
 
 const LoginForm = () => {
   const { login, loading, error } = useAuth();
   const navigate = useNavigate();
 
   const {
-    register, // tells inputs to register with the form
-    handleSubmit, // runs your function when the form is submitted,
-    formState: { errors }, // holds validation errors,
+    register,
+    handleSubmit,
+    formState: { errors },
   } = useForm();
 
   const onSubmitForm = async (formData) => {
@@ -27,58 +21,79 @@ const LoginForm = () => {
       await showSuccess(
         `Logged in successfully as a: ${result.data.venueManager ? "Venue Manager" : "Customer"}`,
       );
-      if (result.data?.venueManager) {
-        navigate("/manager");
-      } else {
-        navigate("/");
-      }
+      navigate(result.data.venueManager ? "/manager" : "/");
     }
   };
 
+  if (loading) {
+    return <SkeletonLoader type="login" />;
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)} noValidate>
-      <h2>Login</h2>
+    <form
+      onSubmit={handleSubmit(onSubmitForm)}
+      noValidate
+      className="space-y-6"
+    >
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
 
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        autoComplete="email"
-        aria-invalid={errors.email ? "true" : "false"}
-        {...register("email", {
-          required: "Email is required",
-          pattern: {
-            value: /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
-            message: "The email must be a valid stud.noroff.no address.",
-          },
-        })}
-      />
-      {errors.email && <p>{errors.email.message}</p>}
+      <div>
+        <label htmlFor="email" className="block mb-1 font-medium">
+          Email*
+        </label>
+        <Input
+          id="email"
+          type="email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
+              message: "Email must be a valid stud.noroff.no address.",
+            },
+          })}
+          error={!!errors.email}
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+        )}
+      </div>
 
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        autoComplete="new-password"
-        aria-invalid={errors.password ? "true" : "false"}
-        {...register("password", {
-          required: "Password is required",
-          minLength: {
-            value: 8,
-            message: "Password must be at least 8 characters",
-          },
-        })}
-      />
-      {errors.password && <p>{errors.password.message}</p>}
+      <div>
+        <label htmlFor="password" className="block mb-1 font-medium">
+          Password*
+        </label>
+        <Input
+          id="password"
+          type="password"
+          {...register("password", {
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters",
+            },
+          })}
+          error={!!errors.password}
+        />
+        {errors.password && (
+          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+        )}
+      </div>
 
-      <button type="submit" disabled={loading}>
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+      >
         {loading ? "Logging in..." : "Login"}
       </button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
-      <p className="mt-3">
-        Don't have an account? <Link to="/register">Register here</Link>
+      <p className="mt-4 text-sm text-center">
+        Don't have an account?{" "}
+        <Link to="/register" className="text-blue-500 underline">
+          Register here
+        </Link>
       </p>
     </form>
   );

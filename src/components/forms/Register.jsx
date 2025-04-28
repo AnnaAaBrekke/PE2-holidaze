@@ -1,25 +1,19 @@
-// Import UseForm from React-hook-form
-// Create the form layout
-// Form fields required with regEx- pattern - validation
-// HandleSubmit Form onSubmit
-// UseAuth AuthProvider
-// reset, loading, error
-// Navigate
-
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
+import SkeletonLoader from "../SkeletonLoader";
+import { Input, Checkbox } from "@material-tailwind/react";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();
   const navigate = useNavigate();
 
   const {
-    register, // tells inputs to register with the form
-    handleSubmit, // runs your function when the form is submitted,
+    register,
+    handleSubmit,
     watch,
-    formState: { errors }, // holds validation errors,
+    formState: { errors },
     reset,
   } = useForm();
 
@@ -36,86 +30,130 @@ const RegisterForm = () => {
     }
   };
 
+  if (loading) {
+    return <SkeletonLoader type="register" />;
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)} noValidate>
-      <h2>Register</h2>
+    <form
+      onSubmit={handleSubmit(onSubmitForm)}
+      noValidate
+      className="space-y-6"
+    >
+      <h2 className="text-2xl font-bold mb-4">Register</h2>
 
-      <label htmlFor="name">Username</label>
-      <input
-        id="name"
-        autoComplete="username"
-        aria-invalid={errors.name ? "true" : "false"}
-        {...register("name", {
-          required: "Name is required",
-          pattern: {
-            value: /^[a-zA-Z0-9_]+$/,
-            message:
-              "The name must not contain punctuation except underscores.",
-          },
-        })}
-      />
-      {errors.name && <p>{errors.name.message}</p>}
+      {/* Username */}
+      <div>
+        <label htmlFor="name" className="block mb-1 font-medium">
+          Username*
+        </label>
+        <Input
+          id="name"
+          {...register("name", {
+            required: "Name is required",
+            pattern: {
+              value: /^[a-zA-Z0-9_]+$/,
+              message:
+                "Username must not contain punctuation except underscores.",
+            },
+          })}
+          error={!!errors.name}
+        />
+        {errors.name && (
+          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+        )}
+      </div>
 
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        autoComplete="email"
-        aria-invalid={errors.email ? "true" : "false"}
-        {...register("email", {
-          required: "Email is required",
-          pattern: {
-            value: /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
-            message: "The email must be a valid stud.noroff.no address.",
-          },
-        })}
-      />
-      {errors.email && <p>{errors.email.message}</p>}
+      {/* Email */}
+      <div>
+        <label htmlFor="email" className="block mb-1 font-medium">
+          Email*
+        </label>
+        <Input
+          id="email"
+          type="email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
+              message: "Email must be a valid stud.noroff.no address.",
+            },
+          })}
+          error={!!errors.email}
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+        )}
+      </div>
 
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        autoComplete="new-password"
-        aria-invalid={errors.password ? "true" : "false"}
-        {...register("password", {
-          required: "Password is required",
-          minLength: {
-            value: 8,
-            message: "Password must be at least 8 characters",
-          },
-        })}
-      />
-      {errors.password && <p>{errors.password.message}</p>}
+      {/* Password */}
+      <div>
+        <label htmlFor="password" className="block mb-1 font-medium">
+          Password*
+        </label>
+        <Input
+          id="password"
+          type="password"
+          {...register("password", {
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters",
+            },
+          })}
+          error={!!errors.password}
+        />
+        {errors.password && (
+          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+        )}
+      </div>
 
-      <label htmlFor="password_repeat">Repeat Password</label>
-      <input
-        id="password_repeat"
-        type="password"
-        autoComplete="new-password"
-        aria-invalid={errors.password_repeat ? "true" : "false"}
-        {...register("password_repeat", {
-          validate: (value) =>
-            value === password || "The password do not match.",
-        })}
-      />
-      {errors.password_repeat && <p>{errors.password_repeat.message}</p>}
+      {/* Repeat Password */}
+      <div>
+        <label htmlFor="password_repeat" className="block mb-1 font-medium">
+          Repeat Password*
+        </label>
+        <Input
+          id="password_repeat"
+          type="password"
+          {...register("password_repeat", {
+            validate: (value) =>
+              value === password || "Passwords do not match.",
+          })}
+          error={!!errors.password_repeat}
+        />
+        {errors.password_repeat && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.password_repeat.message}
+          </p>
+        )}
+      </div>
 
-      <label htmlFor="venueManagerBox">Register as Venue Manager</label>
-      <input
-        id="venueManagerBox"
-        type="checkbox"
-        {...register("venueManager")}
-      />
+      {/* Venue Manager Checkbox */}
+      <div className="flex items-center gap-2">
+        <Checkbox id="venueManager" {...register("venueManager")} />
+        <label htmlFor="venueManager" className="text-sm font-medium">
+          Register as Venue Manager
+        </label>
+      </div>
 
-      <button type="submit" disabled={loading}>
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+      >
         {loading ? "Registering..." : "Register"}
       </button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* Error display */}
+      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
-      <p>
-        Already have a user? <Link to={"/login"}>Login here</Link>
+      <p className="mt-4 text-sm text-center">
+        Already have an account?{" "}
+        <Link to="/login" className="text-blue-500 underline">
+          Login here
+        </Link>
       </p>
     </form>
   );

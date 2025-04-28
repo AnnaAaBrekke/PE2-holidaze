@@ -1,4 +1,5 @@
 import apiFetch from "../utils/apiFetch";
+import { friendlyError } from "../utils/errorMessages";
 
 export const createBooking = async ({
   dateFrom,
@@ -22,7 +23,7 @@ export const createBooking = async ({
     });
   } catch (error) {
     console.error("Error creating booking", error.message);
-    throw error;
+    throw new Error(friendlyError(error.message));
   }
 };
 
@@ -34,6 +35,6 @@ export const getUserBookings = async (name, token) => {
     });
   } catch (error) {
     console.error("Error fetching user bookings:", error.message);
-    throw error;
+    throw new Error(friendlyError(error.message));
   }
 };

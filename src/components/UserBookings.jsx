@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { getUserBookings } from "../services/BookingService";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
+import SkeletonLoader from "./SkeletonLoader";
 
 const UserBookings = () => {
   const { user, token } = useAuth();
@@ -32,6 +33,10 @@ const UserBookings = () => {
 
     fetchBookings();
   }, [user?.name, token]);
+
+  if (loading) {
+    return <SkeletonLoader type="card" count={2} />;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
