@@ -39,33 +39,15 @@ const SingleVenue = () => {
             modules={[Navigation, Pagination]}
             navigation
             pagination={{ clickable: true }}
-            loop={true}
-            className="h-full"
+            loop
+            className="h-full rounded-t-lg"
           >
-            <style>
-              {`
-      .swiper-button-next,
-      .swiper-button-prev {
-        color: white;
-      }
-
-      .swiper-pagination-bullet {
-        background-color: white;
-        opacity: 0.7;
-      }
-
-      .swiper-pagination-bullet-active {
-        background-color: white;
-        opacity: 1;
-      }
-    `}
-            </style>
             {venue.media.map((item, idx) => (
               <SwiperSlide key={`${item.url}-${idx}`}>
                 <img
                   src={item.url}
                   alt={item.alt || venue.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-t-lg"
                 />
               </SwiperSlide>
             ))}

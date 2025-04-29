@@ -16,7 +16,7 @@ const Hero = ({ setSearchNameDesc, setSearchCountry, searchNameDesc }) => {
     );
 
   return (
-    <div className="bg-gray-100 py-8">
+    <div className="py-8">
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-4xl font-bold text-center mb-6">
           Find Your Perfect Venue

@@ -8,6 +8,30 @@ body {
   @apply font-podkova;
 }
 
+/* Swiper Navigation (arrows) */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  transition: color 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #facc15 !important; /* Tailwind yellow-400 */
+}
+
+/* Swiper Pagination (dots) */
+.swiper-pagination-bullet {
+  background: white !important;
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background: white !important;
+  opacity: 1;
+}
+
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
