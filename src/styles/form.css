@@ -17,11 +17,6 @@
   @apply block mb-0.5 font-medium text-black;
 }
 
-/* Reusable button style */
-.button-style {
-  @apply w-full py-2 bg-[#8676CB] text-white rounded-md hover:bg-[#6d5ab8] transition duration-300;
-}
-
 /* Error text */
 .error-text {
   @apply text-red-500 text-sm mt-1;

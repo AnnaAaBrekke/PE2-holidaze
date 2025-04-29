@@ -74,9 +74,7 @@ const RegisterForm = () => {
           })}
           error={!!errors.name}
         />
-        {errors.name && (
-          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-        )}
+        {errors.name && <p className="error-text">{errors.name.message}</p>}
       </div>
 
       {/* Email */}
@@ -97,9 +95,7 @@ const RegisterForm = () => {
           })}
           error={!!errors.email}
         />
-        {errors.email && (
-          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-        )}
+        {errors.email && <p className="error-text">{errors.email.message}</p>}
       </div>
 
       {/* Password */}
@@ -121,7 +117,7 @@ const RegisterForm = () => {
           error={!!errors.password}
         />
         {errors.password && (
-          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+          <p className="error-text">{errors.password.message}</p>
         )}
       </div>
 
@@ -141,9 +137,7 @@ const RegisterForm = () => {
           error={!!errors.password_repeat}
         />
         {errors.password_repeat && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.password_repeat.message}
-          </p>
+          <p className="error-text">{errors.password_repeat.message}</p>
         )}
       </div>
 
@@ -163,7 +157,7 @@ const RegisterForm = () => {
       </button>
 
       {/* Error display */}
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+      {error && <p className="error-text">{error}</p>}
 
       <p className="mt-4 text-sm text-center">
         Already have an account?{" "}

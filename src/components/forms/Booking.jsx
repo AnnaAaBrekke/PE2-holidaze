@@ -151,7 +151,7 @@ const BookingForm = ({
               })}
             />
             {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
+              <p className="error-text">{errors.email.message}</p>
             )}
 
             {/* Calendar Date Picker */}
@@ -166,9 +166,7 @@ const BookingForm = ({
                 }
               />
               {(!dateFrom || !dateTo) && (
-                <p className="text-sm text-red-500">
-                  Please pick a start and end date
-                </p>
+                <p className="error-text">Please pick a start and end date</p>
               )}
             </div>
 
@@ -189,7 +187,7 @@ const BookingForm = ({
               })}
             />
             {errors.guests && (
-              <p className="text-sm text-red-500">{errors.guests.message}</p>
+              <p className="error-text">{errors.guests.message}</p>
             )}
 
             {numberOfNights > 0 && (
@@ -200,7 +198,7 @@ const BookingForm = ({
             )}
           </div>
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="error-text">{error}</p>}
 
           <button
             type="submit"

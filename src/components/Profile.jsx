@@ -94,9 +94,10 @@ const Profile = () => {
           </div>
         </div>
       ) : (
-        <p className="text-center">
-          Create a profile?{" "}
+        <p className="text-center mt-3">
+          Create a profile?
           <Link to="/register" className="text-blue-600 hover:underline">
+            <br />
             Register here
           </Link>
         </p>

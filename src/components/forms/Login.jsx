@@ -57,7 +57,7 @@ const LoginForm = () => {
           error={!!errors.email}
         />
         {errors.email && (
-          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+          <p className="error-tex">{errors.email.message}</p>
         )}
       </div>
 
@@ -79,7 +79,7 @@ const LoginForm = () => {
           error={!!errors.password}
         />
         {errors.password && (
-          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+          <p className="error-text">{errors.password.message}</p>
         )}
       </div>
 
@@ -98,7 +98,7 @@ const LoginForm = () => {
         )}
       </button>
 
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+      {error && <p className="error-text">{error}</p>}
 
       <p className="mt-2 text-center">
         Don't have an account?{" "}

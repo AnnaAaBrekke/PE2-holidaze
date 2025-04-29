@@ -108,7 +108,7 @@ const EditProfileForm = ({ onClose }) => {
         {errors.bio && <p>{errors.bio.message}</p>}
       </div>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="error-text">{error}</p>}
 
       <button
         type="submit"

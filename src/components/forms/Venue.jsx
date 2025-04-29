@@ -114,9 +114,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             className="input-style"
             {...register("name", { required: "Name is required" })}
           />
-          {errors.name && (
-            <p className="text-red-500 text-xs">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="error-text">{errors.name.message}</p>}
         </div>
 
         {/* Description */}
@@ -129,7 +127,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             })}
           />
           {errors.description && (
-            <p className="text-red-500 text-xs">{errors.description.message}</p>
+            <p className="error-text">{errors.description.message}</p>
           )}
         </div>
 
@@ -145,7 +143,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             })}
           />
           {errors.rating && (
-            <p className="text-red-500 text-xs">{errors.rating.message}</p>
+            <p className="error-text">{errors.rating.message}</p>
           )}
         </div>
 
@@ -157,9 +155,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             type="number"
             {...register("price", { required: "Price is required", min: 0 })}
           />
-          {errors.price && (
-            <p className="text-red-500 text-xs">{errors.price.message}</p>
-          )}
+          {errors.price && <p className="error-text">{errors.price.message}</p>}
         </div>
 
         {/* Max Guests */}
@@ -174,7 +170,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             })}
           />
           {errors.maxGuests && (
-            <p className="text-red-500 text-xs">{errors.maxGuests.message}</p>
+            <p className="error-text">{errors.maxGuests.message}</p>
           )}
         </div>
 
@@ -220,9 +216,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             className="input-style"
             {...register("city", { required: "City is required" })}
           />
-          {errors.city && (
-            <p className="text-red-500 text-xs">{errors.city.message}</p>
-          )}
+          {errors.city && <p className="error-text">{errors.city.message}</p>}
         </div>
 
         {/* Country */}
@@ -233,7 +227,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
             {...register("country", { required: "Country is required" })}
           />
           {errors.country && (
-            <p className="text-red-500 text-xs">{errors.country.message}</p>
+            <p className="error-text">{errors.country.message}</p>
           )}
         </div>
 
