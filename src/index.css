@@ -6,6 +6,7 @@
 
 body {
   @apply font-podkova;
+  background-color: #edf7f6;
 }
 
 /* Swiper Navigation (arrows) */

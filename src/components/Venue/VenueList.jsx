@@ -36,7 +36,7 @@ const VenuesList = ({ searchNameDesc, searchCountry }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mt-6">
         {filteredVenues.length > 0 ? (
           filteredVenues.map((venue) => (
             <VenueCard key={venue.id} venue={venue} />

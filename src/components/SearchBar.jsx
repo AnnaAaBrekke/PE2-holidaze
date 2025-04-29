@@ -43,7 +43,7 @@ const SearchBar = ({
             value={searchNameDesc}
             onChange={handleVenueChange}
             placeholder="Search venues..."
-            className="border border-gray-300 w-full p-2 rounded text-sm pr-10"
+            className="border border-gray-300 w-full p-3 rounded text-sm pr-10"
           />
           <button
             onClick={handleClear}
