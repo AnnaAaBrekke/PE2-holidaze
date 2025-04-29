@@ -45,7 +45,7 @@ const UserBookings = () => {
       {bookings.length === 0 ? (
         <p className="text-center text-gray-500">No upcoming bookings found.</p>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 justify-center">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 justify-center">
           {bookings.map((booking) => {
             const { venue } = booking;
 
