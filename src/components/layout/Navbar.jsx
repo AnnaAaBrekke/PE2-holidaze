@@ -45,7 +45,7 @@ const Navbar = () => {
           <Link to="/">
             <img
               src="/logo_holidaze.png"
-              className="w-16 rounded-full h-auto"
+              className="w-14 rounded-full h-auto"
             />
           </Link>
         </div>

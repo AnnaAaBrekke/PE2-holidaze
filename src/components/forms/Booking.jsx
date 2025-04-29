@@ -11,6 +11,7 @@ import {
   showAlert,
   showSuccess,
 } from "../../utils/notifications";
+import "../../styles/form.css";
 
 const BookingForm = ({
   venueId,
@@ -128,11 +129,14 @@ const BookingForm = ({
           <MdWarningAmber /> You cannot book your own venue.
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmitForm)} className="form-style">
           <div>
-            <label htmlFor="email">Email</label>
+            <label className="label-style" htmlFor="email">
+              Email
+            </label>
             <input
               id="email"
+              className="input-style"
               type="email"
               placeholder="Your email"
               {...register("email", {
@@ -152,7 +156,7 @@ const BookingForm = ({
 
             {/* Calendar Date Picker */}
             <div className="mt-4">
-              <label>Select Date Range</label>
+              <label className="label-style">Select Date Range</label>
               <Calendar
                 selectRange
                 onChange={setDateRange}
@@ -168,11 +172,12 @@ const BookingForm = ({
               )}
             </div>
 
-            <label className="mt-4" htmlFor="guests">
+            <label className="label-style" htmlFor="guests">
               Guests
             </label>
             <input
               id="guests"
+              className="input-style"
               type="number"
               {...register("guests", {
                 required: "Guest count is required",

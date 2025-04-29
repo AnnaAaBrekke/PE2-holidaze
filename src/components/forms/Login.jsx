@@ -5,6 +5,7 @@ import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
 import { Input } from "@material-tailwind/react";
 import { ClipLoader } from "react-spinners";
+import "../../styles/form.css";
 
 const LoginForm = () => {
   const { login, loading, error } = useAuth();
@@ -34,16 +35,17 @@ const LoginForm = () => {
     <form
       onSubmit={handleSubmit(onSubmitForm)}
       noValidate
-      className="space-y-6"
+      className="form-style"
     >
       <h2 className="text-2xl font-bold mb-4">Login</h2>
 
       <div>
-        <label htmlFor="email" className="block mb-1 font-medium">
+        <label htmlFor="email" className="label.style">
           Email*
         </label>
         <Input
           id="email"
+          className="input-style"
           type="email"
           {...register("email", {
             required: "Email is required",
@@ -60,11 +62,12 @@ const LoginForm = () => {
       </div>
 
       <div>
-        <label htmlFor="password" className="block mb-1 font-medium">
+        <label htmlFor="password" className="label-style">
           Password*
         </label>
         <Input
           id="password"
+          className="input-style"
           type="password"
           {...register("password", {
             required: "Password is required",
@@ -97,7 +100,7 @@ const LoginForm = () => {
 
       {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
-      <p className="mt-4 text-sm text-center">
+      <p className="mt-2 text-center">
         Don't have an account?{" "}
         <Link to="/register" className="text-blue-500 underline">
           Register here

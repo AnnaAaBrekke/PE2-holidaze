@@ -5,6 +5,7 @@ import { confirmAction, showSuccess } from "../../utils/notifications";
 import { useEffect, useState } from "react";
 import { Input, Checkbox } from "@material-tailwind/react";
 import { ClipLoader } from "react-spinners";
+import "../../styles/form.css";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
@@ -96,20 +97,23 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div>
       <h2 className="text-2xl font-bold mb-4">
         {mode === "edit" ? "Edit Venue" : "Create Venue"}
       </h2>
 
       <form
         onSubmit={handleSubmit(onSubmitVenueForm)}
-        className="space-y-6"
+        className="form-style"
         noValidate
       >
         {/* Name */}
         <div>
-          <label>Name*</label>
-          <Input {...register("name", { required: "Name is required" })} />
+          <label className="label-style">Name*</label>
+          <Input
+            className="input-style"
+            {...register("name", { required: "Name is required" })}
+          />
           {errors.name && (
             <p className="text-red-500 text-xs">{errors.name.message}</p>
           )}
@@ -117,12 +121,12 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Description */}
         <div>
-          <label>Description*</label>
+          <label className="label-style">Description*</label>
           <textarea
+            className="input-style"
             {...register("description", {
               required: "Description is required",
             })}
-            className="border p-2 w-full rounded-md"
           />
           {errors.description && (
             <p className="text-red-500 text-xs">{errors.description.message}</p>
@@ -131,8 +135,9 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Rating */}
         <div>
-          <label>Rating (0-5)</label>
+          <label className="label-style">Rating (0-5)</label>
           <Input
+            className="input-style"
             type="number"
             {...register("rating", {
               min: { value: 0, message: "Minimum rating is 0" },
@@ -146,8 +151,9 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Price */}
         <div>
-          <label>Price per night*</label>
+          <label className="label-style">Price per night*</label>
           <Input
+            className="input-style"
             type="number"
             {...register("price", { required: "Price is required", min: 0 })}
           />
@@ -158,8 +164,9 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Max Guests */}
         <div>
-          <label>Max Guests*</label>
+          <label className="label-style">Max Guests*</label>
           <Input
+            className="input-style"
             type="number"
             {...register("maxGuests", {
               required: "Max guests required",
@@ -187,28 +194,32 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Image URLs */}
         <div>
-          <label>Main Image URL*</label>
+          <label className="label-style">Main Image URL*</label>
           <Input
+            className="input-style"
             {...register("mediaUrl1", { required: "Main image URL required" })}
           />
         </div>
         <div>
-          <label>Image URL 2 (optional)</label>
-          <Input {...register("mediaUrl2")} />
+          <label className="label-style">Image URL 2 (optional)</label>
+          <Input className="input-style" {...register("mediaUrl2")} />
         </div>
         <div>
-          <label>Image URL 3 (optional)</label>
-          <Input {...register("mediaUrl3")} />
+          <label className="label-style">Image URL 3 (optional)</label>
+          <Input className="input-style" {...register("mediaUrl3")} />
         </div>
         <div>
-          <label>Image URL 4 (optional)</label>
-          <Input {...register("mediaUrl4")} />
+          <label className="label-style">Image URL 4 (optional)</label>
+          <Input className="input-style" {...register("mediaUrl4")} />
         </div>
 
         {/* City */}
         <div>
-          <label>City*</label>
-          <Input {...register("city", { required: "City is required" })} />
+          <label className="label-style">City*</label>
+          <Input
+            className="input-style"
+            {...register("city", { required: "City is required" })}
+          />
           {errors.city && (
             <p className="text-red-500 text-xs">{errors.city.message}</p>
           )}
@@ -216,8 +227,9 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Country */}
         <div>
-          <label>Country*</label>
+          <label className="label-style">Country*</label>
           <Input
+            className="input-style"
             {...register("country", { required: "Country is required" })}
           />
           {errors.country && (

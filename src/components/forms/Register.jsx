@@ -5,6 +5,7 @@ import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
 import { Input, Checkbox } from "@material-tailwind/react";
 import { ClipLoader } from "react-spinners";
+import "../../styles/form.css";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();
@@ -39,17 +40,30 @@ const RegisterForm = () => {
     <form
       onSubmit={handleSubmit(onSubmitForm)}
       noValidate
-      className="space-y-6"
+      className="form-style"
     >
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <h2 className="text-2xl font-bold">Register</h2>
+
+      {/* Venue Manager Checkbox */}
+      <div className="flex items-center">
+        <Checkbox
+          id="venueManager"
+          {...register("venueManager")}
+          className="size-4"
+        />
+        <label htmlFor="venueManager" className="label-style">
+          Register as Venue Manager
+        </label>
+      </div>
 
       {/* Username */}
       <div>
-        <label htmlFor="name" className="block mb-1 font-medium">
+        <label htmlFor="name" className="label-style">
           Username*
         </label>
         <Input
           id="name"
+          className="input-style"
           {...register("name", {
             required: "Name is required",
             pattern: {
@@ -67,11 +81,12 @@ const RegisterForm = () => {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block mb-1 font-medium">
+        <label htmlFor="email" className="label-style">
           Email*
         </label>
         <Input
           id="email"
+          className="input-style"
           type="email"
           {...register("email", {
             required: "Email is required",
@@ -89,11 +104,12 @@ const RegisterForm = () => {
 
       {/* Password */}
       <div>
-        <label htmlFor="password" className="block mb-1 font-medium">
+        <label htmlFor="password" className="label-style">
           Password*
         </label>
         <Input
           id="password"
+          className="input-style"
           type="password"
           {...register("password", {
             required: "Password is required",
@@ -116,6 +132,7 @@ const RegisterForm = () => {
         </label>
         <Input
           id="password_repeat"
+          className="input-style"
           type="password"
           {...register("password_repeat", {
             validate: (value) =>
@@ -128,14 +145,6 @@ const RegisterForm = () => {
             {errors.password_repeat.message}
           </p>
         )}
-      </div>
-
-      {/* Venue Manager Checkbox */}
-      <div className="flex items-center gap-2">
-        <Checkbox id="venueManager" {...register("venueManager")} />
-        <label htmlFor="venueManager" className="text-sm font-medium">
-          Register as Venue Manager
-        </label>
       </div>
 
       <button

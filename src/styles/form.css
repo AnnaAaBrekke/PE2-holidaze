@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Full form container style */
+.form-style {
+  @apply flex flex-col gap-6 p-10 bg-white rounded-md shadow-md w-full max-w-lg mx-auto mt-6 text-left;
+}
+
+/* Reusable input style */
+.input-style {
+  @apply w-full border border-[#6385AD] rounded-md px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-[#6385AD] focus:border-transparent;
+}
+
+/* Reusable label style */
+.label-style {
+  @apply block mb-0.5 font-medium text-black;
+}
+
+/* Reusable button style */
+.button-style {
+  @apply w-full py-2 bg-[#8676CB] text-white rounded-md hover:bg-[#6d5ab8] transition duration-300;
+}
+
+/* Error text */
+.error-text {
+  @apply text-red-500 text-sm mt-1;
+}

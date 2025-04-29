@@ -4,6 +4,7 @@ import updateProfile from "../../services/ProfileService";
 import { useState } from "react";
 import { showAlert, showSuccess } from "../../utils/notifications";
 import { ClipLoader } from "react-spinners";
+import "../../styles/form.css";
 
 const EditProfileForm = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -54,10 +55,10 @@ const EditProfileForm = ({ onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)}>
+    <form onSubmit={handleSubmit(onSubmitForm)} className="form-style">
       {/* Avatar Preview*/}
 
-      <div className="flex gap-4 mt-4 items-center">
+      <div className="flex gap-4 mt-4 justify-center">
         <div>
           <p className="text-sm">Current Avatar</p>
           <img
@@ -81,20 +82,29 @@ const EditProfileForm = ({ onClose }) => {
       </div>
 
       <div>
-        <label>Avatar URL</label>
-        <input {...register("url", { required: "URL is required" })} />
+        <label className="label-style">Avatar URL</label>
+        <input
+          className="input-style"
+          {...register("url", { required: "URL is required" })}
+        />
         {errors.url && <p>{errors.url.message}</p>}
       </div>
 
       <div>
-        <label>Avatar Alt</label>
-        <input {...register("alt", { required: "Alt is required" })} />
+        <label className="label-style">Avatar Alt</label>
+        <input
+          className="input-style"
+          {...register("alt", { required: "Alt is required" })}
+        />
         {errors.alt && <p>{errors.alt.message}</p>}
       </div>
 
       <div>
-        <label>Bio</label>
-        <textarea {...register("bio", { maxLength: 200 })} />
+        <label className="label-style">Bio</label>
+        <textarea
+          className="input-style"
+          {...register("bio", { maxLength: 200 })}
+        />
         {errors.bio && <p>{errors.bio.message}</p>}
       </div>
 
