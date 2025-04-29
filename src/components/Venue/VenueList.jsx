@@ -47,7 +47,7 @@ const VenuesList = ({ searchNameDesc, searchCountry }) => {
       </div>
 
       {/* Pagination buttons */}
-      <div className="flex gap-4 mt-6">
+      <div className="flex gap-4 m-10">
         <button
           onClick={handlePrevPage}
           className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
