@@ -1,0 +1,19 @@
+.react-calendar {
+  @apply rounded-2xl p-4 max-w-[540px] bg-[#F4F4E8] shadow-md font-roboto;
+}
+
+.react-calendar__tile {
+  @apply flex items-center justify-center w-10 h-10 rounded-full text-sm transition-colors duration-200;
+}
+
+.react-calendar__tile:disabled {
+  @apply text-gray-300 pointer-events-none;
+}
+
+.react-calendar__tile--now {
+  @apply bg-[#E2E4D4] text-[#1B1C15];
+}
+
+.react-calendar__tile:hover:not(:disabled) {
+  @apply bg-[#E3E3D7];
+}
