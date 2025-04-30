@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { RiCoinsFill } from "react-icons/ri";
+import "../../styles/button.css";
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -63,7 +64,7 @@ const SingleVenue = () => {
 
       {/* Name + Price + Rating */}
       <div className="flex justify-between items-start mb-2">
-        <h1 className="text-2xl font-bold font-podkova underline break-all">
+        <h1 className="text-2xl font-bold font-podkova underline truncate">
           {venue.name}
         </h1>
         <div className="flex gap-1">
@@ -93,9 +94,18 @@ const SingleVenue = () => {
         <h2 className="text-xl font-podkova font-medium text-[#101010] mb-2">
           Description
         </h2>
-        <p className="text-[#939393] text-lg font-podkova leading-[1.5]">
-          {venue.description}
-        </p>
+        <div className="relative group cursor-pointer w-full">
+          <p
+            className="line-clamp-3 text-[#939393] text-lg font-podkova leading-[1.5]"
+            title={venue.description}
+          >
+            {venue.description}
+          </p>
+
+          <div className="absolute z-10 hidden group-hover:block bg-white border border-gray-300 text-sm text-gray-800 p-2 rounded shadow-lg w-72 top-full mt-1">
+            {venue.description}
+          </div>
+        </div>
       </div>
 
       {/* Meta features (Wifi, Breakfast, Pets, Parking) */}
@@ -134,7 +144,7 @@ const SingleVenue = () => {
       <div className="w-full text-center">
         <button
           onClick={handleOpenBookingForm}
-          className="w-full bg-[#0F6474] text-white font-podkova text-lg font-semibold py-3 rounded-lg hover:bg-[#0c4e5a] transition"
+          className="button-primary-style w-full"
         >
           {showForm ? "Close" : "Create Booking"}
         </button>

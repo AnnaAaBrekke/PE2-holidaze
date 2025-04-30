@@ -6,6 +6,7 @@ import SkeletonLoader from "../SkeletonLoader";
 import { Input } from "@material-tailwind/react";
 import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
+import "../../styles/button.css";
 
 const LoginForm = () => {
   const { login, loading, error } = useAuth();
@@ -56,9 +57,7 @@ const LoginForm = () => {
           })}
           error={!!errors.email}
         />
-        {errors.email && (
-          <p className="error-tex">{errors.email.message}</p>
-        )}
+        {errors.email && <p className="error-tex">{errors.email.message}</p>}
       </div>
 
       <div>
@@ -83,11 +82,7 @@ const LoginForm = () => {
         )}
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
+      <button type="submit" disabled={loading} className="button-primary-style">
         {loading ? (
           <>
             <ClipLoader size={20} color="#ffffff" />
@@ -102,7 +97,7 @@ const LoginForm = () => {
 
       <p className="mt-2 text-center">
         Don't have an account?{" "}
-        <Link to="/register" className="text-blue-500 underline">
+        <Link to="/register" className="text-color-secondary hover:underline">
           Register here
         </Link>
       </p>

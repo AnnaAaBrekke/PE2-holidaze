@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { GoSidebarCollapse } from "react-icons/go";
 import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
+import "../../styles/button.css";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -25,8 +26,8 @@ const Navbar = () => {
 
     return `flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 p-2 rounded transition-all ${
       isActive
-        ? "font-bold text-blue-600 border-l-4 border-blue-600 sm:pl-2 bg-blue-50"
-        : "text-gray-700 hover:text-blue-600"
+        ? "font-bold text-color-primary border-l-4 border-color-primary sm:pl-2 bg-color-background"
+        : "text-color-text-primary hover:text-color-primary"
     }`;
   };
 
@@ -70,15 +71,12 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="text-sm bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-              >
+              <Link to="/login" className="text-sm button-secondary-style">
                 Login
               </Link>
               <Link
                 to="/register"
-                className="text-sm bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 transition"
+                className="text-sm bg-[#0E4551] button-secondary-style"
               >
                 Register
               </Link>

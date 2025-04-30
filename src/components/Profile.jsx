@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import EditProfileForm from "./forms/EditProfile";
 import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaSignOutAlt, FaUserEdit } from "react-icons/fa";
+import "../styles/button.css";
 
 const Profile = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -49,10 +50,12 @@ const Profile = () => {
           </p>
 
           {/* Edit Profile Button */}
+
           <button
             onClick={handleEditProfileClick}
-            className="bg-[#0F6474] hover:bg-[#0E4551] text-white font-semibold px-6 py-2 rounded-full mb-6 transition-all"
+            className="button-primary-style flex items-center gap-2"
           >
+            <FaUserEdit />
             {showForm ? "Close" : "Edit Profile"}
           </button>
 
@@ -68,7 +71,7 @@ const Profile = () => {
             {user?.venueManager ? (
               <Link
                 to="/manager"
-                className="flex items-center gap-2 bg-[#AFCDA2] text-[#08323B] hover:bg-[#96A88E] font-medium py-2 px-4 rounded-full w-full justify-center transition"
+                className="flex flex-row items-center gap-2 button-secondary-style"
               >
                 <RiHomeGearLine className="text-lg" />
                 Manage Venues
@@ -76,7 +79,7 @@ const Profile = () => {
             ) : (
               <Link
                 to="/bookings"
-                className="flex items-center gap-2 bg-[#AFCDA2] text-[#08323B] hover:bg-[#96A88E] font-medium py-2 px-4 rounded-full w-full justify-center transition"
+                className="flex flex-row items-center gap-2 button-secondary-style"
               >
                 <RiHomeHeartLine className="text-lg" />
                 My Bookings
@@ -86,7 +89,7 @@ const Profile = () => {
             {/* Logout */}
             <button
               onClick={logout}
-              className="flex items-center gap-2 bg-[#E85757] text-white hover:bg-red-600 font-medium py-2 px-4 rounded-full w-full justify-center transition"
+              className="flex flex-row items-center gap-2 px-4 py-2 border border-red-600 text-red-600 hover:text-red-800 hover:border-red-800 rounded transition duration-200 ease-in-out"
             >
               <FaSignOutAlt className="text-lg" />
               Logout
@@ -96,7 +99,7 @@ const Profile = () => {
       ) : (
         <p className="text-center mt-3">
           Create a profile?
-          <Link to="/register" className="text-blue-600 hover:underline">
+          <Link to="/register" className="text-color-secondary hover:underline">
             <br />
             Register here
           </Link>

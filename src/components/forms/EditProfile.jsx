@@ -5,6 +5,7 @@ import { useState } from "react";
 import { showAlert, showSuccess } from "../../utils/notifications";
 import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
+import "../../styles/button.css";
 
 const EditProfileForm = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -110,11 +111,7 @@ const EditProfileForm = ({ onClose }) => {
 
       {error && <p className="error-text">{error}</p>}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-2 bg-blue-400 text-white rounded hover:bg-blue-700 transition"
-      >
+      <button type="submit" disabled={loading} className="button-primary-style">
         {loading ? (
           <>
             <ClipLoader size={20} color="#ffffff" />

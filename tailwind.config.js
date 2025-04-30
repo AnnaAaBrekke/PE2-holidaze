@@ -6,11 +6,22 @@ export default {
       fontFamily: {
         podkova: ["Podkova", "serif"],
       },
+      colors: {
+        "color-primary": "#0F6474",
+        "color-secondary": "#96A88E",
+        "color-accent": "#AFCDA2",
+        "color-background": "#E0F9F6",
+        "color-text-primary": "#08323B",
+        "color-text-secondary": "#6A6773",
+        "color-primary-button": "#0F6474",
+        "color-secondary-button": "#96A88E",
+        "color-error": "#E85757",
+        "color-success": "#AFCDA2",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
-
 
 // do i need this or no????
 // const withMT = require("@material-tailwind/react/utils/withMT");

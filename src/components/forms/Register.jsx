@@ -6,6 +6,7 @@ import SkeletonLoader from "../SkeletonLoader";
 import { Input, Checkbox } from "@material-tailwind/react";
 import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
+import "../../styles/button.css";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();
@@ -141,11 +142,7 @@ const RegisterForm = () => {
         )}
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
+      <button type="submit" disabled={loading} className="button-primary-style">
         {loading ? (
           <>
             <ClipLoader size={20} color="#ffffff" />

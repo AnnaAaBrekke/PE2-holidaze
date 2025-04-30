@@ -7,6 +7,7 @@ import VenueBookingsTable from "../components/Table";
 import { confirmAction, showAlert, showSuccess } from "../utils/notifications";
 import SkeletonLoader from "../components/SkeletonLoader";
 import ManagerStats from "../components/ManagerStats";
+import "../styles/button.css";
 
 const ManagerDashboard = () => {
   const { user, token } = useAuth();
@@ -114,10 +115,7 @@ const ManagerDashboard = () => {
       <div className="flex justify-between items-center max-w-5xl mx-auto mb-6">
         <h2 className="text-2xl font-semibold">Your Venues</h2>
 
-        <button
-          onClick={handleCreateClick}
-          className="bg-[#0F6474] focus:outline-double text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
-        >
+        <button onClick={handleCreateClick} className="button-primary-style">
           {showForm ? "Close Form" : "+ Create New Venue"}
         </button>
       </div>

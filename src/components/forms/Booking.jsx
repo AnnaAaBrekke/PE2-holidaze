@@ -12,6 +12,8 @@ import {
   showSuccess,
 } from "../../utils/notifications";
 import "../../styles/form.css";
+import "../../styles/button.css";
+
 
 const BookingForm = ({
   venueId,
@@ -114,13 +116,16 @@ const BookingForm = ({
 
       {!user ? (
         <div className="text-center">
-          <p className="text-muted mt-3">
+          <p className="text-muted text-lg mt-3 mb-3">
             You must be logged in to make a booking.
           </p>
-          <Link to="/login" className="btn btn-outline-primary me-2">
+          <Link to="/login" className="text-sm button-secondary-style mr-2">
             Log In
           </Link>
-          <Link to="/register" className="btn btn-outline-secondary">
+          <Link
+            to="/register"
+            className="text-sm bg-[#0E4551] button-secondary-style"
+          >
             Register
           </Link>
         </div>
@@ -203,7 +208,7 @@ const BookingForm = ({
           <button
             type="submit"
             disabled={loading}
-            className="btn btn-primary w-full mt-4"
+            className="button-primary-style"
           >
             {loading ? "Booking..." : "Book Now"}
           </button>

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Input, Checkbox } from "@material-tailwind/react";
 import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
+import "../../styles/button.css";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
@@ -242,7 +243,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-[#0F6474] text-[#E0F9F6] w-full font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none"
+          className="button-primary-style"
           disabled={loading}
         >
           {loading ? (
