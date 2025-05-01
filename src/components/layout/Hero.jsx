@@ -16,7 +16,7 @@ const Hero = ({ setSearchNameDesc, setSearchCountry, searchNameDesc }) => {
     );
 
   return (
-    <div className="relative h-[400px] md:h-[450px] flex items-center justify-center bg-[#08323B]">
+    <div className="relative h-[400px] md:h-[450px] flex items-center justify-center bg-color-text-primary">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -31,7 +31,7 @@ const Hero = ({ setSearchNameDesc, setSearchCountry, searchNameDesc }) => {
       {/* Content */}
       <div className="absolute left-0 z-10 text-center px-4 max-w-2xl w-full">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight drop-shadow-xl">
-          Welcome to <span className="text-[#AFCDA2]">Holidaze</span>
+          Welcome to <span className="text-color-accent">Holidaze</span>
         </h1>
         <p className="text-lg md:text-xl text-color-background mb-8 drop-shadow">
           Book your perfect venue from around the world — fast, easy, and

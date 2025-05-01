@@ -88,7 +88,7 @@ const LoginForm = () => {
       {error && <p className="error-text">{error}</p>}
 
       <p className="mt-2 text-center">
-        Don't have an account?{" "}
+        Don't have an account?
         <Link to="/register" className="text-color-secondary hover:underline">
           Register here
         </Link>

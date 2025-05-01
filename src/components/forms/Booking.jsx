@@ -181,13 +181,13 @@ const BookingForm = ({
             {numberOfNights > 0 && (
               <div className=" text-gray-700 text-center mt-4">
                 <p>
-                  <span className="font-bold text-[#0F6474] mr-1">
+                  <span className="font-bold text-color-primary mr-1">
                     {numberOfNights}
                   </span>
                   - Total Nights
                 </p>
                 <p>
-                  <span className="font-bold text-[#0F6474] mr-1">
+                  <span className="font-bold text-color-primary mr-1">
                     ${totalPrice}
                   </span>
                   - Total Price

@@ -97,7 +97,7 @@ const UserBookings = () => {
                   </div>
 
                   <div className="flex items-center gap-2 font-medium text-[20px] mt-2">
-                    <BsCheckCircleFill className="text-[#AFCDA2] w-8 h-8" />
+                    <BsCheckCircleFill className="text-color-accent w-8 h-8" />
                     <span>Confirmed Booking</span>
                   </div>
                 </div>

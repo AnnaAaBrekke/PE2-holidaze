@@ -30,20 +30,22 @@ const Profile = () => {
               "https://plus.unsplash.com/premium_photo-1682308170035-ec5ef069ee10?w=1400&auto=format&fit=crop&q=60"
             }
             alt={user?.avatar?.alt || "Avatar"}
-            className="h-32 w-32 rounded-full border-2 border-[#0F6474] mb-4 object-cover"
+            className="h-32 w-32 rounded-full border-2 border-color-primary mb-4 object-cover"
           />
 
           {/* Name */}
-          <h2 className="text-2xl font-bold text-[#08323B]">{user?.name}</h2>
+          <h2 className="text-2xl font-bold text-color-text-primary">
+            {user?.name}
+          </h2>
 
           {/* Role */}
-          <h3 className="text-sm text-[#96A88E] mb-2">
+          <h3 className="text-sm text-color-secondary mb-2">
             {user?.venueManager ? "Venue Manager" : "Customer"}
           </h3>
 
           {/* Bio */}
           <p
-            className="text-[#6A6773] text-sm mb-6 max-w-sm
+            className="text-color-text-secondary text-sm mb-6 max-w-sm
           "
           >
             {user?.bio || "No bio provided."}

@@ -26,7 +26,6 @@ const VenueCard = ({
       <Link to={`/venue/${venue.id}`} className="block">
         {/* Image / Swiper */}
         <div className="relative h-[220px] w-full">
-          {" "}
           {/* reduced height */}
           {venue.media.length > 1 ? (
             <Swiper
@@ -54,10 +53,10 @@ const VenueCard = ({
             />
           )}
           {/* Location Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#08323B99] to-transparent px-3 py-2 text-white text-sm">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white text-sm">
             <p className="flex items-center gap-1">
               <MdLocationPin />
-              {venue.location?.city || "Unknown City"},{" "}
+              {venue.location?.city || "Unknown City"},
               {venue.location?.country || "Unknown Country"}
             </p>
           </div>
@@ -112,7 +111,7 @@ const VenueCard = ({
         <div className="flex justify-between gap-2 p-4 pt-0">
           <button
             onClick={onEdit}
-            className="bg-[#0F6474] text-white text-sm px-3 py-2 rounded-full w-1/2"
+            className="bg-color-primary text-white text-sm px-3 py-2 rounded-full w-1/2"
           >
             Edit
           </button>
