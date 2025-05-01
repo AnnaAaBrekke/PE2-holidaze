@@ -33,7 +33,7 @@ const Hero = ({ setSearchNameDesc, setSearchCountry, searchNameDesc }) => {
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight drop-shadow-xl">
           Welcome to <span className="text-[#AFCDA2]">Holidaze</span>
         </h1>
-        <p className="text-lg md:text-xl text-[#E0F9F6] mb-8 drop-shadow">
+        <p className="text-lg md:text-xl text-color-background mb-8 drop-shadow">
           Book your perfect venue from around the world — fast, easy, and
           beautiful.
         </p>

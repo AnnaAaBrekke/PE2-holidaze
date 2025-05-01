@@ -22,7 +22,7 @@ const Profile = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       {isAuthenticated ? (
-        <div className="flex flex-col items-center text-center bg-[#E0F9F6] p-8 rounded-xl shadow-lg">
+        <div className="flex flex-col items-center text-center bg-color-background p-8 rounded-xl shadow-lg">
           {/* Avatar */}
           <img
             src={

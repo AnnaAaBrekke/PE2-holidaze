@@ -133,7 +133,7 @@ const SingleVenue = () => {
       </div>
 
       {/* Price */}
-      <div className="flex items-center gap-2 bg-[#E0F9F6] px-4 py-2 rounded-md w-fit mb-6">
+      <div className="flex items-center gap-2  bg-color-background px-4 py-2 rounded-md w-fit mb-6">
         <RiCoinsFill />
         <span className="text-sm font-podkova text-[#101010]">
           Price p/night: ${venue.price}
