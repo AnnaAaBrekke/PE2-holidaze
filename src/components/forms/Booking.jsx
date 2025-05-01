@@ -186,7 +186,7 @@ const BookingForm = ({
                 required: "Guest count is required",
                 min: { value: 1, message: "At least 1 guest" },
                 max: {
-                  value: maxGuests || 10, // fallback max if missing
+                  value: maxGuests || 15,
                   message: `Cannot book more than ${maxGuests} guests`,
                 },
               })}
@@ -196,9 +196,19 @@ const BookingForm = ({
             )}
 
             {numberOfNights > 0 && (
-              <div>
-                <p>Total Nights: {numberOfNights}</p>
-                <p>Total Price: ${totalPrice} </p>
+              <div className=" text-gray-700 text-center mt-4">
+                <p>
+                  <span className="font-bold text-[#0F6474] mr-1">
+                    {numberOfNights}
+                  </span>
+                  - Total Nights
+                </p>
+                <p>
+                  <span className="font-bold text-[#0F6474] mr-1">
+                    ${totalPrice}
+                  </span>
+                  - Total Price
+                </p>
               </div>
             )}
           </div>
