@@ -18,7 +18,7 @@ body {
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  color: #facc15 !important; /* Tailwind yellow-400 */
+  color: #afcda2 !important;
 }
 
 /* Swiper Pagination (dots) */

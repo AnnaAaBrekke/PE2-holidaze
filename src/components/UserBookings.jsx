@@ -54,53 +54,49 @@ const UserBookings = () => {
                 key={booking.id}
                 className="relative w-full max-w-[280px] bg-white rounded-lg shadow-md overflow-hidden"
               >
-                {/* Image */}
-                <div className="h-[200px] relative">
-                  <img
-                    src={
-                      venue?.media?.[0]?.url || "https://placehold.co/600x400"
-                    }
-                    alt={venue?.media?.[0]?.alt || venue.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-2 text-white">
-                    <MdLocationPin className="inline-block mr-1" />
-                    {venue?.location?.city}, {venue?.location?.country}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-4 flex flex-col gap-2">
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold line-clamp-1">
-                      <Link
-                        to={`/venue/${venue.id}`}
-                        className="hover:text-blue-600"
-                      >
-                        {venue.name}
-                      </Link>
-                    </h3>
-                    <div className="text-yellow-400 ">
-                      {"★".repeat(Math.floor(venue.rating))}
-                      {"☆".repeat(5 - Math.floor(venue.rating))}
+                <Link to={`/venue/${venue.id}`} className="block">
+                  {/* Image */}
+                  <div className="h-[200px] relative">
+                    <img
+                      src={
+                        venue?.media?.[0]?.url || "https://placehold.co/600x400"
+                      }
+                      alt={venue?.media?.[0]?.alt || venue.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-2 text-white">
+                      <MdLocationPin className="inline-block mr-1" />
+                      {venue?.location?.city}, {venue?.location?.country}
                     </div>
                   </div>
+                  {/* Content */}
+                  <div className="p-4 flex flex-col gap-2">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-lg font-semibold line-clamp-1">
+                        {venue.name}
+                      </h3>
+                      <div className="text-yellow-400 ">
+                        {"★".repeat(Math.floor(venue.rating))}
+                        {"☆".repeat(5 - Math.floor(venue.rating))}
+                      </div>
+                    </div>
 
-                  <div className="flex items-center  text-gray-600">
-                    <MdDateRange className="mr-1" />
-                    {new Date(booking.dateFrom).toLocaleDateString()} →{" "}
-                    {new Date(booking.dateTo).toLocaleDateString()}
-                  </div>
+                    <div className="flex items-center  text-gray-600">
+                      <MdDateRange className="mr-1" />
+                      {new Date(booking.dateFrom).toLocaleDateString()} →{" "}
+                      {new Date(booking.dateTo).toLocaleDateString()}
+                    </div>
 
-                  <div className="flex items-center  text-gray-600">
-                    <FaUsers className="mr-1" /> Guests: {booking.guests}
-                  </div>
+                    <div className="flex items-center  text-gray-600">
+                      <FaUsers className="mr-1" /> Guests: {booking.guests}
+                    </div>
 
-                  <div className="flex items-center gap-2 font-medium text-[20px] mt-2">
-                    <BsCheckCircleFill className="text-color-accent w-8 h-8" />
-                    <span>Confirmed Booking</span>
+                    <div className="flex items-center gap-2 font-medium text-[20px] mt-2">
+                      <BsCheckCircleFill className="text-color-accent w-8 h-8" />
+                      <span>Confirmed Booking</span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             );
           })}

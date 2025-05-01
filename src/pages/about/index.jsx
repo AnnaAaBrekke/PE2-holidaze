@@ -2,17 +2,37 @@ import React from "react";
 
 const AboutPage = () => {
   return (
-    <section className="max-w-3xl mx-auto px-6 py-12 text-center">
-      <h1 className="text-4xl font-bold mb-6 text-gray-800">About Us</h1>
-      <p className="text-lg text-gray-600 leading-relaxed font-podkova">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere
-        velit at ante faucibus, nec malesuada lacus dignissim. Ut fermentum
-        tristique nisi, at viverra nulla. Integer rutrum, justo nec blandit
-        fringilla, elit massa volutpat justo, in malesuada metus nisi sed elit.
-        Quisque non eros id nulla imperdiet vulputate. Curabitur euismod magna
-        in ex cursus, vitae tincidunt turpis efficitur. Nullam sit amet orci
-        massa. Duis id sapien a velit feugiat convallis.
-      </p>
+    <section className="max-w-6xl mx-auto px-6 py-16">
+      <div className="grid md:grid-cols-2 gap-12 items-center">
+        {/* Text Content */}
+        <div className="text-center md:text-left">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">About Us</h1>
+          <h2 className="text-xl text-gray-600 font-medium mb-6 ">
+            Book your perfect venue from around the world.
+          </h2>
+
+          <p className="text-lg text-gray-700 leading-relaxed mb-6">
+            Holidaze is a platform for finding unique places to stay — from
+            peaceful cabins and cozy cottages to scenic homes and modern
+            hideaways. We handpick every location for its comfort, charm, and
+            setting, so you can relax and enjoy your getaway without the hassle.
+          </p>
+
+          <p className="text-lg text-gray-700 leading-relaxed mb-6">
+            Travel at your own pace. Stay somewhere that feels just right — with
+            Holidaze.
+          </p>
+        </div>
+
+        {/* Image */}
+        <div className="w-full h-[300px] md:h-[400px]">
+          <img
+            src="./hero-bg.png"
+            alt="Scenic holiday destination"
+            className="w-full h-full object-cover rounded-xl shadow-lg"
+          />
+        </div>
+      </div>
     </section>
   );
 };

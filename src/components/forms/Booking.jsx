@@ -5,7 +5,6 @@ import getBookedDates from "../../utils/getBookedDates";
 import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
 import { createBooking } from "../../services/BookingService";
-import { MdWarningAmber } from "react-icons/md";
 import {
   confirmAction,
   showAlert,
@@ -113,8 +112,8 @@ const BookingForm = ({
           </Link>
         </div>
       ) : user.name === ownerName ? (
-        <div className="alert alert-warning text-center mt-3">
-          <MdWarningAmber /> You cannot book your own venue.
+        <div className="flex flex-col text-center mt-3">
+          <p className="text-color-error">You cannot book your own venue.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmitForm)} className="form-style">

@@ -44,10 +44,7 @@ const Navbar = () => {
         {/* Centered Logo */}
         <div className="absolute left-1/2 -translate-x-1/2 text-lg font-bold text-yellow-600">
           <Link to="/">
-            <img
-              src="/logo_holidaze.png"
-              className="w-14 rounded-full h-auto"
-            />
+            <img src="/logo_holidaze.png" className="w-16 rounded-lg h-auto" />
           </Link>
         </div>
 

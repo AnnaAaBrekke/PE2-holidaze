@@ -8,9 +8,8 @@ const Footer = () => {
           <img
             src="/logo_holidaze.png"
             alt="Holidaze Logo"
-            className="w-16 rounded-full h-auto"
+            className="w-16 rounded-lg h-auto"
           />
-          <span className="text-2xl font-bold">Holidaze</span>
         </Link>
       </nav>
       <div className="text-center text-sm p-4 bg-teal-950">

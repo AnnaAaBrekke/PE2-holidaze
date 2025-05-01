@@ -16,7 +16,7 @@ const SubmitFormButton = ({
     >
       {loading ? (
         <>
-          <ClipLoader />
+          <ClipLoader color="#ffffff" size={20} className="pt-3" />
           <span className="ml-2">{loadingText}</span>
         </>
       ) : (
