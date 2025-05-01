@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Full form container style */
-.button-primary-style {
-  @apply bg-color-primary text-color-background text-lg px-6 py-2 rounded-lg shadow-md hover:bg-[#0d5665] m-0.5;
-}
+@layer components {
+  .button-primary-style {
+    @apply bg-color-primary text-color-background text-lg px-6 py-2 rounded-lg shadow-md hover:bg-[#0d5665] m-0.5;
+  }
 
-.button-secondary-style {
-  @apply bg-color-secondary text-white px-5 py-2.5 rounded-lg hover:bg-[#859879] shadow-sm;
+  .button-secondary-style {
+    @apply bg-color-secondary text-white px-5 py-2.5 rounded-lg hover:bg-[#859879] shadow-sm;
+  }
 }

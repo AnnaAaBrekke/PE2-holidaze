@@ -113,7 +113,7 @@ const ManagerDashboard = () => {
 
       {/* Your Venues Heading + Button */}
       <div className="flex justify-between items-center max-w-5xl mx-auto mb-6">
-        <h2 className="text-2xl font-semibold">Your Venues</h2>
+        <h2 className="text-4xl font-semibold">Your Venues</h2>
 
         <button onClick={handleCreateClick} className="button-primary-style">
           {showForm ? "Close Form" : "+ Create New Venue"}

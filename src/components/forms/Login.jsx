@@ -4,9 +4,8 @@ import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
 import { Input } from "@material-tailwind/react";
-import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
-import "../../styles/button.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const LoginForm = () => {
   const { login, loading, error } = useAuth();
@@ -82,16 +81,9 @@ const LoginForm = () => {
         )}
       </div>
 
-      <button type="submit" disabled={loading} className="button-primary-style">
-        {loading ? (
-          <>
-            <ClipLoader size={20} color="#ffffff" />
-            <span className="ml-2">Logging in...</span>
-          </>
-        ) : (
-          "Login"
-        )}
-      </button>
+      <SubmitFormButton loading={loading} loadingText="Logging in...">
+        Login
+      </SubmitFormButton>
 
       {error && <p className="error-text">{error}</p>}
 

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx}", "./src/styles/**/*.css"],
+  safelist: ["button-primary-style", "button-secondary-style"],
   theme: {
     extend: {
       fontFamily: {
@@ -20,7 +21,7 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [],
 };
 
 // do i need this or no????

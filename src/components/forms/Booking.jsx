@@ -13,6 +13,7 @@ import {
 } from "../../utils/notifications";
 import "../../styles/form.css";
 import "../../styles/button.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const BookingForm = ({
   venueId,
@@ -201,16 +202,10 @@ const BookingForm = ({
               </div>
             )}
           </div>
-
           {error && <p className="error-text">{error}</p>}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="button-primary-style"
-          >
-            {loading ? "Booking..." : "Book Now"}
-          </button>
+          <SubmitFormButton loading={loading} loadingText="Booking...">
+            Book now
+          </SubmitFormButton>
         </form>
       )}
     </div>

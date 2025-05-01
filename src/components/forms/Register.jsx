@@ -7,6 +7,7 @@ import { Input, Checkbox } from "@material-tailwind/react";
 import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
 import "../../styles/button.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();
@@ -142,23 +143,16 @@ const RegisterForm = () => {
         )}
       </div>
 
-      <button type="submit" disabled={loading} className="button-primary-style">
-        {loading ? (
-          <>
-            <ClipLoader size={20} color="#ffffff" />
-            <span className="ml-2">Registering...</span>
-          </>
-        ) : (
-          "Register"
-        )}
-      </button>
+      <SubmitFormButton loading={loading} loadingText="Registering...">
+        Register
+      </SubmitFormButton>
 
       {/* Error display */}
       {error && <p className="error-text">{error}</p>}
 
       <p className="mt-4 text-sm text-center">
         Already have an account?{" "}
-        <Link to="/login" className="text-blue-500 underline">
+        <Link to="/login" className="text-color-secondary hover:underline">
           Login here
         </Link>
       </p>

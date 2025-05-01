@@ -7,6 +7,7 @@ import { Input, Checkbox } from "@material-tailwind/react";
 import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
 import "../../styles/button.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
@@ -99,7 +100,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">
+      <h2 className="text-2xl font-semibold mb-4 text-center">
         {mode === "edit" ? "Edit Venue" : "Create Venue"}
       </h2>
 
@@ -241,19 +242,9 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="button-primary-style"
-          disabled={loading}
-        >
-          {loading ? (
-            <ClipLoader />
-          ) : mode === "edit" ? (
-            "Update Venue"
-          ) : (
-            "Create Venue"
-          )}
-        </button>
+        <SubmitFormButton loading={loading}>
+          {mode === "edit" ? "Update Venue" : "Create Venue"}
+        </SubmitFormButton>
       </form>
     </div>
   );
