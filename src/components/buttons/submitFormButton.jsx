@@ -11,7 +11,7 @@ const SubmitFormButton = ({
     <button
       type="submit"
       disabled={loading}
-      className=" bg-color-primary text-color-background text-lg px-6 py-2 rounded-lg shadow-md hover:bg-[#0d5665] m-0.5"
+      className="bg-color-primary text-color-background text-lg px-6 py-2 rounded-lg shadow-md hover:bg-[#0d5665] m-0.5"
       {...props}
     >
       {loading ? (

@@ -74,7 +74,7 @@ export async function showBookingConfirmation({ from, to }) {
           {from} – {to}
         </p>
         <div className="h-1 w-16 bg-color-accent mx-auto my-4 rounded-full" />
-        <p className="text-[#939393] mt-2">
+        <p className="text-color-text-body mt-2">
           A confirmation has been sent to your email and is available under "My
           bookings".
         </p>

@@ -13,6 +13,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { RiCoinsFill } from "react-icons/ri";
+import "../../styles/layout.css";
+import "../../styles/typography.css";
 
 const VenueCard = ({
   venue,
@@ -25,7 +27,7 @@ const VenueCard = ({
     <div className="relative w-full max-w-[300px] bg-white rounded-lg shadow-md overflow-hidden transition hover:shadow-lg duration-300">
       <Link to={`/venue/${venue.id}`} className="block">
         {/* Image / Swiper */}
-        <div className="relative h-[220px] w-full">
+        <div className="relative h-[220px] w-full overflow-visible">
           {/* reduced height */}
           {venue.media.length > 1 ? (
             <Swiper
@@ -33,7 +35,7 @@ const VenueCard = ({
               navigation
               pagination={{ clickable: true }}
               loop={true}
-              className="h-full rounded-t-lg"
+              className="h-full rounded-t-lg swiper-top-pagination"
             >
               {venue.media.map((item, idx) => (
                 <SwiperSlide key={`${item.url}-${idx}`}>
@@ -42,6 +44,14 @@ const VenueCard = ({
                     alt={item.alt || venue.name}
                     className="w-full h-full object-cover rounded-t-lg"
                   />
+                  {/* Location Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-small">
+                    <p className="flex items-center gap-1">
+                      <MdLocationPin />
+                      {venue.location?.city || "Unknown City"},
+                      {venue.location?.country || "Unknown Country"}
+                    </p>
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -53,7 +63,7 @@ const VenueCard = ({
             />
           )}
           {/* Location Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white text-sm">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-small">
             <p className="flex items-center gap-1">
               <MdLocationPin />
               {venue.location?.city || "Unknown City"},
@@ -65,7 +75,7 @@ const VenueCard = ({
         {/* Content */}
         <div className="p-4 flex flex-col justify-between">
           <div className="flex justify-between items-center mb-2">
-            <h3 className="text-lg font-semibold line-clamp-1">{venue.name}</h3>
+            <h1 className="title line-clamp-1">{venue.name}</h1>
             <div className="text-yellow-400 text-xs">
               {"★".repeat(Math.floor(venue.rating))}
               {"☆".repeat(5 - Math.floor(venue.rating))}
@@ -79,22 +89,22 @@ const VenueCard = ({
           {/* Amenities */}
           <div className="flex gap-2 flex-wrap mb-4">
             {venue.meta?.wifi && (
-              <span className="bg-blue-100/40 text-xs px-2 py-1 rounded-md flex items-center gap-1">
+              <span className="meta-tag">
                 <MdWifi /> Wifi
               </span>
             )}
             {venue.meta?.breakfast && (
-              <span className="bg-blue-100/40 text-xs px-2 py-1 rounded-md flex items-center gap-1">
+              <span className="meta-tag">
                 <MdFreeBreakfast /> Breakfast
               </span>
             )}
             {venue.meta?.parking && (
-              <span className="bg-blue-100/40 text-xs px-2 py-1 rounded-md flex items-center gap-1">
+              <span className="meta-tag">
                 <FaParking /> Parking
               </span>
             )}
             {venue.meta?.pets && (
-              <span className="bg-blue-100/40 text-xs px-2 py-1 rounded-md flex items-center gap-1">
+              <span className="meta-tag">
                 <FaPaw /> Pets
               </span>
             )}

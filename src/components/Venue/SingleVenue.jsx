@@ -13,6 +13,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { RiCoinsFill } from "react-icons/ri";
 import "../../styles/button.css";
+import "../../styles/layout.css";
+import "../../styles/typography.css";
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -41,7 +43,7 @@ const SingleVenue = () => {
             navigation
             pagination={{ clickable: true }}
             loop
-            className="h-full rounded-t-lg"
+            className="h-full rounded-t-lg swiper-top-pagination"
           >
             {venue.media.map((item, idx) => (
               <SwiperSlide key={`${item.url}-${idx}`}>
@@ -64,9 +66,7 @@ const SingleVenue = () => {
 
       {/* Name + Price + Rating */}
       <div className="flex justify-between items-start mb-2">
-        <h1 className="text-2xl font-bold font-podkova underline truncate">
-          {venue.name}
-        </h1>
+        <h1 className="heading-small truncate">{venue.name}</h1>
         <div className="flex gap-1">
           {[...Array(5)].map((_, i) => (
             <FaStar
@@ -84,25 +84,23 @@ const SingleVenue = () => {
       {/* Location */}
       <div className="flex items-center gap-2 mb-4">
         <MdLocationPin className="text-[#4C4DDC] text-lg" />
-        <p className="text-sm text-[#939393] font-podkova">
+        <p className="body-small text-color-text-body">
           {venue.location.city}, {venue.location.country}
         </p>
       </div>
 
       {/* Description */}
       <div className="mb-6">
-        <h2 className="text-xl font-podkova font-medium text-[#101010] mb-2">
-          Description
-        </h2>
+        <h2 className="body text-color-text-secondary mb-2">Description</h2>
         <div className="relative group cursor-pointer w-full">
           <p
-            className="line-clamp-3 text-[#939393] text-lg font-podkova leading-[1.5]"
+            className="line-clamp-3  text-color-text-body body-small"
             title={venue.description}
           >
             {venue.description}
           </p>
 
-          <div className="absolute z-10 hidden group-hover:block bg-white border border-gray-300 text-sm text-gray-800 p-2 rounded shadow-lg w-72 top-full mt-1">
+          <div className="absolute z-10 hidden group-hover:block bg-white border border-gray-300 text-sm text-color-text-body p-2 rounded shadow-lg w-72 top-full mt-1">
             {venue.description}
           </div>
         </div>
@@ -111,22 +109,22 @@ const SingleVenue = () => {
       {/* Meta features (Wifi, Breakfast, Pets, Parking) */}
       <div className="flex flex-wrap gap-2 mb-6">
         {venue.meta?.wifi && (
-          <span className="flex items-center gap-2 bg-blue-100/40 px-3 py-2 rounded-md text-sm">
+          <span className="meta-tag">
             <MdWifi /> Wifi
           </span>
         )}
         {venue.meta?.breakfast && (
-          <span className="flex items-center gap-2 bg-blue-100/40 px-3 py-2 rounded-md text-sm">
+          <span className="meta-tag">
             <MdFreeBreakfast /> Breakfast
           </span>
         )}
         {venue.meta?.parking && (
-          <span className="flex items-center gap-2 bg-blue-100/40 px-3 py-2 rounded-md text-sm">
+          <span className="meta-tag">
             <FaParking /> Parking
           </span>
         )}
         {venue.meta?.pets && (
-          <span className="flex items-center gap-2 bg-blue-100/40 px-3 py-2 rounded-md text-sm">
+          <span className="meta-tag">
             <FaPaw /> Pets Allowed
           </span>
         )}

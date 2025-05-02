@@ -45,7 +45,7 @@ const Profile = () => {
 
           {/* Bio */}
           <p
-            className="text-color-text-secondary text-sm mb-6 max-w-sm
+            className="text-color-text-body text-sm mb-6 max-w-sm
           "
           >
             {user?.bio || "No bio provided."}
