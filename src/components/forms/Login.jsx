@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
-import { Input } from "@material-tailwind/react";
 import "../../styles/form.css";
 import SubmitFormButton from "../buttons/submitFormButton";
 
@@ -37,16 +36,16 @@ const LoginForm = () => {
       noValidate
       className="form-style"
     >
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <h1 className="text-2xl font-bold mb-4">Login</h1>
 
       <div>
-        <label htmlFor="email" className="label.style">
+        <label htmlFor="email" className="label-style">
           Email*
         </label>
-        <Input
+        <input
           id="email"
-          className="input-style"
           type="email"
+          className="input-style"
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -54,7 +53,6 @@ const LoginForm = () => {
               message: "Email must be a valid stud.noroff.no address.",
             },
           })}
-          error={!!errors.email}
         />
         {errors.email && <p className="error-tex">{errors.email.message}</p>}
       </div>
@@ -63,10 +61,10 @@ const LoginForm = () => {
         <label htmlFor="password" className="label-style">
           Password*
         </label>
-        <Input
+        <input
           id="password"
-          className="input-style"
           type="password"
+          className="input-style"
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -74,7 +72,6 @@ const LoginForm = () => {
               message: "Password must be at least 8 characters",
             },
           })}
-          error={!!errors.password}
         />
         {errors.password && (
           <p className="error-text">{errors.password.message}</p>

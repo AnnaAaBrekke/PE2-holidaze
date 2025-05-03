@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
-import { Input, Checkbox } from "@material-tailwind/react";
-import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
 import "../../styles/button.css";
 import SubmitFormButton from "../buttons/submitFormButton";
@@ -45,14 +43,15 @@ const RegisterForm = () => {
       noValidate
       className="form-style"
     >
-      <h2 className="text-2xl font-bold">Register</h2>
+      <h1 className="text-2xl font-bold mb-4">Register</h1>
 
       {/* Venue Manager Checkbox */}
       <div className="flex items-center">
-        <Checkbox
+        <input
+          type="checkbox"
           id="venueManager"
+          className="mr-2 cursor-pointer"
           {...register("venueManager")}
-          className="size-4"
         />
         <label htmlFor="venueManager" className="label-style">
           Register as Venue Manager
@@ -60,7 +59,7 @@ const RegisterForm = () => {
       </div>
 
       {CheckedOfVenueManager && (
-        <p className="body-3">
+        <p className="body-3 mb-4">
           As a Venue Manager, you can create and manage your own venues. Show
           upcoming bookings and access extra dashboard tools.
         </p>
@@ -71,7 +70,7 @@ const RegisterForm = () => {
         <label htmlFor="name" className="label-style">
           Username*
         </label>
-        <Input
+        <input
           id="name"
           className="input-style"
           {...register("name", {
@@ -82,7 +81,6 @@ const RegisterForm = () => {
                 "Username must not contain punctuation except underscores.",
             },
           })}
-          error={!!errors.name}
         />
         {errors.name && <p className="error-text">{errors.name.message}</p>}
       </div>
@@ -92,7 +90,7 @@ const RegisterForm = () => {
         <label htmlFor="email" className="label-style">
           Email*
         </label>
-        <Input
+        <input
           id="email"
           className="input-style"
           type="email"
@@ -103,7 +101,6 @@ const RegisterForm = () => {
               message: "Email must be a valid stud.noroff.no address.",
             },
           })}
-          error={!!errors.email}
         />
         {errors.email && <p className="error-text">{errors.email.message}</p>}
       </div>
@@ -113,10 +110,10 @@ const RegisterForm = () => {
         <label htmlFor="password" className="label-style">
           Password*
         </label>
-        <Input
+        <input
           id="password"
-          className="input-style"
           type="password"
+          className="input-style"
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -124,7 +121,6 @@ const RegisterForm = () => {
               message: "Password must be at least 8 characters",
             },
           })}
-          error={!!errors.password}
         />
         {errors.password && (
           <p className="error-text">{errors.password.message}</p>
@@ -133,18 +129,17 @@ const RegisterForm = () => {
 
       {/* Repeat Password */}
       <div>
-        <label htmlFor="password_repeat" className="block mb-1 font-medium">
+        <label htmlFor="password_repeat" className="label-style">
           Repeat Password*
         </label>
-        <Input
+        <input
           id="password_repeat"
-          className="input-style"
           type="password"
+          className="input-style"
           {...register("password_repeat", {
             validate: (value) =>
               value === password || "Passwords do not match.",
           })}
-          error={!!errors.password_repeat}
         />
         {errors.password_repeat && (
           <p className="error-text">{errors.password_repeat.message}</p>
@@ -155,14 +150,13 @@ const RegisterForm = () => {
         Register
       </SubmitFormButton>
 
-      {/* Error display */}
       {error && <p className="error-text">{error}</p>}
 
       <p className="mt-4 body-3 text-center">
         Already have an account?
         <Link
           to="/login"
-          className="text-color-secondary underline ml-1  hover:text-color-accent-hover"
+          className="text-color-secondary underline ml-1 hover:text-color-accent-hover"
         >
           Login here
         </Link>
