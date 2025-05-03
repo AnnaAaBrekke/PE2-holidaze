@@ -80,7 +80,7 @@ const VenueCard = ({
             <h1 className="title line-clamp-1">
               {venue?.name || "Venue Title"}
             </h1>
-            <div className="text-yellow-400 text-xs">
+            <div className="text-yellow-700 text-sm">
               {"★".repeat(Math.floor(venue.rating))}
               {"☆".repeat(5 - Math.floor(venue.rating))}
             </div>

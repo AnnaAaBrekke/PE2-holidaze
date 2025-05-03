@@ -36,7 +36,10 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         {/* Left Nav */}
         <div className="flex items-center gap-4">
-          <button onClick={() => setSidebarOpen(true)}>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open sidebar navigation"
+          >
             <GoSidebarCollapse className="size-6 hover:size-8" />
           </button>
         </div>
@@ -46,6 +49,7 @@ const Navbar = () => {
           <Link to="/">
             <img
               src="/logo_holidaze.png"
+              alt="Logo Holidaze"
               className="w-16 p-0.5 rounded-lg h-auto hover:shadow-md"
             />
           </Link>
@@ -94,6 +98,7 @@ const Navbar = () => {
         {/* Close Button */}
         <button
           onClick={() => setSidebarOpen(false)}
+          aria-label="Close sidebar navigation"
           className="absolute top-4 right-4 text-gray-600 hover:text-black"
         >
           <FaArrowLeft size={20} />

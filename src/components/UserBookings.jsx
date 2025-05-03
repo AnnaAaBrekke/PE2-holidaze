@@ -75,7 +75,7 @@ const UserBookings = () => {
                       <h3 className="text-lg font-semibold line-clamp-1">
                         {venue.name}
                       </h3>
-                      <div className="text-yellow-400 ">
+                      <div className="text-yellow-500">
                         {"★".repeat(Math.floor(venue.rating))}
                         {"☆".repeat(5 - Math.floor(venue.rating))}
                       </div>
