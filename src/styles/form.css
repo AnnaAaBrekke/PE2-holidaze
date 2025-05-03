@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Full form container style */
 .form-style {
   @apply flex flex-col gap-6 p-10 bg-white rounded-md shadow-md w-full max-w-lg mx-auto mt-6 text-left;
 }

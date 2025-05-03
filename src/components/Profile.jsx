@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext";
 import EditProfileForm from "./forms/EditProfile";
 import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
 import { FaSignOutAlt, FaUserEdit } from "react-icons/fa";
-import "../styles/button.css";
 
 const Profile = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -20,9 +19,9 @@ const Profile = () => {
   const handleEditProfileClick = () => setShowForm((prev) => !prev);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="px-4 sm:px-6 lg:px-8 py-10 max-w-4xl mx-auto">
       {isAuthenticated ? (
-        <div className="flex flex-col items-center text-center bg-color-background p-8 rounded-xl shadow-lg">
+        <div className="bg-white shadow-2xl rounded-2xl p-8 sm:p-10 flex flex-col items-center text-center space-y-6 relative">
           {/* Avatar */}
           <img
             src={
@@ -30,50 +29,44 @@ const Profile = () => {
               "https://plus.unsplash.com/premium_photo-1682308170035-ec5ef069ee10?w=1400&auto=format&fit=crop&q=60"
             }
             alt={user?.avatar?.alt || "Avatar"}
-            className="h-32 w-32 rounded-full border-2 border-color-primary mb-4 object-cover"
+            className="h-32 w-32 rounded-full border-4 border-gray-300 object-cover shadow-md"
           />
 
           {/* Name */}
-          <h2 className="text-2xl font-bold text-color-text-primary">
-            {user?.name}
-          </h2>
+          <h2 className="text-3xl font-semibold text-gray-800">{user?.name}</h2>
 
           {/* Role */}
-          <h3 className="body-3 text-color-secondary mb-2">
+          <h3 className="body-3 text-gray-500 uppercase tracking-wide font-medium">
             {user?.venueManager ? "Venue Manager" : "Customer"}
           </h3>
 
           {/* Bio */}
-          <p
-            className="text-color-text-body body-3 mb-6 max-w-sm
-          "
-          >
+          <p className="text-gray-600 max-w-md text-base leading-relaxed">
             {user?.bio || "No bio provided."}
           </p>
 
-          {/* Edit Profile Button */}
-
+          {/* Edit Button */}
           <button
             onClick={handleEditProfileClick}
-            className="button-primary-style flex items-center gap-2"
+            className="button-primary-style flex items-center justify-center gap-2"
           >
             <FaUserEdit />
             {showForm ? "Close" : "Edit Profile"}
           </button>
 
-          {/* Form */}
+          {/* Edit Form */}
           {showForm && (
-            <div ref={formRef} className="w-full">
+            <div ref={formRef} className="w-full mt-6">
               <EditProfileForm onClose={() => setShowForm(false)} />
             </div>
           )}
 
-          {/* Links */}
-          <div className="flex flex-col items-center gap-4 mt-4 w-full">
+          {/* Action Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mt-6">
             {user?.venueManager ? (
               <Link
                 to="/manager"
-                className="flex flex-row items-center gap-2 button-secondary-style"
+                className="button-secondary-style flex items-center justify-center gap-2"
               >
                 <RiHomeGearLine className="text-lg" />
                 Manage Venues
@@ -81,17 +74,16 @@ const Profile = () => {
             ) : (
               <Link
                 to="/bookings"
-                className="flex flex-row items-center gap-2 button-secondary-style"
+                className="button-secondary-style flex items-center justify-center gap-2"
               >
                 <RiHomeHeartLine className="text-lg" />
                 My Bookings
               </Link>
             )}
 
-            {/* Logout */}
             <button
               onClick={logout}
-              className="flex flex-row items-center gap-2 px-12 py-2 border-2 border-color-error text-color-error hover:text-color-error-accent hover:border-color-error-accent hover:shadow-lg rounded-md bg-white"
+              className="flex items-center justify-center gap-2 px-12 py-2 border-2 border-color-error text-color-error hover:text-color-error-accent hover:border-color-error-accent hover:shadow-lg rounded-md bg-white"
             >
               <FaSignOutAlt className="text-lg" />
               Logout
@@ -99,13 +91,17 @@ const Profile = () => {
           </div>
         </div>
       ) : (
-        <p className="text-center mt-3">
-          Create a profile?
-          <Link to="/register" className="text-color-secondary hover:underline">
-            <br />
+        <div className="text-center mt-8">
+          <p className="text-gray-600">
+            You need an account to view your profile.
+          </p>
+          <Link
+            to="/register"
+            className="text-color-accent font-medium underline hover:text-color-accent-hover"
+          >
             Register here
           </Link>
-        </p>
+        </div>
       )}
     </div>
   );

@@ -91,7 +91,7 @@ const LoginForm = () => {
         Don't have an account?
         <Link
           to="/register"
-          className="text-color-secondary hover:underline ml-1"
+          className="text-color-secondary underline ml-1  hover:text-color-accent-hover"
         >
           Register here
         </Link>
