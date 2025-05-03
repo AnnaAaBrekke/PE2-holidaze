@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
 import {
@@ -15,8 +15,14 @@ import "../../styles/button.css";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   const linkClasses = (path) => {
     const isHome = path === "/";
@@ -106,7 +112,6 @@ const Navbar = () => {
 
         {/* Sidebar Content */}
         <div className="mt-12 flex-1 flex flex-col overflow-y-auto">
-          {/* Profile Card */}
           {isAuthenticated && (
             <div className="flex flex-col items-center text-center mb-6">
               <img
@@ -191,7 +196,7 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => {
-                logout();
+                handleLogout();
                 setSidebarOpen(false);
               }}
               className="flex flex-col sm:flex-row items-center justify-center sm:justify-start pl-6 gap-1 sm:gap-2 text-color-error hover:text-color-error-accent text-md"

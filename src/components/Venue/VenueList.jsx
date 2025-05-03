@@ -56,7 +56,7 @@ const VenuesList = ({ searchNameDesc, searchCountry }) => {
         >
           Previous
         </button>
-        <button onClick={handleNextPage} className="  button-secondary-style">
+        <button onClick={handleNextPage} className="button-secondary-style">
           Next
         </button>
       </div>

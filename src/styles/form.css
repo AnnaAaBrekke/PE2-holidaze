@@ -7,7 +7,7 @@
 }
 
 .input-style {
-  @apply w-full border border-[#6385AD] rounded-md px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-[#6385AD] focus:border-transparent;
+  @apply w-full border border-[#6385AD] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#6385AD] focus:border-transparent;
 }
 
 .label-style {

@@ -45,7 +45,7 @@ const VenueCard = ({
                     className="w-full h-full object-cover rounded-t-lg"
                   />
                   {/* Location Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-2">
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 to-transparent px-3 py-2 text-white z-index">
                     <p className="flex items-center gap-1">
                       <MdLocationPin />
                       <span>{venue.location?.city || "City"}, </span>
@@ -65,7 +65,7 @@ const VenueCard = ({
             />
           )}
           {/* Location Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-2">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 to-transparent px-3 py-2 text-white z-index">
             <p className="flex items-center gap-1">
               <MdLocationPin />
               {venue.location?.city || "City"},
