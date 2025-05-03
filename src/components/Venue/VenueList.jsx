@@ -2,6 +2,7 @@ import { useState } from "react";
 import VenueCard from "./VenueCard";
 import useVenues from "../../hooks/useVenues";
 import SkeletonLoader from "../SkeletonLoader";
+import "../../styles/button.css";
 
 const VenuesList = ({ searchNameDesc, searchCountry }) => {
   const [page, setPage] = useState(1);
@@ -36,7 +37,7 @@ const VenuesList = ({ searchNameDesc, searchCountry }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mt-6">
         {filteredVenues.length > 0 ? (
           filteredVenues.map((venue) => (
             <VenueCard key={venue.id} venue={venue} />
@@ -50,15 +51,12 @@ const VenuesList = ({ searchNameDesc, searchCountry }) => {
       <div className="flex gap-4 m-10">
         <button
           onClick={handlePrevPage}
-          className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+          className="button-secondary-style"
           disabled={page === 1}
         >
           Previous
         </button>
-        <button
-          onClick={handleNextPage}
-          className="bg-[#0F6474] text-[#E0F9F6] px-4 py-2 rounded hover:bg-[#0c4e5a]"
-        >
+        <button onClick={handleNextPage} className="button-secondary-style">
           Next
         </button>
       </div>

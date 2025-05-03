@@ -6,6 +6,8 @@ import VenueCard from "../components/Venue/VenueCard";
 import VenueBookingsTable from "../components/Table";
 import { confirmAction, showAlert, showSuccess } from "../utils/notifications";
 import SkeletonLoader from "../components/SkeletonLoader";
+import ManagerStats from "../components/ManagerStats";
+import "../styles/button.css";
 
 const ManagerDashboard = () => {
   const { user, token } = useAuth();
@@ -91,18 +93,34 @@ const ManagerDashboard = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-6 text-center">Manager Dashboard</h1>
+    <div className="p-6 overflow-x-hidden">
+      {/* Top Header */}
+      <div className="max-w-5xl mx-auto text-center mb-10">
+        <h1 className="text-4xl font-bold mb-2">Manager Dashboard</h1>
+        <p className="text-gray-600 body-3 mb-6">
+          Manage your venues, view upcoming bookings on your venues, and create
+          new venues easily.
+        </p>
 
-      <div className="text-center mb-6">
-        <button
-          onClick={handleCreateClick}
-          className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition"
-        >
+        {/* Stats */}
+        <div className="m-2">
+          <ManagerStats venues={venues} />
+        </div>
+      </div>
+
+      {/* New Divider here */}
+      <hr className="border-t border-gray-300 my-8 max-w-5xl mx-auto" />
+
+      {/* Your Venues Heading + Button */}
+      <div className="flex justify-between items-center max-w-5xl mx-auto mb-6">
+        <h2 className="text-4xl font-semibold">Your Venues</h2>
+
+        <button onClick={handleCreateClick} className="button-primary-style">
           {showForm ? "Close Form" : "+ Create New Venue"}
         </button>
       </div>
 
+      {/* Form below */}
       {showForm && (
         <div ref={formRef} className="mb-12">
           <VenueForm
@@ -114,21 +132,20 @@ const ManagerDashboard = () => {
         </div>
       )}
 
-      <h2 className="text-2xl font-semibold mb-6">Your Venues</h2>
-
       {loading ? (
         <SkeletonLoader type="dashboard" />
       ) : venues.length === 0 ? (
         <p className="text-center text-gray-500">No venues created yet.</p>
       ) : (
-        <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2 justify-items-center">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {venues.map((venue) => (
             <div
               key={venue.id}
-              className="w-full flex justify-center items-start"
+              className="w-full max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-6"
             >
-              <div className="flex flex-col sm:flex-row gap-6 w-full max-w-5xl">
-                <div className="flex-1">
+              <div className="flex flex-col md:flex-row">
+                {/* Venue Card */}
+                <div className="w-full md:w-1/2 mb-4 justify-center flex">
                   <VenueCard
                     venue={venue}
                     isManager
@@ -137,7 +154,12 @@ const ManagerDashboard = () => {
                     isDeleting={isDeleting}
                   />
                 </div>
-                <div className="flex-1">
+
+                {/* Bookings Table */}
+                <div className="w-full md:w-1/2 ml-3">
+                  <h2 className="font-normal text-center">
+                    Upcoming bookings for: <strong>{venue.name}</strong>
+                  </h2>
                   <VenueBookingsTable bookings={venue.bookings} />
                 </div>
               </div>

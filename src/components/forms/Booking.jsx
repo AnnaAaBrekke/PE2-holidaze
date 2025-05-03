@@ -5,12 +5,14 @@ import getBookedDates from "../../utils/getBookedDates";
 import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
 import { createBooking } from "../../services/BookingService";
-import { MdWarningAmber } from "react-icons/md";
 import {
   confirmAction,
   showAlert,
-  showSuccess,
+  showBookingConfirmation,
 } from "../../utils/notifications";
+import "../../styles/form.css";
+import "../../styles/button.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const BookingForm = ({
   venueId,
@@ -79,24 +81,7 @@ const BookingForm = ({
 
       const formattedFrom = new Date(dateFrom).toLocaleDateString();
       const formattedTo = new Date(dateTo).toLocaleDateString();
-      await showSuccess(`
-        <div style="position: relative; width: 100%; max-width: 480px; text-align: center; font-family: 'Podkova', serif;">
-          
-          <div style="margin-bottom: 1.5rem;">
-            <h2 style="font-size: 24px; font-weight: 700; color: #101010; margin-bottom: 0.5rem;">BOOKING CONFIRMED!</h2>
-            <div style="width: 60px; height: 6px; background: #AFCDA2; margin: 0 auto 1rem auto; border-radius: 3px;"></div>
-          </div>
-      
-          <div style="font-size: 20px; font-weight: 400; color: #101010; margin-bottom: 1rem;">
-            ${formattedFrom} - ${formattedTo}
-          </div>
-      
-          <div style="font-size: 22px; font-weight: 400; color: #939393; margin-top: 1rem;">
-            A booking confirmation is sent to your email and you find it under 'My bookings'!
-          </div>
-      
-        </div>
-      `);
+      await showBookingConfirmation({ from: formattedFrom, to: formattedTo });
 
       reset();
     } catch (error) {
@@ -113,26 +98,32 @@ const BookingForm = ({
 
       {!user ? (
         <div className="text-center">
-          <p className="text-muted mt-3">
+          <p className="text-muted text-lg mt-3 mb-3">
             You must be logged in to make a booking.
           </p>
-          <Link to="/login" className="btn btn-outline-primary me-2">
+          <Link to="/login" className="body-3 button-secondary-style mr-2">
             Log In
           </Link>
-          <Link to="/register" className="btn btn-outline-secondary">
+          <Link
+            to="/register"
+            className="body-3 bg-[#0E4551] button-secondary-style"
+          >
             Register
           </Link>
         </div>
       ) : user.name === ownerName ? (
-        <div className="alert alert-warning text-center mt-3">
-          <MdWarningAmber /> You cannot book your own venue.
+        <div className="flex flex-col text-center mt-3">
+          <p className="text-color-error">You cannot book your own venue.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmitForm)} className="form-style">
           <div>
-            <label htmlFor="email">Email</label>
+            <label className="label-style" htmlFor="email">
+              Email
+            </label>
             <input
               id="email"
+              className="input-style"
               type="email"
               placeholder="Your email"
               {...register("email", {
@@ -147,12 +138,12 @@ const BookingForm = ({
               })}
             />
             {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
+              <p className="error-text">{errors.email.message}</p>
             )}
 
             {/* Calendar Date Picker */}
             <div className="mt-4">
-              <label>Select Date Range</label>
+              <label className="label-style">Select Date Range</label>
               <Calendar
                 selectRange
                 onChange={setDateRange}
@@ -162,48 +153,51 @@ const BookingForm = ({
                 }
               />
               {(!dateFrom || !dateTo) && (
-                <p className="text-sm text-red-500">
-                  Please pick a start and end date
-                </p>
+                <p className="error-text">Please pick a start and end date</p>
               )}
             </div>
 
-            <label className="mt-4" htmlFor="guests">
+            <label className="label-style" htmlFor="guests">
               Guests
             </label>
             <input
               id="guests"
+              className="input-style"
               type="number"
               {...register("guests", {
                 required: "Guest count is required",
                 min: { value: 1, message: "At least 1 guest" },
                 max: {
-                  value: maxGuests || 10, // fallback max if missing
+                  value: maxGuests || 15,
                   message: `Cannot book more than ${maxGuests} guests`,
                 },
               })}
             />
             {errors.guests && (
-              <p className="text-sm text-red-500">{errors.guests.message}</p>
+              <p className="error-text">{errors.guests.message}</p>
             )}
 
             {numberOfNights > 0 && (
-              <div>
-                <p>Total Nights: {numberOfNights}</p>
-                <p>Total Price: ${totalPrice} </p>
+              <div className=" text-gray-700 text-center mt-4">
+                <p>
+                  <span className="font-bold text-color-primary mr-1">
+                    {numberOfNights}
+                  </span>
+                  - Total Nights
+                </p>
+                <p>
+                  <span className="font-bold text-color-primary mr-1">
+                    ${totalPrice}
+                  </span>
+                  - Total Price
+                </p>
               </div>
             )}
           </div>
-
-          {error && <p className="text-sm text-red-600">{error}</p>}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn btn-primary w-full mt-4"
-          >
-            {loading ? "Booking..." : "Book Now"}
-          </button>
+          {error && <p className="error-text">{error}</p>}
+          <SubmitFormButton loading={loading} loadingText="Booking...">
+            Book now
+          </SubmitFormButton>
         </form>
       )}
     </div>

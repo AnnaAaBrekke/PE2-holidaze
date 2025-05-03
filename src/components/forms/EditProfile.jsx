@@ -4,6 +4,9 @@ import updateProfile from "../../services/ProfileService";
 import { useState } from "react";
 import { showAlert, showSuccess } from "../../utils/notifications";
 import { ClipLoader } from "react-spinners";
+import "../../styles/form.css";
+import "../../styles/button.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const EditProfileForm = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -36,11 +39,13 @@ const EditProfileForm = ({ onClose }) => {
         token,
         ...formData,
       });
+
       const updatedUser = {
         ...user,
         avatar: result.data.avatar,
         bio: result.data.bio,
       };
+
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
       await showSuccess("Updated profile");
@@ -54,12 +59,11 @@ const EditProfileForm = ({ onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)}>
-      {/* Avatar Preview*/}
-
-      <div className="flex gap-4 mt-4 items-center">
+    <form onSubmit={handleSubmit(onSubmitForm)} className="form-style">
+      {/* Avatar Preview */}
+      <div className="flex gap-4 mt-4 justify-center">
         <div>
-          <p className="text-sm">Current Avatar</p>
+          <p className="body-3">Current Avatar</p>
           <img
             src={
               user?.avatar?.url ||
@@ -71,7 +75,7 @@ const EditProfileForm = ({ onClose }) => {
         </div>
 
         <div>
-          <p className="text-sm">New Avatar Preview</p>
+          <p className="body-3">New Avatar Preview</p>
           <img
             src={newAvatarImg || "https://placehold.co/150?text=Preview"}
             alt="New avatar preview"
@@ -80,40 +84,52 @@ const EditProfileForm = ({ onClose }) => {
         </div>
       </div>
 
+      {/* Avatar URL */}
       <div>
-        <label>Avatar URL</label>
-        <input {...register("url", { required: "URL is required" })} />
-        {errors.url && <p>{errors.url.message}</p>}
+        <label htmlFor="url" className="label-style">
+          Avatar URL
+        </label>
+        <input
+          id="url"
+          className="input-style"
+          {...register("url", { required: "URL is required" })}
+        />
+        {errors.url && <p className="error-text">{errors.url.message}</p>}
       </div>
 
+      {/* Avatar Alt */}
       <div>
-        <label>Avatar Alt</label>
-        <input {...register("alt", { required: "Alt is required" })} />
-        {errors.alt && <p>{errors.alt.message}</p>}
+        <label htmlFor="alt" className="label-style">
+          Avatar Alt
+        </label>
+        <input
+          id="alt"
+          className="input-style"
+          {...register("alt", { required: "Alt is required" })}
+        />
+        {errors.alt && <p className="error-text">{errors.alt.message}</p>}
       </div>
 
+      {/* Bio */}
       <div>
-        <label>Bio</label>
-        <textarea {...register("bio", { maxLength: 200 })} />
-        {errors.bio && <p>{errors.bio.message}</p>}
+        <label htmlFor="bio" className="label-style">
+          Bio
+        </label>
+        <textarea
+          id="bio"
+          className="input-style"
+          {...register("bio", { maxLength: 200 })}
+        />
+        {errors.bio && <p className="error-text">{errors.bio.message}</p>}
       </div>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {/* General error */}
+      {error && <p className="error-text">{error}</p>}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-2 bg-blue-400 text-white rounded hover:bg-blue-700 transition"
-      >
-        {loading ? (
-          <>
-            <ClipLoader size={20} color="#ffffff" />
-            <span className="ml-2">Updating...</span>
-          </>
-        ) : (
-          "Update Profile"
-        )}
-      </button>
+      {/* Submit button */}
+      <SubmitFormButton loading={loading} loadingText="Updating...">
+        Update Profile
+      </SubmitFormButton>
     </form>
   );
 };

@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
-import { Input } from "@material-tailwind/react";
-import { ClipLoader } from "react-spinners";
+import "../../styles/form.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const LoginForm = () => {
   const { login, loading, error } = useAuth();
@@ -34,17 +34,18 @@ const LoginForm = () => {
     <form
       onSubmit={handleSubmit(onSubmitForm)}
       noValidate
-      className="space-y-6"
+      className="form-style"
     >
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <h1 className="text-2xl font-bold mb-4">Login</h1>
 
       <div>
-        <label htmlFor="email" className="block mb-1 font-medium">
+        <label htmlFor="email" className="label-style">
           Email*
         </label>
-        <Input
+        <input
           id="email"
           type="email"
+          className="input-style"
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -52,20 +53,18 @@ const LoginForm = () => {
               message: "Email must be a valid stud.noroff.no address.",
             },
           })}
-          error={!!errors.email}
         />
-        {errors.email && (
-          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-        )}
+        {errors.email && <p className="error-tex">{errors.email.message}</p>}
       </div>
 
       <div>
-        <label htmlFor="password" className="block mb-1 font-medium">
+        <label htmlFor="password" className="label-style">
           Password*
         </label>
-        <Input
+        <input
           id="password"
           type="password"
+          className="input-style"
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -73,33 +72,24 @@ const LoginForm = () => {
               message: "Password must be at least 8 characters",
             },
           })}
-          error={!!errors.password}
         />
         {errors.password && (
-          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+          <p className="error-text">{errors.password.message}</p>
         )}
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
-        {loading ? (
-          <>
-            <ClipLoader size={20} color="#ffffff" />
-            <span className="ml-2">Logging in...</span>
-          </>
-        ) : (
-          "Login"
-        )}
-      </button>
+      <SubmitFormButton loading={loading} loadingText="Logging in...">
+        Login
+      </SubmitFormButton>
 
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+      {error && <p className="error-text">{error}</p>}
 
-      <p className="mt-4 text-sm text-center">
-        Don't have an account?{" "}
-        <Link to="/register" className="text-blue-500 underline">
+      <p className="mt-2 text-center">
+        Don't have an account?
+        <Link
+          to="/register"
+          className="text-color-secondary underline ml-1  hover:text-color-accent-hover"
+        >
           Register here
         </Link>
       </p>

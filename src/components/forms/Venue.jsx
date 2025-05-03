@@ -3,8 +3,9 @@ import { useAuth } from "../../context/AuthContext";
 import { createVenue, updateVenue } from "../../services/VenueService";
 import { confirmAction, showSuccess } from "../../utils/notifications";
 import { useEffect, useState } from "react";
-import { Input, Checkbox } from "@material-tailwind/react";
-import { ClipLoader } from "react-spinners";
+import "../../styles/form.css";
+import "../../styles/button.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
@@ -96,84 +97,101 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">
+    <div>
+      <h2 className="text-2xl font-semibold mb-4 text-center">
         {mode === "edit" ? "Edit Venue" : "Create Venue"}
       </h2>
 
       <form
         onSubmit={handleSubmit(onSubmitVenueForm)}
-        className="space-y-6"
+        className="form-style"
         noValidate
       >
         {/* Name */}
         <div>
-          <label>Name*</label>
-          <Input {...register("name", { required: "Name is required" })} />
-          {errors.name && (
-            <p className="text-red-500 text-xs">{errors.name.message}</p>
-          )}
+          <label htmlFor="name" className="label-style">
+            Name*
+          </label>
+          <input
+            id="name"
+            className="input-style"
+            {...register("name", { required: "Name is required" })}
+          />
+          {errors.name && <p className="error-text">{errors.name.message}</p>}
         </div>
 
         {/* Description */}
         <div>
-          <label>Description*</label>
+          <label htmlFor="description" className="label-style">
+            Description*
+          </label>
           <textarea
+            id="description"
+            className="input-style"
             {...register("description", {
               required: "Description is required",
             })}
-            className="border p-2 w-full rounded-md"
           />
           {errors.description && (
-            <p className="text-red-500 text-xs">{errors.description.message}</p>
+            <p className="error-text">{errors.description.message}</p>
           )}
         </div>
 
         {/* Rating */}
         <div>
-          <label>Rating (0-5)</label>
-          <Input
+          <label htmlFor="rating" className="label-style">
+            Rating (0-5)
+          </label>
+          <input
+            id="rating"
             type="number"
+            className="input-style"
             {...register("rating", {
               min: { value: 0, message: "Minimum rating is 0" },
               max: { value: 5, message: "Maximum rating is 5" },
             })}
           />
           {errors.rating && (
-            <p className="text-red-500 text-xs">{errors.rating.message}</p>
+            <p className="error-text">{errors.rating.message}</p>
           )}
         </div>
 
         {/* Price */}
         <div>
-          <label>Price per night*</label>
-          <Input
+          <label htmlFor="price" className="label-style">
+            Price per night*
+          </label>
+          <input
+            id="price"
             type="number"
+            className="input-style"
             {...register("price", { required: "Price is required", min: 0 })}
           />
-          {errors.price && (
-            <p className="text-red-500 text-xs">{errors.price.message}</p>
-          )}
+          {errors.price && <p className="error-text">{errors.price.message}</p>}
         </div>
 
         {/* Max Guests */}
         <div>
-          <label>Max Guests*</label>
-          <Input
+          <label htmlFor="maxGuests" className="label-style">
+            Max Guests*
+          </label>
+          <input
+            id="maxGuests"
             type="number"
+            className="input-style"
             {...register("maxGuests", {
               required: "Max guests required",
               min: 1,
             })}
           />
           {errors.maxGuests && (
-            <p className="text-red-500 text-xs">{errors.maxGuests.message}</p>
+            <p className="error-text">{errors.maxGuests.message}</p>
           )}
         </div>
 
         {/* Image Previews */}
         {previewImages.length > 0 && (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 mb-4">
             {previewImages.map((url, idx) => (
               <img
                 key={idx}
@@ -186,67 +204,80 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         )}
 
         {/* Image URLs */}
-        <div>
-          <label>Main Image URL*</label>
-          <Input
-            {...register("mediaUrl1", { required: "Main image URL required" })}
-          />
-        </div>
-        <div>
-          <label>Image URL 2 (optional)</label>
-          <Input {...register("mediaUrl2")} />
-        </div>
-        <div>
-          <label>Image URL 3 (optional)</label>
-          <Input {...register("mediaUrl3")} />
-        </div>
-        <div>
-          <label>Image URL 4 (optional)</label>
-          <Input {...register("mediaUrl4")} />
-        </div>
+        {[1, 2, 3, 4].map((num) => (
+          <div key={num}>
+            <label htmlFor={`mediaUrl${num}`} className="label-style">
+              {num === 1 ? "Main Image URL*" : `Image URL ${num} (optional)`}
+            </label>
+            <input
+              id={`mediaUrl${num}`}
+              className="input-style"
+              {...register(
+                `mediaUrl${num}`,
+                num === 1 ? { required: "Main image URL required" } : {},
+              )}
+            />
+            {errors[`mediaUrl${num}`] && (
+              <p className="error-text">{errors[`mediaUrl${num}`].message}</p>
+            )}
+          </div>
+        ))}
 
         {/* City */}
         <div>
-          <label>City*</label>
-          <Input {...register("city", { required: "City is required" })} />
-          {errors.city && (
-            <p className="text-red-500 text-xs">{errors.city.message}</p>
-          )}
+          <label htmlFor="city" className="label-style">
+            City*
+          </label>
+          <input
+            id="city"
+            className="input-style"
+            {...register("city", { required: "City is required" })}
+          />
+          {errors.city && <p className="error-text">{errors.city.message}</p>}
         </div>
 
         {/* Country */}
         <div>
-          <label>Country*</label>
-          <Input
+          <label htmlFor="country" className="label-style">
+            Country*
+          </label>
+          <input
+            id="country"
+            className="input-style"
             {...register("country", { required: "Country is required" })}
           />
           {errors.country && (
-            <p className="text-red-500 text-xs">{errors.country.message}</p>
+            <p className="error-text">{errors.country.message}</p>
           )}
         </div>
 
         {/* Amenities */}
-        <div className="grid grid-cols-2">
-          <Checkbox label="Free Wifi" {...register("meta.wifi")} />
-          <Checkbox label="Parking" {...register("meta.parking")} />
-          <Checkbox label="Free Breakfast" {...register("meta.breakfast")} />
-          <Checkbox label="Pets Allowed" {...register("meta.pets")} />
-        </div>
+        <fieldset className="mt-4">
+          <legend className="label-style mb-2">Amenities</legend>
+          <div className="grid grid-cols-2 gap-2">
+            <label className="flex items-center gap-2">
+              <input type="checkbox" {...register("meta.wifi")} />
+              <span>Free Wifi</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input type="checkbox" {...register("meta.parking")} />
+              <span>Parking</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input type="checkbox" {...register("meta.breakfast")} />
+              <span>Free Breakfast</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input type="checkbox" {...register("meta.pets")} />
+              <span>Pets Allowed</span>
+            </label>
+          </div>
+        </fieldset>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="bg-[#0F6474] text-[#E0F9F6] w-full font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none"
-          disabled={loading}
-        >
-          {loading ? (
-            <ClipLoader />
-          ) : mode === "edit" ? (
-            "Update Venue"
-          ) : (
-            "Create Venue"
-          )}
-        </button>
+        {/* Submit */}
+        <SubmitFormButton loading={loading}>
+          {mode === "edit" ? "Update Venue" : "Create Venue"}
+        </SubmitFormButton>
       </form>
     </div>
   );

@@ -1,0 +1,27 @@
+.heading-big {
+  @apply text-[40px] font-bold font-podkova leading-tight;
+}
+
+.heading-small {
+  @apply text-[32px] font-bold font-podkova leading-snug;
+}
+
+.h3 {
+  @apply text-[28px] font-bold font-podkova leading-snug;
+}
+
+.title {
+  @apply text-[23px] font-bold font-podkova underline;
+}
+
+.body {
+  @apply text-[20px] font-medium font-podkova;
+}
+
+.body-2 {
+  @apply text-[18px] font-normal font-podkova;
+}
+
+.body-3 {
+  @apply text-[14px] font-normal font-podkova;
+}

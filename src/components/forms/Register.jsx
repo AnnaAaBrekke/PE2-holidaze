@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
-import { Input, Checkbox } from "@material-tailwind/react";
-import { ClipLoader } from "react-spinners";
+import "../../styles/form.css";
+import "../../styles/button.css";
+import SubmitFormButton from "../buttons/submitFormButton";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();
@@ -19,6 +20,7 @@ const RegisterForm = () => {
   } = useForm();
 
   const password = watch("password");
+  const CheckedOfVenueManager = watch("venueManager");
 
   const onSubmitForm = async (formData) => {
     const result = await registerUser(formData);
@@ -39,17 +41,38 @@ const RegisterForm = () => {
     <form
       onSubmit={handleSubmit(onSubmitForm)}
       noValidate
-      className="space-y-6"
+      className="form-style"
     >
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <h1 className="text-2xl font-bold mb-4">Register</h1>
+
+      {/* Venue Manager Checkbox */}
+      <div className="flex items-center">
+        <input
+          type="checkbox"
+          id="venueManager"
+          className="mr-2 cursor-pointer"
+          {...register("venueManager")}
+        />
+        <label htmlFor="venueManager" className="label-style">
+          Register as Venue Manager
+        </label>
+      </div>
+
+      {CheckedOfVenueManager && (
+        <p className="body-3 mb-4">
+          As a Venue Manager, you can create and manage your own venues. Show
+          upcoming bookings and access extra dashboard tools.
+        </p>
+      )}
 
       {/* Username */}
       <div>
-        <label htmlFor="name" className="block mb-1 font-medium">
+        <label htmlFor="name" className="label-style">
           Username*
         </label>
-        <Input
+        <input
           id="name"
+          className="input-style"
           {...register("name", {
             required: "Name is required",
             pattern: {
@@ -58,20 +81,18 @@ const RegisterForm = () => {
                 "Username must not contain punctuation except underscores.",
             },
           })}
-          error={!!errors.name}
         />
-        {errors.name && (
-          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-        )}
+        {errors.name && <p className="error-text">{errors.name.message}</p>}
       </div>
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block mb-1 font-medium">
+        <label htmlFor="email" className="label-style">
           Email*
         </label>
-        <Input
+        <input
           id="email"
+          className="input-style"
           type="email"
           {...register("email", {
             required: "Email is required",
@@ -80,21 +101,19 @@ const RegisterForm = () => {
               message: "Email must be a valid stud.noroff.no address.",
             },
           })}
-          error={!!errors.email}
         />
-        {errors.email && (
-          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-        )}
+        {errors.email && <p className="error-text">{errors.email.message}</p>}
       </div>
 
       {/* Password */}
       <div>
-        <label htmlFor="password" className="block mb-1 font-medium">
+        <label htmlFor="password" className="label-style">
           Password*
         </label>
-        <Input
+        <input
           id="password"
           type="password"
+          className="input-style"
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -102,63 +121,43 @@ const RegisterForm = () => {
               message: "Password must be at least 8 characters",
             },
           })}
-          error={!!errors.password}
         />
         {errors.password && (
-          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+          <p className="error-text">{errors.password.message}</p>
         )}
       </div>
 
       {/* Repeat Password */}
       <div>
-        <label htmlFor="password_repeat" className="block mb-1 font-medium">
+        <label htmlFor="password_repeat" className="label-style">
           Repeat Password*
         </label>
-        <Input
+        <input
           id="password_repeat"
           type="password"
+          className="input-style"
           {...register("password_repeat", {
             validate: (value) =>
               value === password || "Passwords do not match.",
           })}
-          error={!!errors.password_repeat}
         />
         {errors.password_repeat && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.password_repeat.message}
-          </p>
+          <p className="error-text">{errors.password_repeat.message}</p>
         )}
       </div>
 
-      {/* Venue Manager Checkbox */}
-      <div className="flex items-center gap-2">
-        <Checkbox id="venueManager" {...register("venueManager")} />
-        <label htmlFor="venueManager" className="text-sm font-medium">
-          Register as Venue Manager
-        </label>
-      </div>
+      <SubmitFormButton loading={loading} loadingText="Registering...">
+        Register
+      </SubmitFormButton>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
-        {loading ? (
-          <>
-            <ClipLoader size={20} color="#ffffff" />
-            <span className="ml-2">Registering...</span>
-          </>
-        ) : (
-          "Register"
-        )}
-      </button>
+      {error && <p className="error-text">{error}</p>}
 
-      {/* Error display */}
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-
-      <p className="mt-4 text-sm text-center">
-        Already have an account?{" "}
-        <Link to="/login" className="text-blue-500 underline">
+      <p className="mt-4 body-3 text-center">
+        Already have an account?
+        <Link
+          to="/login"
+          className="text-color-secondary underline ml-1 hover:text-color-accent-hover"
+        >
           Login here
         </Link>
       </p>

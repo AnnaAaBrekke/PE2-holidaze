@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.10",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "react": "^19.0.0",
     "react-calendar": "^5.1.0",
     "react-datepicker": "^8.3.0",
@@ -23,6 +24,7 @@
     "react-select": "^5.10.1",
     "react-spinners": "^0.17.0",
     "sweetalert2": "^11.19.1",
+    "sweetalert2-react-content": "^5.1.0",
     "swiper": "^11.2.6"
   },
   "devDependencies": {

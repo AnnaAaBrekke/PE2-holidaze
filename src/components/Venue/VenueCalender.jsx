@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import getBookedDates from "../../utils/getBookedDates";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import "../../styles/calendar.css";
 
 const VenueCalendar = ({ bookings = [] }) => {
   const bookedDates = useMemo(() => getBookedDates(bookings), [bookings]);
@@ -12,9 +13,6 @@ const VenueCalendar = ({ bookings = [] }) => {
     <div>
       <Calendar
         tileDisabled={({ date }) => isBooked(date) || date < new Date()}
-        tileClassName={({ date }) =>
-          isBooked(date) ? "booked-date" : "available-date"
-        }
       />
       <p>Booked dates are grey.</p>
     </div>

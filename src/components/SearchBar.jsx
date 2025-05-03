@@ -24,26 +24,28 @@ const SearchBar = ({
 
   return (
     <div className="flex flex-col items-center m-4">
-      <div className="flex flex-col md:flex-row justify-between w-full max-w-5xl items-center">
+      <div className="flex flex-col md:flex-row justify-between w-full max-w-5xl items-center text-color-text-primary">
         {/* Country Search */}
-        <div className="flex-1 m-2">
+        <div className="flex-1 m-2 text-left">
           <Select
             options={countryOptions}
             onChange={handleCountryChange}
             placeholder="Search by country..."
             isClearable
-            className="text-sm"
+            className="body-3 text-color-text-body "
+            aria-label="Search by country"
           />
         </div>
 
         {/* Venue Name Search */}
-        <div className="relative w-full md:w-2/3 m-2">
+        <div className="relative w-full md:w-2/3 m-2 text-left">
           <input
             type="text"
             value={searchNameDesc}
             onChange={handleVenueChange}
             placeholder="Search venues..."
-            className="border border-gray-300 w-full p-2 rounded text-sm pr-10"
+            aria-label="Search venues.."
+            className="border border-gray-300 text-color-text-body w-full p-3 rounded body-3 pr-10"
           />
           <button
             onClick={handleClear}

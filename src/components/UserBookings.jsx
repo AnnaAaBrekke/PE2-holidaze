@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MdDateRange, MdLocationPin } from "react-icons/md";
+import { FaStar, FaUsers } from "react-icons/fa";
+import { BsCheckCircleFill } from "react-icons/bs";
 import { useAuth } from "../context/AuthContext";
 import { getUserBookings } from "../services/BookingService";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { FaUsers } from "react-icons/fa";
 import SkeletonLoader from "./SkeletonLoader";
 
 const UserBookings = () => {
@@ -22,7 +22,6 @@ const UserBookings = () => {
         const sortedBookings = (result.data || []).sort(
           (a, b) => new Date(a.dateFrom) - new Date(b.dateFrom),
         );
-
         setBookings(sortedBookings);
       } catch (error) {
         setError(error.message);
@@ -30,92 +29,91 @@ const UserBookings = () => {
         setLoading(false);
       }
     };
-
     fetchBookings();
   }, [user?.name, token]);
 
-  if (loading) {
-    return <SkeletonLoader type="card" count={2} />;
-  }
+  if (loading) return <SkeletonLoader type="card" count={2} />;
+  if (error) return <p className="text-center text-color-error">{error}</p>;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-        <h2>Your Upcoming Bookings</h2>
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="text-center mb-10">
+        <h1 className="text-3xl font-bold mb-2">Your Upcoming Bookings</h1>
+        <h2 className="text-color-text-body">View all your upcoming stays.</h2>
+      </div>
 
-        {loading && <p>Loading your bookings...</p>}
-        {error && <p className="text-danger">{error}</p>}
-        {!loading && bookings.length === 0 && (
-          <p>No upcoming bookings found.</p>
-        )}
-
-        <div className="row gap-4 mt-4">
+      {bookings.length === 0 ? (
+        <p className="text-center text-gray-500">No upcoming bookings found.</p>
+      ) : (
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 justify-center">
           {bookings.map((booking) => {
             const { venue } = booking;
 
             return (
               <div
                 key={booking.id}
-                className="relative w-[323px] h-[596px] bg-white rounded-xl shadow-lg overflow-hidden"
+                className="relative w-full max-w-[280px] bg-white rounded-lg shadow-md overflow-hidden"
               >
-                {/* Image */}
-                <div className="absolute top-[30px] left-[11px] w-[300px] h-[395px]">
-                  <img
-                    src={
-                      venue?.media?.[0]?.url || "https://placehold.co/300x395"
-                    }
-                    alt={venue?.media?.[0]?.alt || venue.name}
-                    className="w-full h-full object-cover rounded-[10px]"
-                  />
-
-                  {/* Gradient Overlay */}
-                  <div className="absolute bottom-0 w-full h-[30%] bg-gradient-to-t from-[#08323B99] to-transparent rounded-b-[10px] px-4 py-2 text-white">
-                    <p className="text-[22px] font-podkova leading-[24px]">
-                      <MdLocationPin className="inline-block mr-1 -mt-1" />
-                      {venue?.location.city}, {venue?.location.country}
-                    </p>
+                <Link to={`/venue/${venue.id}`} className="block">
+                  {/* Image */}
+                  <div className="h-[200px] relative">
+                    <img
+                      src={
+                        venue?.media?.[0]?.url || "https://placehold.co/600x400"
+                      }
+                      alt={venue?.media?.[0]?.alt || venue.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-2 text-white">
+                      <MdLocationPin className="inline-block mr-1" />
+                      {venue?.location?.city}, {venue?.location?.country}
+                    </div>
                   </div>
-                </div>
+                  {/* Content */}
+                  <div className="p-4 flex flex-col gap-2">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-lg font-semibold line-clamp-1">
+                        {venue.name}
+                      </h3>
+                      <div
+                        className="flex"
+                        aria-label="Venue rating"
+                        title={`Rating: ${venue.rating}`}
+                      >
+                        {[...Array(5)].map((_, i) => (
+                          <FaStar
+                            key={i}
+                            className={`h-4 w-4 ${
+                              i < Math.round(venue.rating)
+                                ? "text-yellow-400"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
 
-                {/* Name + Stars */}
-                <div className="absolute top-[435px] left-[18px] right-[18px] flex justify-between items-center">
-                  <h3 className="text-[24px] font-bold font-podkova underline line-clamp-1">
-                    <Link
-                      to={`/venue/${venue.id}`}
-                      className="hover:text-yellow-600"
-                    >
-                      {venue.name}
-                    </Link>
-                  </h3>
-                  <div className="text-yellow-400 text-sm flex">
-                    {"★".repeat(Math.floor(venue.rating))}
-                    {"☆".repeat(5 - Math.floor(venue.rating))}
+                    <div className="flex items-center  text-gray-600">
+                      <MdDateRange className="mr-1" />
+                      {new Date(booking.dateFrom).toLocaleDateString()} →{" "}
+                      {new Date(booking.dateTo).toLocaleDateString()}
+                    </div>
+
+                    <div className="flex items-center  text-gray-600">
+                      <FaUsers className="mr-1" /> Guests: {booking.guests}
+                    </div>
+
+                    <div className="flex items-center gap-2 font-medium text-[20px] mt-2">
+                      <BsCheckCircleFill className="text-color-accent w-8 h-8" />
+                      <span>Confirmed Booking</span>
+                    </div>
                   </div>
-                </div>
-
-                {/* Booking Dates */}
-                <div className="absolute top-[480px] left-[18px] bg-[#E0F9F6] px-3 py-2 rounded-[8px] text-sm flex items-center gap-2 font-podkova">
-                  <MdDateRange className="text-black" />
-                  {new Date(booking.dateFrom).toLocaleDateString()} →{" "}
-                  {new Date(booking.dateTo).toLocaleDateString()}
-                </div>
-
-                {/* Guest Count */}
-                <div className="absolute top-[482px] left-[186px] bg-blue-100/40 px-3 py-1 rounded-[8px] text-sm flex items-center gap-2 font-podkova">
-                  <FaUsers className="text-black" />
-                  {booking.guests}
-                </div>
-
-                {/* Confirmed label */}
-                <div className="absolute bottom-[10px] left-4 text-center font-podkova font-semibold text-[24px] flex gap-x-2">
-                  <BsCheckCircleFill className="text-[#AFCDA2] w-12 h-12" />
-                  <p>Confirmed Booking</p>
-                </div>
+                </Link>
               </div>
             );
           })}
         </div>
-      </div>
+      )}
     </div>
   );
 };

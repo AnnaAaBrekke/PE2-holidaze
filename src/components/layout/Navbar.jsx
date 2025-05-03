@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
 import {
@@ -11,11 +11,18 @@ import {
 } from "react-icons/fa";
 import { GoSidebarCollapse } from "react-icons/go";
 import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
+import "../../styles/button.css";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   const linkClasses = (path) => {
     const isHome = path === "/";
@@ -25,17 +32,20 @@ const Navbar = () => {
 
     return `flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 p-2 rounded transition-all ${
       isActive
-        ? "font-bold text-blue-600 border-l-4 border-blue-600 sm:pl-2 bg-blue-50"
-        : "text-gray-700 hover:text-blue-600"
+        ? "font-bold text-color-primary border-l-4 border-color-primary sm:pl-2 bg-color-background"
+        : "text-color-text-primary hover:text-color-primary"
     }`;
   };
 
   return (
-    <nav className="bg-white border-b shadow-sm px-6 py-4 relative">
+    <nav className="bg-white border-b shadow-sm px-6 py-3 relative">
       <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         {/* Left Nav */}
         <div className="flex items-center gap-4">
-          <button onClick={() => setSidebarOpen(true)}>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open sidebar navigation"
+          >
             <GoSidebarCollapse className="size-6 hover:size-8" />
           </button>
         </div>
@@ -45,7 +55,8 @@ const Navbar = () => {
           <Link to="/">
             <img
               src="/logo_holidaze.png"
-              className="w-16 rounded-full h-auto"
+              alt="Logo Holidaze"
+              className="w-16 p-0.5 rounded-lg h-auto hover:shadow-md"
             />
           </Link>
         </div>
@@ -56,7 +67,7 @@ const Navbar = () => {
             <>
               <div className="text-right">
                 <h5 className="font-semibold text-gray-800">{user?.name}</h5>
-                <p className="text-sm text-gray-500">
+                <p className="body-3 text-gray-500">
                   {user?.venueManager ? "Venue Manager" : "Customer"}
                 </p>
               </div>
@@ -70,15 +81,12 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="text-sm bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-              >
+              <Link to="/login" className="body-3 button-secondary-style">
                 Login
               </Link>
               <Link
                 to="/register"
-                className="text-sm bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 transition"
+                className="body-3 bg-[#0E4551] button-secondary-style"
               >
                 Register
               </Link>
@@ -96,6 +104,7 @@ const Navbar = () => {
         {/* Close Button */}
         <button
           onClick={() => setSidebarOpen(false)}
+          aria-label="Close sidebar navigation"
           className="absolute top-4 right-4 text-gray-600 hover:text-black"
         >
           <FaArrowLeft size={20} />
@@ -103,7 +112,6 @@ const Navbar = () => {
 
         {/* Sidebar Content */}
         <div className="mt-12 flex-1 flex flex-col overflow-y-auto">
-          {/* Profile Card */}
           {isAuthenticated && (
             <div className="flex flex-col items-center text-center mb-6">
               <img
@@ -113,7 +121,7 @@ const Navbar = () => {
               />
               <div className="hidden sm:flex flex-col items-center">
                 <h5 className="font-semibold text-gray-800">{user?.name}</h5>
-                <p className="text-sm text-gray-500">
+                <p className="body-3 text-gray-500">
                   {user?.venueManager ? "Venue Manager" : "Customer"}
                 </p>
               </div>
@@ -188,10 +196,10 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => {
-                logout();
+                handleLogout();
                 setSidebarOpen(false);
               }}
-              className="flex flex-col sm:flex-row items-center justify-center sm:justify-start pl-6 gap-1 sm:gap-2 text-red-600 hover:text-red-800 text-md"
+              className="flex flex-col sm:flex-row items-center justify-center sm:justify-start pl-6 gap-1 sm:gap-2 text-color-error hover:text-color-error-accent text-md"
             >
               <FaSignOutAlt className="size-5" />
               <span className="hidden sm:inline">Logout</span>
