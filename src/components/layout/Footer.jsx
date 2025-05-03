@@ -12,7 +12,7 @@ const Footer = () => {
           />
         </Link>
       </nav>
-      <div className="text-center text-sm p-4 bg-teal-950">
+      <div className="text-center body-3 p-4 bg-teal-950">
         © {new Date().getFullYear()} Holidaze. All rights reserved.
       </div>
     </footer>

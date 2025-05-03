@@ -18,6 +18,10 @@
   @apply text-[20px] font-medium font-podkova;
 }
 
-.body-small {
+.body-2 {
   @apply text-[18px] font-normal font-podkova;
+}
+
+.body-3 {
+  @apply text-[14px] font-normal font-podkova;
 }

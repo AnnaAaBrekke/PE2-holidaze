@@ -4,7 +4,7 @@ const VenueBookingsTable = ({ bookings = [] }) => {
   }
 
   return (
-    <div className="relative shadow-md sm:rounded-lg mt-4">
+    <div className="relative shadow-md sm:rounded-lg mt-4 hover:shadow-xl">
       <table className="w-full text-xs text-left text-gray-700 border border-gray-200">
         <thead className="text-[11px] text-gray-600 uppercase bg-gray-100">
           <tr>

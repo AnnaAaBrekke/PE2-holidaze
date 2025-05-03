@@ -84,7 +84,7 @@ const SingleVenue = () => {
       {/* Location */}
       <div className="flex items-center gap-2 mb-4">
         <MdLocationPin className="text-[#4C4DDC] text-lg" />
-        <p className="body-small text-color-text-body">
+        <p className="body-2 text-color-text-body">
           {venue.location.city}, {venue.location.country}
         </p>
       </div>
@@ -94,13 +94,13 @@ const SingleVenue = () => {
         <h2 className="body text-color-text-secondary mb-2">Description</h2>
         <div className="relative group cursor-pointer w-full">
           <p
-            className="line-clamp-3  text-color-text-body body-small"
+            className="line-clamp-3  text-color-text-body body-2"
             title={venue.description}
           >
             {venue.description}
           </p>
 
-          <div className="absolute z-10 hidden group-hover:block bg-white border border-gray-300 text-sm text-color-text-body p-2 rounded shadow-lg w-72 top-full mt-1">
+          <div className="absolute z-10 hidden group-hover:block bg-white border border-gray-300 body-3 text-color-text-body p-2 rounded shadow-lg w-72 top-full mt-1">
             {venue.description}
           </div>
         </div>
@@ -133,7 +133,7 @@ const SingleVenue = () => {
       {/* Price */}
       <div className="flex items-center gap-2  bg-color-background px-4 py-2 rounded-md w-fit mb-6">
         <RiCoinsFill />
-        <span className="text-sm font-podkova text-[#101010]">
+        <span className="body-3 font-podkova text-[#101010]">
           Price p/night: ${venue.price}
         </span>
       </div>

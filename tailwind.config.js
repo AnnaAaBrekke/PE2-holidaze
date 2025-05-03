@@ -17,6 +17,7 @@ export default {
         "color-text-secondary": "6A6773",
         "color-text-body": "#939393",
         "color-error": "#E85757",
+        "color-error-accent": "#991B1B",
       },
     },
   },

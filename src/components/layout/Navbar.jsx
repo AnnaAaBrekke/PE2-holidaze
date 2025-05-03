@@ -54,7 +54,7 @@ const Navbar = () => {
             <>
               <div className="text-right">
                 <h5 className="font-semibold text-gray-800">{user?.name}</h5>
-                <p className="text-sm text-gray-500">
+                <p className="body-3 text-gray-500">
                   {user?.venueManager ? "Venue Manager" : "Customer"}
                 </p>
               </div>
@@ -68,12 +68,12 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link to="/login" className="text-sm button-secondary-style">
+              <Link to="/login" className="body-3 button-secondary-style">
                 Login
               </Link>
               <Link
                 to="/register"
-                className="text-sm bg-[#0E4551] button-secondary-style"
+                className="body-3 bg-[#0E4551] button-secondary-style"
               >
                 Register
               </Link>
@@ -108,7 +108,7 @@ const Navbar = () => {
               />
               <div className="hidden sm:flex flex-col items-center">
                 <h5 className="font-semibold text-gray-800">{user?.name}</h5>
-                <p className="text-sm text-gray-500">
+                <p className="body-3 text-gray-500">
                   {user?.venueManager ? "Venue Manager" : "Customer"}
                 </p>
               </div>

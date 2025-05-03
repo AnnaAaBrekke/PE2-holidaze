@@ -22,7 +22,7 @@ const ManagerStats = ({ venues }) => {
   }, 0);
 
   return (
-    <div className="flex flex-wrap justify-center gap-8 mt-8 text-gray-700 text-sm">
+    <div className="flex flex-wrap justify-center gap-8 mt-8 text-gray-700 body-3">
       <div className="flex flex-col items-center">
         <span className="text-xl font-bold text-color-primary">
           {totalVenues}

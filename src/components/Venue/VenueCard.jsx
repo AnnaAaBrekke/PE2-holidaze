@@ -45,7 +45,7 @@ const VenueCard = ({
                     className="w-full h-full object-cover rounded-t-lg"
                   />
                   {/* Location Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-small">
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-2">
                     <p className="flex items-center gap-1">
                       <MdLocationPin />
                       {venue.location?.city || "Unknown City"},
@@ -63,7 +63,7 @@ const VenueCard = ({
             />
           )}
           {/* Location Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-small">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-2">
             <p className="flex items-center gap-1">
               <MdLocationPin />
               {venue.location?.city || "Unknown City"},
@@ -110,7 +110,7 @@ const VenueCard = ({
             )}
           </div>
 
-          <div className=" bg-color-background px-4 py-2 rounded-md text-sm w-fit font-medium">
+          <div className=" bg-color-background px-4 py-2 rounded-md body-3 w-fit font-medium">
             <RiCoinsFill className="inline" /> ${venue.price} / night
           </div>
         </div>
@@ -121,14 +121,14 @@ const VenueCard = ({
         <div className="flex justify-between gap-2 p-4 pt-0">
           <button
             onClick={onEdit}
-            className="bg-color-primary text-white text-sm px-3 py-2 rounded-full w-1/2"
+            className="bg-color-primary text-white body-3 px-3 py-2 rounded-full w-1/2 shadow-sm hover:shadow-xl"
           >
             Edit
           </button>
           <button
             onClick={onDelete}
             disabled={isDeleting}
-            className="bg-color-error text-white text-sm px-3 py-2 rounded-full w-1/2"
+            className="bg-color-error text-white body-3 px-3 py-2 rounded-full w-1/2 shadow-sm hover:shadow-xl"
           >
             {isDeleting ? "Deleting..." : "Delete"}
           </button>

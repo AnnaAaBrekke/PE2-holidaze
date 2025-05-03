@@ -62,7 +62,7 @@ const EditProfileForm = ({ onClose }) => {
 
       <div className="flex gap-4 mt-4 justify-center">
         <div>
-          <p className="text-sm">Current Avatar</p>
+          <p className="body-3">Current Avatar</p>
           <img
             src={
               user?.avatar?.url ||
@@ -74,7 +74,7 @@ const EditProfileForm = ({ onClose }) => {
         </div>
 
         <div>
-          <p className="text-sm">New Avatar Preview</p>
+          <p className="body-3">New Avatar Preview</p>
           <img
             src={newAvatarImg || "https://placehold.co/150?text=Preview"}
             alt="New avatar preview"

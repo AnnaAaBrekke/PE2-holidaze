@@ -22,6 +22,7 @@ const RegisterForm = () => {
   } = useForm();
 
   const password = watch("password");
+  const CheckedOfVenueManager = watch("venueManager");
 
   const onSubmitForm = async (formData) => {
     const result = await registerUser(formData);
@@ -57,6 +58,13 @@ const RegisterForm = () => {
           Register as Venue Manager
         </label>
       </div>
+
+      {CheckedOfVenueManager && (
+        <p className="body-3">
+          As a Venue Manager, you can create and manage your own venues. Show
+          upcoming bookings and access extra dashboard tools.
+        </p>
+      )}
 
       {/* Username */}
       <div>
@@ -150,7 +158,7 @@ const RegisterForm = () => {
       {/* Error display */}
       {error && <p className="error-text">{error}</p>}
 
-      <p className="mt-4 text-sm text-center">
+      <p className="mt-4 body-3 text-center">
         Already have an account?
         <Link to="/login" className="text-color-secondary hover:underline ml-1">
           Login here

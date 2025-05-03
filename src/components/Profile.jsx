@@ -39,13 +39,13 @@ const Profile = () => {
           </h2>
 
           {/* Role */}
-          <h3 className="text-sm text-color-secondary mb-2">
+          <h3 className="body-3 text-color-secondary mb-2">
             {user?.venueManager ? "Venue Manager" : "Customer"}
           </h3>
 
           {/* Bio */}
           <p
-            className="text-color-text-body text-sm mb-6 max-w-sm
+            className="text-color-text-body body-3 mb-6 max-w-sm
           "
           >
             {user?.bio || "No bio provided."}
@@ -91,7 +91,7 @@ const Profile = () => {
             {/* Logout */}
             <button
               onClick={logout}
-              className="flex flex-row items-center gap-2 px-4 py-2 border border-red-600 text-red-600 hover:text-red-800 hover:border-red-800 rounded transition duration-200 ease-in-out"
+              className="flex flex-row items-center gap-2 px-12 py-2 border-2 border-color-error text-color-error hover:text-color-error-accent hover:border-color-error-accent hover:shadow-lg rounded-md bg-white"
             >
               <FaSignOutAlt className="text-lg" />
               Logout

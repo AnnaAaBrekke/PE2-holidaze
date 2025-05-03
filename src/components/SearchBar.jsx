@@ -32,7 +32,7 @@ const SearchBar = ({
             onChange={handleCountryChange}
             placeholder="Search by country..."
             isClearable
-            className="text-sm"
+            className="body-3"
           />
         </div>
 
@@ -43,7 +43,7 @@ const SearchBar = ({
             value={searchNameDesc}
             onChange={handleVenueChange}
             placeholder="Search venues..."
-            className="border border-gray-300 w-full p-3 rounded text-sm pr-10"
+            className="border border-gray-300 w-full p-3 rounded body-3 pr-10"
           />
           <button
             onClick={handleClear}

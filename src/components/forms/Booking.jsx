@@ -101,12 +101,12 @@ const BookingForm = ({
           <p className="text-muted text-lg mt-3 mb-3">
             You must be logged in to make a booking.
           </p>
-          <Link to="/login" className="text-sm button-secondary-style mr-2">
+          <Link to="/login" className="body-3 button-secondary-style mr-2">
             Log In
           </Link>
           <Link
             to="/register"
-            className="text-sm bg-[#0E4551] button-secondary-style"
+            className="body-3 bg-[#0E4551] button-secondary-style"
           >
             Register
           </Link>

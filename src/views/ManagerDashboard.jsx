@@ -97,7 +97,7 @@ const ManagerDashboard = () => {
       {/* Top Header */}
       <div className="max-w-5xl mx-auto text-center mb-10">
         <h1 className="text-4xl font-bold mb-2">Manager Dashboard</h1>
-        <p className="text-gray-600 text-sm mb-6">
+        <p className="text-gray-600 body-3 mb-6">
           Manage your venues, view upcoming bookings on your venues, and create
           new venues easily.
         </p>
