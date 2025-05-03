@@ -48,8 +48,10 @@ const VenueCard = ({
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-2">
                     <p className="flex items-center gap-1">
                       <MdLocationPin />
-                      {venue.location?.city || "Unknown City"},
-                      {venue.location?.country || "Unknown Country"}
+                      <span>{venue.location?.city || "City"}, </span>
+                      <span className="ml-1">
+                        {venue.location?.country || "Country"}
+                      </span>
                     </p>
                   </div>
                 </SwiperSlide>
@@ -66,8 +68,8 @@ const VenueCard = ({
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-color-text-primary to-transparent px-3 py-2 text-white body-2">
             <p className="flex items-center gap-1">
               <MdLocationPin />
-              {venue.location?.city || "Unknown City"},
-              {venue.location?.country || "Unknown Country"}
+              {venue.location?.city || "City"},
+              {venue.location?.country || "Country"}
             </p>
           </div>
         </div>
@@ -75,7 +77,9 @@ const VenueCard = ({
         {/* Content */}
         <div className="p-4 flex flex-col justify-between">
           <div className="flex justify-between items-center mb-2">
-            <h1 className="title line-clamp-1">{venue.name}</h1>
+            <h1 className="title line-clamp-1">
+              {venue?.name || "Venue Title"}
+            </h1>
             <div className="text-yellow-400 text-xs">
               {"★".repeat(Math.floor(venue.rating))}
               {"☆".repeat(5 - Math.floor(venue.rating))}

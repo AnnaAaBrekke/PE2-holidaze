@@ -85,7 +85,8 @@ const SingleVenue = () => {
       <div className="flex items-center gap-2 mb-4">
         <MdLocationPin className="text-[#4C4DDC] text-lg" />
         <p className="body-2 text-color-text-body">
-          {venue.location.city}, {venue.location.country}
+          <span>{venue.location?.city || "City"},</span>
+          <span className="ml-1">{venue.location?.country || "Country"}</span>
         </p>
       </div>
 

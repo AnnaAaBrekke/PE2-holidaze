@@ -12,6 +12,7 @@ export default {
         "color-secondary": "#96A88E",
         "color-accent": "#AFCDA2",
         "color-accent-hover": "#7C9670",
+
         "color-background": "#E0F9F6",
         "color-tag": "#DBEAFE66",
         "color-text-primary": "#08323B",

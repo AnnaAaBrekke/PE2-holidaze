@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import EditProfileForm from "./forms/EditProfile";
 import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
@@ -9,6 +9,7 @@ const Profile = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (showForm && formRef.current) {
@@ -17,6 +18,11 @@ const Profile = () => {
   }, [showForm]);
 
   const handleEditProfileClick = () => setShowForm((prev) => !prev);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-10 max-w-4xl mx-auto">
@@ -82,7 +88,7 @@ const Profile = () => {
             )}
 
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="flex items-center justify-center gap-2 px-12 py-2 border-2 border-color-error text-color-error hover:text-color-error-accent hover:border-color-error-accent hover:shadow-lg rounded-md bg-white"
             >
               <FaSignOutAlt className="text-lg" />

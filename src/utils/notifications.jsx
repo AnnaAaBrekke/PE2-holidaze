@@ -63,13 +63,11 @@ export async function showSuccess(message = "Action completed successfully!") {
 export async function showBookingConfirmation({ from, to }) {
   await baseSwal.fire({
     icon: "success",
-    title: (
-      <h2 className="font-bold text-2xl text-color-text-primary text-center">
-        Booking Confirmed!
-      </h2>
-    ),
     html: (
       <div className="text-center font-podkova text-color-text-primary">
+        <h2 className="font-bold text-2xl text-color-text-primary text-center mb-2">
+          Booking Confirmed!
+        </h2>
         <p className="text-base">
           {from} – {to}
         </p>
