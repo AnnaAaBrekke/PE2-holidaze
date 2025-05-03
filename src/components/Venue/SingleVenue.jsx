@@ -31,11 +31,11 @@ const SingleVenue = () => {
   const handleOpenBookingForm = () => setShowForm((prev) => !prev);
 
   if (loading) return <SkeletonLoader type="card" count={1} layout="block" />;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (error) return <p className="text-center text-color-error">{error}</p>;
   if (!venue) return <p className="text-center">Venue not found.</p>;
 
   return (
-    <div className="max-w-xl mx-auto p-6 relative">
+    <div className="max-w-xl mx-auto p-6 relative bg-white m-4 rounded-lg">
       <div className="w-full h-[400px] rounded-xl overflow-hidden mb-6">
         {venue.media.length > 1 ? (
           <Swiper
@@ -67,7 +67,7 @@ const SingleVenue = () => {
       {/* Name + Price + Rating */}
       <div className="flex justify-between items-start mb-2">
         <h1 className="heading-small truncate">{venue.name}</h1>
-        <div className="flex gap-1">
+        <div className="flex mt-4">
           {[...Array(5)].map((_, i) => (
             <FaStar
               key={i}
@@ -101,7 +101,7 @@ const SingleVenue = () => {
             {venue.description}
           </p>
 
-          <div className="absolute z-10 hidden group-hover:block bg-white border border-gray-300 body-3 text-color-text-body p-2 rounded shadow-lg w-72 top-full mt-1">
+          <div className="absolute z-10 hidden group-hover:block body-3 text-color-text-body p-2 rounded shadow-lg w-72 top-full mt-1">
             {venue.description}
           </div>
         </div>

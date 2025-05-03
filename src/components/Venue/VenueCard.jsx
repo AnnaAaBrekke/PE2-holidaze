@@ -5,7 +5,7 @@ import {
   MdLocationPin,
   MdWifi,
 } from "react-icons/md";
-import { FaParking, FaPaw } from "react-icons/fa";
+import { FaParking, FaPaw, FaStar } from "react-icons/fa";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -80,9 +80,17 @@ const VenueCard = ({
             <h1 className="title line-clamp-1">
               {venue?.name || "Venue Title"}
             </h1>
-            <div className="text-yellow-700 text-sm">
-              {"★".repeat(Math.floor(venue.rating))}
-              {"☆".repeat(5 - Math.floor(venue.rating))}
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <FaStar
+                  key={i}
+                  className={`h-4 w-4 ${
+                    i < Math.round(venue.rating)
+                      ? "text-yellow-400"
+                      : "text-gray-300"
+                  }`}
+                />
+              ))}
             </div>
           </div>
 

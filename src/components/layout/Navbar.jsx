@@ -194,7 +194,7 @@ const Navbar = () => {
                 logout();
                 setSidebarOpen(false);
               }}
-              className="flex flex-col sm:flex-row items-center justify-center sm:justify-start pl-6 gap-1 sm:gap-2 text-red-600 hover:text-red-800 text-md"
+              className="flex flex-col sm:flex-row items-center justify-center sm:justify-start pl-6 gap-1 sm:gap-2 text-color-error hover:text-color-error-accent text-md"
             >
               <FaSignOutAlt className="size-5" />
               <span className="hidden sm:inline">Logout</span>

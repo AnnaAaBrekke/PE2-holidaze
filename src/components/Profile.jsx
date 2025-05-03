@@ -39,12 +39,12 @@ const Profile = () => {
           />
 
           {/* Name */}
-          <h2 className="text-3xl font-semibold text-gray-800">{user?.name}</h2>
+          <h1 className="text-3xl font-semibold text-gray-800">{user?.name}</h1>
 
           {/* Role */}
-          <h3 className="body-3 text-gray-500 uppercase tracking-wide font-medium">
+          <h2 className="body-3 text-gray-500 uppercase tracking-wide font-medium">
             {user?.venueManager ? "Venue Manager" : "Customer"}
-          </h3>
+          </h2>
 
           {/* Bio */}
           <p className="text-gray-600 max-w-md text-base leading-relaxed">

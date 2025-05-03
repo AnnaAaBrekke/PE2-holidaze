@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MdDateRange, MdLocationPin } from "react-icons/md";
-import { FaUsers } from "react-icons/fa";
+import { FaStar, FaUsers } from "react-icons/fa";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { useAuth } from "../context/AuthContext";
 import { getUserBookings } from "../services/BookingService";
@@ -33,13 +33,13 @@ const UserBookings = () => {
   }, [user?.name, token]);
 
   if (loading) return <SkeletonLoader type="card" count={2} />;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (error) return <p className="text-center text-color-error">{error}</p>;
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold mb-2">Your Upcoming Bookings</h2>
-        <h3 className="text-gray-500">View all your upcoming stays.</h3>
+        <h1 className="text-3xl font-bold mb-2">Your Upcoming Bookings</h1>
+        <h2 className="text-color-text-body">View all your upcoming stays.</h2>
       </div>
 
       {bookings.length === 0 ? (
@@ -75,9 +75,21 @@ const UserBookings = () => {
                       <h3 className="text-lg font-semibold line-clamp-1">
                         {venue.name}
                       </h3>
-                      <div className="text-yellow-500">
-                        {"★".repeat(Math.floor(venue.rating))}
-                        {"☆".repeat(5 - Math.floor(venue.rating))}
+                      <div
+                        className="flex"
+                        aria-label="Venue rating"
+                        title={`Rating: ${venue.rating}`}
+                      >
+                        {[...Array(5)].map((_, i) => (
+                          <FaStar
+                            key={i}
+                            className={`h-4 w-4 ${
+                              i < Math.round(venue.rating)
+                                ? "text-yellow-400"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        ))}
                       </div>
                     </div>
 

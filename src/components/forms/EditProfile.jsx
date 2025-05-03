@@ -39,11 +39,13 @@ const EditProfileForm = ({ onClose }) => {
         token,
         ...formData,
       });
+
       const updatedUser = {
         ...user,
         avatar: result.data.avatar,
         bio: result.data.bio,
       };
+
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
       await showSuccess("Updated profile");
@@ -58,8 +60,7 @@ const EditProfileForm = ({ onClose }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="form-style">
-      {/* Avatar Preview*/}
-
+      {/* Avatar Preview */}
       <div className="flex gap-4 mt-4 justify-center">
         <div>
           <p className="body-3">Current Avatar</p>
@@ -83,35 +84,49 @@ const EditProfileForm = ({ onClose }) => {
         </div>
       </div>
 
+      {/* Avatar URL */}
       <div>
-        <label className="label-style">Avatar URL</label>
+        <label htmlFor="url" className="label-style">
+          Avatar URL
+        </label>
         <input
+          id="url"
           className="input-style"
           {...register("url", { required: "URL is required" })}
         />
-        {errors.url && <p>{errors.url.message}</p>}
+        {errors.url && <p className="error-text">{errors.url.message}</p>}
       </div>
 
+      {/* Avatar Alt */}
       <div>
-        <label className="label-style">Avatar Alt</label>
+        <label htmlFor="alt" className="label-style">
+          Avatar Alt
+        </label>
         <input
+          id="alt"
           className="input-style"
           {...register("alt", { required: "Alt is required" })}
         />
-        {errors.alt && <p>{errors.alt.message}</p>}
+        {errors.alt && <p className="error-text">{errors.alt.message}</p>}
       </div>
 
+      {/* Bio */}
       <div>
-        <label className="label-style">Bio</label>
+        <label htmlFor="bio" className="label-style">
+          Bio
+        </label>
         <textarea
+          id="bio"
           className="input-style"
           {...register("bio", { maxLength: 200 })}
         />
-        {errors.bio && <p>{errors.bio.message}</p>}
+        {errors.bio && <p className="error-text">{errors.bio.message}</p>}
       </div>
 
+      {/* General error */}
       {error && <p className="error-text">{error}</p>}
 
+      {/* Submit button */}
       <SubmitFormButton loading={loading} loadingText="Updating...">
         Update Profile
       </SubmitFormButton>
