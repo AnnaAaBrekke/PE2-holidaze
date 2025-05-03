@@ -3,8 +3,6 @@ import { useAuth } from "../../context/AuthContext";
 import { createVenue, updateVenue } from "../../services/VenueService";
 import { confirmAction, showSuccess } from "../../utils/notifications";
 import { useEffect, useState } from "react";
-import { Input, Checkbox } from "@material-tailwind/react";
-import { ClipLoader } from "react-spinners";
 import "../../styles/form.css";
 import "../../styles/button.css";
 import SubmitFormButton from "../buttons/submitFormButton";
@@ -111,8 +109,11 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
       >
         {/* Name */}
         <div>
-          <label className="label-style">Name*</label>
-          <Input
+          <label htmlFor="name" className="label-style">
+            Name*
+          </label>
+          <input
+            id="name"
             className="input-style"
             {...register("name", { required: "Name is required" })}
           />
@@ -121,8 +122,11 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Description */}
         <div>
-          <label className="label-style">Description*</label>
+          <label htmlFor="description" className="label-style">
+            Description*
+          </label>
           <textarea
+            id="description"
             className="input-style"
             {...register("description", {
               required: "Description is required",
@@ -135,10 +139,13 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Rating */}
         <div>
-          <label className="label-style">Rating (0-5)</label>
-          <Input
-            className="input-style"
+          <label htmlFor="rating" className="label-style">
+            Rating (0-5)
+          </label>
+          <input
+            id="rating"
             type="number"
+            className="input-style"
             {...register("rating", {
               min: { value: 0, message: "Minimum rating is 0" },
               max: { value: 5, message: "Maximum rating is 5" },
@@ -151,10 +158,13 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Price */}
         <div>
-          <label className="label-style">Price per night*</label>
-          <Input
-            className="input-style"
+          <label htmlFor="price" className="label-style">
+            Price per night*
+          </label>
+          <input
+            id="price"
             type="number"
+            className="input-style"
             {...register("price", { required: "Price is required", min: 0 })}
           />
           {errors.price && <p className="error-text">{errors.price.message}</p>}
@@ -162,10 +172,13 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Max Guests */}
         <div>
-          <label className="label-style">Max Guests*</label>
-          <Input
-            className="input-style"
+          <label htmlFor="maxGuests" className="label-style">
+            Max Guests*
+          </label>
+          <input
+            id="maxGuests"
             type="number"
+            className="input-style"
             {...register("maxGuests", {
               required: "Max guests required",
               min: 1,
@@ -178,7 +191,7 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Image Previews */}
         {previewImages.length > 0 && (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 mb-4">
             {previewImages.map((url, idx) => (
               <img
                 key={idx}
@@ -191,30 +204,32 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         )}
 
         {/* Image URLs */}
-        <div>
-          <label className="label-style">Main Image URL*</label>
-          <Input
-            className="input-style"
-            {...register("mediaUrl1", { required: "Main image URL required" })}
-          />
-        </div>
-        <div>
-          <label className="label-style">Image URL 2 (optional)</label>
-          <Input className="input-style" {...register("mediaUrl2")} />
-        </div>
-        <div>
-          <label className="label-style">Image URL 3 (optional)</label>
-          <Input className="input-style" {...register("mediaUrl3")} />
-        </div>
-        <div>
-          <label className="label-style">Image URL 4 (optional)</label>
-          <Input className="input-style" {...register("mediaUrl4")} />
-        </div>
+        {[1, 2, 3, 4].map((num) => (
+          <div key={num}>
+            <label htmlFor={`mediaUrl${num}`} className="label-style">
+              {num === 1 ? "Main Image URL*" : `Image URL ${num} (optional)`}
+            </label>
+            <input
+              id={`mediaUrl${num}`}
+              className="input-style"
+              {...register(
+                `mediaUrl${num}`,
+                num === 1 ? { required: "Main image URL required" } : {},
+              )}
+            />
+            {errors[`mediaUrl${num}`] && (
+              <p className="error-text">{errors[`mediaUrl${num}`].message}</p>
+            )}
+          </div>
+        ))}
 
         {/* City */}
         <div>
-          <label className="label-style">City*</label>
-          <Input
+          <label htmlFor="city" className="label-style">
+            City*
+          </label>
+          <input
+            id="city"
             className="input-style"
             {...register("city", { required: "City is required" })}
           />
@@ -223,8 +238,11 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
 
         {/* Country */}
         <div>
-          <label className="label-style">Country*</label>
-          <Input
+          <label htmlFor="country" className="label-style">
+            Country*
+          </label>
+          <input
+            id="country"
             className="input-style"
             {...register("country", { required: "Country is required" })}
           />
@@ -234,14 +252,29 @@ const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
         </div>
 
         {/* Amenities */}
-        <div className="grid grid-cols-2">
-          <Checkbox label="Free Wifi" {...register("meta.wifi")} />
-          <Checkbox label="Parking" {...register("meta.parking")} />
-          <Checkbox label="Free Breakfast" {...register("meta.breakfast")} />
-          <Checkbox label="Pets Allowed" {...register("meta.pets")} />
-        </div>
+        <fieldset className="mt-4">
+          <legend className="label-style mb-2">Amenities</legend>
+          <div className="grid grid-cols-2 gap-2">
+            <label className="flex items-center gap-2">
+              <input type="checkbox" {...register("meta.wifi")} />
+              <span>Free Wifi</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input type="checkbox" {...register("meta.parking")} />
+              <span>Parking</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input type="checkbox" {...register("meta.breakfast")} />
+              <span>Free Breakfast</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input type="checkbox" {...register("meta.pets")} />
+              <span>Pets Allowed</span>
+            </label>
+          </div>
+        </fieldset>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <SubmitFormButton loading={loading}>
           {mode === "edit" ? "Update Venue" : "Create Venue"}
         </SubmitFormButton>

@@ -132,7 +132,7 @@ const VenueCard = ({
           <button
             onClick={onDelete}
             disabled={isDeleting}
-            className="bg-color-error text-white body-3 px-3 py-2 rounded-full w-1/2 shadow-sm hover:shadow-xl"
+            className="bg-color-error text-black body-small font-medium px-3 py-2 rounded-full w-1/2 shadow-sm hover:shadow-xl hover:bg-color-error-accent"
           >
             {isDeleting ? "Deleting..." : "Delete"}
           </button>
