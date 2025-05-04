@@ -1,6 +1,8 @@
 # Holidaze – Booking Venue Application
 
-`![Alt Text](relative/path/to/image.png)`
+<img width="1415" alt="Home-Holidaze" src="https://github.com/user-attachments/assets/584c72dd-d867-48dc-b7c7-98554e0a1f7a" />
+<img width="1415" alt="Venue Manager-Holidaze" src="https://github.com/user-attachments/assets/4007de5d-a92e-475b-b825-6beeb9fa0fed" />
+
 
 ## Overview
 
@@ -92,12 +94,7 @@ npm run preview # Preview the production build
 
 This project is deployed using Netlify.
 
-Live Site: xxxx
-
-## Planning
-
-- Kanban Board: xxx
-- Gantt Chart: xxxx
+Live Site: https://holidaze-annaaab.netlify.app/
 
 ## Testing
 
