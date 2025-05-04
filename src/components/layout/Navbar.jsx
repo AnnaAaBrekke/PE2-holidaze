@@ -51,7 +51,7 @@ const Navbar = () => {
         </div>
 
         {/* Centered Logo */}
-        <div className="absolute left-1/2 -translate-x-1/2 text-lg font-bold text-yellow-600">
+        <div className="flex-1 flex justify-center sm:justify-center text-lg font-bold text-yellow-600">
           <Link to="/">
             <img
               src="/logo_holidaze.png"
