@@ -11,7 +11,6 @@ const useVenues = () => {
     const fetchVenues = async () => {
       try {
         setLoading(true);
-        // Fetch all venues (e.g., 1000 at once, or whatever your API allows)
         const result = await apiFetch(
           `/venues?limit=100&sort=created&sortOrder=desc`,
         );

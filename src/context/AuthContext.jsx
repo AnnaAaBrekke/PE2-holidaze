@@ -1,22 +1,8 @@
-// Register users
-// Log in
-// Log out
-// Know if a user is authenticated
-// Access the user's info (e.g. name, role)
-
-// ---> after filling in the form this will happen:
-
 import { createContext, useContext, useState } from "react";
 import { API_BASE_URL } from "../../constants";
 import apiFetch from "../utils/apiFetch";
 import { confirmAction } from "../utils/notifications";
 import { friendlyError } from "../utils/errorMessages";
-
-// This creates a context object that React will use to pass down auth-related data through the component tree — without props.
-
-// It provides access to auth state (user, token, etc.) and functions (login, logout, etc.) to any component inside.
-// user and token are loaded from localStorage on first render — so users stay logged in when refreshing.
-// Saves user data and token to localStorage + updates state.
 
 const AuthContext = createContext();
 

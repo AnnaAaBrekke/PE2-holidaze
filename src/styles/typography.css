@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .heading-big {
   @apply text-[40px] font-bold font-podkova leading-tight;
 }

@@ -27,7 +27,6 @@ const ManagerDashboard = () => {
     );
   }
 
-  // Load venues on mount
   useEffect(() => {
     const fetchVenues = async () => {
       if (!user?.name) return;
@@ -46,7 +45,6 @@ const ManagerDashboard = () => {
     fetchVenues();
   }, [user?.name, token]);
 
-  // Form and card handlers
   const handleCreateClick = () => {
     setMode("create");
     setSelectedVenue(null);
