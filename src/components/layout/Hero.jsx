@@ -1,20 +1,6 @@
-import useVenues from "../../hooks/useVenues";
 import SearchBar from "../SearchBar";
 
-const Hero = ({ setSearchNameDesc, setSearchCountry, searchNameDesc }) => {
-  const { venues } = useVenues();
-
-  // Unique country list
-  const countryOptions = venues
-    .map((venue) => ({
-      value: venue.location.country,
-      label: venue.location.country,
-    }))
-    .filter(
-      (option, index, self) =>
-        index === self.findIndex((o) => o.value === option.value),
-    );
-
+const Hero = ({ setSearchNameDesc, searchNameDesc }) => {
   return (
     <div className="relative h-[400px] md:h-[450px] flex items-center justify-center bg-color-text-primary">
       {/* Background Image */}
@@ -39,9 +25,7 @@ const Hero = ({ setSearchNameDesc, setSearchCountry, searchNameDesc }) => {
         </p>
 
         <SearchBar
-          countryOptions={countryOptions}
           setSearchNameDesc={setSearchNameDesc}
-          setSearchCountry={setSearchCountry}
           searchNameDesc={searchNameDesc}
         />
       </div>
