@@ -11,7 +11,7 @@
 }
 
 .h3 {
-  @apply text-[28px] font-bold font-podkova leading-snug;
+  @apply text-[25px] font-semibold font-podkova leading-snug;
 }
 
 .title {

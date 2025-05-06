@@ -1,5 +1,5 @@
 import React from "react";
-import UserBookings from "../../components/UserBookings";
+import UserBookings from "../../components/bookings/UserBookings";
 
 const CustomerBookingsPage = () => (
   <div>
