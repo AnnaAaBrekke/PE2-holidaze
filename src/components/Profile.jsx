@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import EditProfileForm from "./forms/EditProfile";
 import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
 import { FaSignOutAlt, FaUserEdit } from "react-icons/fa";
-import { useHandleLogout } from "../handlers/handleLogout";
+import { useHandleLogout } from "../hooks/useHandleLogout";
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuth();
