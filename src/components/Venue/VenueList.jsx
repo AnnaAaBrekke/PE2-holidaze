@@ -4,7 +4,7 @@ import SkeletonLoader from "../SkeletonLoader";
 import VenueCard from "./VenueCard";
 import "../../styles/button.css";
 
-const VenuesList = ({ searchNameDesc }) => {
+const VenueList = ({ searchNameDesc }) => {
   const [page, setPage] = useState(1);
   const { venues, loading, error } = useVenues();
 
@@ -74,4 +74,4 @@ const VenuesList = ({ searchNameDesc }) => {
   );
 };
 
-export default VenuesList;
+export default VenueList;

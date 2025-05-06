@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import VenuesList from "../../components/venue/VenueList";
+import VenueList from "../../components/venue/VenueList";
 import Hero from "../../components/layout/Hero";
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
         searchNameDesc={searchNameDesc}
       />
       <main>
-        <VenuesList searchNameDesc={searchNameDesc} />
+        <VenueList searchNameDesc={searchNameDesc} />
       </main>
     </div>
   );
