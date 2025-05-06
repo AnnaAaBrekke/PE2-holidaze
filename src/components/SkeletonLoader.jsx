@@ -18,7 +18,6 @@ const SkeletonLoader = ({ count = 6, layout = "grid", type = "card" }) => {
               <div className="h-4 bg-gray-300 rounded-full w-1/3"></div>
             </div>
             <div className="h-6 bg-gray-300 rounded-full w-24"></div>
-            {/* Price */}
           </div>
         );
 

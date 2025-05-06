@@ -1,3 +1,28 @@
+/**
+ * AuthContext - Provides authentication state and actions across the app.
+ *
+ * @context
+ * @property {Object|null} user - The currently authenticated user object.
+ * @property {Function} setUser - Updates the user state.
+ * @property {string|null} token - The current access token.
+ * @property {boolean} loading - Indicates if an auth operation is in progress.
+ * @property {string|null} error - Authentication error message, if any.
+ * @property {boolean} isAuthenticated - Whether the user is logged in.
+ * @property {boolean} isManager - True if the user is a venue manager.
+ * @property {boolean} isCustomer - True if the user is a customer.
+ * @property {Function} register - Registers a new user. Accepts form data.
+ * @property {Function} login - Logs in a user. Accepts { email, password }.
+ * @property {Function} logout - Logs the user out with confirmation.
+ *
+ * @component
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - The child components that consume the auth context.
+ * @returns {JSX.Element} AuthProvider component wrapping the app.
+ *
+ * @function useAuth
+ * @returns {Object} Auth context value (see above).
+ */
+
 import { createContext, useContext, useState } from "react";
 import { API_BASE_URL } from "../../constants";
 import apiFetch from "../utils/apiFetch";

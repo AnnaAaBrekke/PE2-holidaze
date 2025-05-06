@@ -1,3 +1,25 @@
+/**
+ * VenueCard - Displays a venue preview card with image(s), name, rating, amenities, and price.
+ * Optionally includes manager edit/delete buttons.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.venue - Venue data to display.
+ * @param {string} props.venue.id - Unique venue ID.
+ * @param {string} props.venue.name - Venue name.
+ * @param {Array<Object>} props.venue.media - Media objects ({ url, alt }).
+ * @param {number} props.venue.price - Price per night.
+ * @param {number} props.venue.maxGuests - Max guest capacity.
+ * @param {number} props.venue.rating - Rating value (0–5).
+ * @param {Object} [props.venue.location] - Venue location (city and country).
+ * @param {Object} [props.venue.meta] - Amenities (wifi, breakfast, parking, pets).
+ * @param {Function} [props.onEdit] - Edit handler for managers.
+ * @param {Function} [props.onDelete] - Delete handler for managers.
+ * @param {boolean} [props.isManager=false] - Whether to show manager actions.
+ * @param {boolean} [props.isDeleting=false] - Whether the venue is being deleted.
+ * @returns {JSX.Element} Venue preview card.
+ */
+
 import { Link } from "react-router-dom";
 import {
   MdFreeBreakfast,

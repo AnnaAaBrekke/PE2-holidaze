@@ -1,3 +1,26 @@
+/**
+ * BookingForm - A booking form component for selecting dates and guests to book a venue.
+ *
+ * @component
+ * @param {Object} props
+ * @param {string} props.venueId - ID of the venue being booked.
+ * @param {Array<Object>} [props.bookings=[]] - Existing bookings to disable unavailable dates.
+ * @param {string} props.ownerName - Name of the venue owner (to prevent self-booking).
+ * @param {Function} [props.onClose] - Optional callback to close the form after booking.
+ * @param {Function} [props.onBookingCreated] - Optional callback fired after successful booking.
+ * @param {number} props.price - Price per night for the venue.
+ * @param {number} props.maxGuests - Maximum number of guests allowed.
+ * @returns {JSX.Element} A complete booking form with date picker, validation, and dynamic pricing.
+ *
+ * Features:
+ * - Uses `react-hook-form` for form handling and validation
+ * - Prevents booking by venue owner
+ * - Disables past and already booked dates using a calendar
+ * - Validates email (must match logged-in user's) and guest count
+ * - Calculates and displays total price and duration
+ * - Handles API request via `createBooking` and shows confirmation
+ */
+
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { useMemo, useState } from "react";

@@ -1,3 +1,14 @@
+/**
+ * Custom React hook for fetching detailed information about a single venue.
+ *
+ * @param {string} id - The ID of the venue to fetch.
+ * @returns {Object} An object containing:
+ * - venue {Object|null}: The fetched venue data (includes owner and bookings).
+ * - loading {boolean}: Whether the data is currently being fetched.
+ * - error {string}: Error message if the fetch fails.
+ * - refetch {Function}: Function to manually re-fetch the venue data.
+ */
+
 import { useState, useEffect } from "react";
 import apiFetch from "../utils/apiFetch";
 import { friendlyError } from "../utils/errorMessages";

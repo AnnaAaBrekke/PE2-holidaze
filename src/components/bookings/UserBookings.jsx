@@ -1,3 +1,16 @@
+/**
+ * UserBookings - Displays a user's bookings, divided into upcoming and past stays.
+ *
+ * @component
+ * @returns {JSX.Element} A sectioned view of the user's upcoming and completed bookings.
+ *
+ * Features:
+ * - Fetches bookings from the BookingService using the authenticated user's name and token
+ * - Sorts and categorizes bookings based on current date
+ * - Displays loading state with skeletons and error message if fetch fails
+ * - Uses `BookingCard` for each individual booking
+ */
+
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { getUserBookings } from "../../services/BookingService";

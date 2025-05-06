@@ -1,3 +1,20 @@
+/**
+ * Displays a table of bookings for a specific venue.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Array<Object>} props.bookings - List of booking objects.
+ * @param {Object} props.bookings[].customer - The customer who made the booking.
+ * @param {string} props.bookings[].customer.name - Customer's name.
+ * @param {Object} [props.bookings[].customer.avatar] - Customer's avatar info.
+ * @param {string} [props.bookings[].customer.avatar.url] - Avatar image URL.
+ * @param {string} [props.bookings[].customer.avatar.alt] - Avatar alt text.
+ * @param {string} props.bookings[].dateFrom - Booking start date (ISO string).
+ * @param {string} props.bookings[].dateTo - Booking end date (ISO string).
+ * @param {number} props.bookings[].guests - Number of guests.
+ * @returns {JSX.Element} A styled table showing booking details or a fallback message.
+ */
+
 const VenueBookingsTable = ({ bookings = [] }) => {
   if (!bookings || bookings.length === 0) {
     return <p className="text-gray-500 mt-2">No bookings on this venue yet.</p>;

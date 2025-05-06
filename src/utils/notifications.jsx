@@ -1,3 +1,13 @@
+/**
+ * Custom SweetAlert utilities using SweetAlert2 with React integration.
+ *
+ * @functions
+ * @function confirmAction - Shows a confirmation dialog with Yes/Cancel buttons.
+ * @function showAlert - Displays an error alert with a custom message.
+ * @function showSuccess - Displays a success message.
+ * @function showBookingConfirmation - Displays a booking confirmation message with date range.
+ */
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import React from "react";

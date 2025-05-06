@@ -1,3 +1,11 @@
+/**
+ * friendlyError - Converts technical error messages into user-friendly messages.
+ *
+ * @function
+ * @param {string} message - The original error message from an API or system.
+ * @returns {string} A readable and helpful message for end users.
+ */
+
 export function friendlyError(message) {
   if (!message) return "Something went wrong. Please try again.";
 

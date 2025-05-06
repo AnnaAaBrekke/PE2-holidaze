@@ -1,3 +1,15 @@
+/**
+ * SubmitFormButton - A styled submit button for forms that shows a loading spinner when submitting.
+ *
+ * @component
+ * @param {Object} props
+ * @param {boolean} props.loading - Whether the button is in a loading state.
+ * @param {string} [props.loadingText="Loading.."] - Text displayed next to the spinner.
+ * @param {React.ReactNode} props.children - Button content when not loading.
+ * @param {Object} [props.props] - Additional props passed to the button element (e.g., aria attributes).
+ * @returns {JSX.Element} A styled submit button with loading state support.
+ */
+
 import { ClipLoader } from "react-spinners";
 import "../../styles/button.css";
 

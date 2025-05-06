@@ -1,3 +1,21 @@
+/**
+ * RegisterForm - A user registration form with validation and role selection.
+ *
+ * @component
+ * @returns {JSX.Element} A styled form that allows users to register as a customer or venue manager.
+ *
+ * Features:
+ * - Uses `react-hook-form` for form state and validation
+ * - Allows users to optionally register as a Venue Manager
+ * - Validates:
+ *   - Username (alphanumeric + underscores)
+ *   - Email (must be a `stud.noroff.no` address)
+ *   - Password (minimum 8 characters)
+ *   - Password confirmation (must match)
+ * - Displays validation errors and handles async registration via `useAuth`
+ * - Shows success message on registration and redirects to login
+ */
+
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";

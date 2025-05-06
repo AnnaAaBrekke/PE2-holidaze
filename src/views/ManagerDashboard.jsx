@@ -1,3 +1,19 @@
+/**
+ * ManagerDashboard - The main dashboard for venue managers to manage their listings and view bookings.
+ *
+ * @component
+ * @returns {JSX.Element} A dashboard interface for venue managers with venue management and booking overview.
+ *
+ * Features:
+ * - Checks if the logged-in user is a venue manager; restricts access otherwise
+ * - Fetches and displays the manager's venues and their bookings
+ * - Displays venue stats via `ManagerStats`
+ * - Allows creation, editing, and deletion of venues using `VenueForm` and `VenueCard`
+ * - Displays a table of upcoming bookings per venue using `VenueBookingsTable`
+ * - Handles loading and error states with `SkeletonLoader` and messages
+ * - Scrolls to the form on edit for better UX
+ */
+
 import { useEffect, useRef, useState } from "react";
 import { getManagerVenues, deleteVenue } from "../services/VenueService";
 import { useAuth } from "../context/AuthContext";

@@ -1,3 +1,23 @@
+/**
+ * BookingCard - Displays a summary card for a single booking, including venue info,
+ * dates, guests, and status (past or upcoming).
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.booking - Booking data.
+ * @param {Object} props.booking.venue - Venue details associated with the booking.
+ * @param {string} props.booking.venue.id - Unique ID of the venue.
+ * @param {string} props.booking.venue.name - Name of the venue.
+ * @param {Array<Object>} props.booking.venue.media - Venue images ({ url, alt }).
+ * @param {Object} props.booking.venue.location - Venue location ({ city, country }).
+ * @param {number} props.booking.venue.rating - Venue rating.
+ * @param {string} props.booking.dateFrom - Start date of the booking.
+ * @param {string} props.booking.dateTo - End date of the booking.
+ * @param {number} props.booking.guests - Number of guests for the booking.
+ * @param {boolean} [props.isPast=false] - Whether the booking is in the past.
+ * @returns {JSX.Element} A styled card showing booking information and venue preview.
+ */
+
 import { Link } from "react-router-dom";
 import { MdDateRange, MdLocationPin } from "react-icons/md";
 import { FaStar, FaUsers } from "react-icons/fa";

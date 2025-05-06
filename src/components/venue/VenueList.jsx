@@ -1,3 +1,18 @@
+/**
+ * VenueList - Displays a paginated, filterable list of venue cards.
+ *
+ * @component
+ * @param {Object} props
+ * @param {string} props.searchNameDesc - Text input used to filter venues by name or description.
+ * @returns {JSX.Element} Filtered and paginated venue list with loading and error handling.
+ *
+ * Features:
+ * - Filters venues based on search input
+ * - Paginates results (12 per page)
+ * - Uses SkeletonLoader while loading
+ * - Displays VenueCard components
+ */
+
 import { useState } from "react";
 import useVenues from "../../hooks/useVenues";
 import SkeletonLoader from "../SkeletonLoader";
