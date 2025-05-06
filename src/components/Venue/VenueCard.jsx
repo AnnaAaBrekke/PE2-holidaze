@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import { RiCoinsFill } from "react-icons/ri";
 import "../../styles/layout.css";
 import "../../styles/typography.css";
+import "../../styles/carousel.css";
 
 const VenueCard = ({
   venue,

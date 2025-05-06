@@ -15,6 +15,7 @@ import { RiCoinsFill } from "react-icons/ri";
 import "../../styles/button.css";
 import "../../styles/layout.css";
 import "../../styles/typography.css";
+import "../../styles/carousel.css";
 
 const SingleVenue = () => {
   const { id } = useParams();
