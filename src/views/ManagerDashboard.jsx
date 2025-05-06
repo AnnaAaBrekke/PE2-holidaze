@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getManagerVenues, deleteVenue } from "../services/VenueService";
 import { useAuth } from "../context/AuthContext";
 import VenueForm from "../components/forms/Venue";
-import VenueCard from "../components/Venue/VenueCard";
+import VenueCard from "../components/venue/VenueCard";
 import VenueBookingsTable from "../components/Table";
 import { confirmAction, showAlert, showSuccess } from "../utils/notifications";
 import SkeletonLoader from "../components/SkeletonLoader";

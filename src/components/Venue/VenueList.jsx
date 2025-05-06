@@ -1,6 +1,6 @@
 import { useState } from "react";
-import VenueCard from "./VenueCard";
 import useVenues from "../../hooks/useVenues";
+import VenueCard from "./VenueCard";
 import SkeletonLoader from "../SkeletonLoader";
 import "../../styles/button.css";
 
