@@ -5,7 +5,7 @@
 
 ## Overview
 
-**Holidaze** is a modern, responsive accommodation booking application built as part of the Front-End Development 2 (FED2) course exam. This project demonstrates skills in project planning, responsive UI design, front-end development using React and Tailwind CSS, with Vite as the build tool for fast local development and optimized production builds.
+**Holidaze** is a modern, responsive accommodation booking application built as part of the Front-End Development 2 course exam. This project demonstrates skills in project planning, responsive UI design, front-end development using React and Tailwind CSS, with Vite as the build tool for fast local development and optimized production builds.
 
 The application features two main user experiences:
 
