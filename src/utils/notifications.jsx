@@ -59,7 +59,7 @@ export async function showSuccess(message = "Action completed successfully!") {
     confirmButtonText: "OK",
   });
 }
-// Styled booking-specific success modal
+// This is the booking-specific success modal
 export async function showBookingConfirmation({ from, to }) {
   await baseSwal.fire({
     icon: "success",
