@@ -1,3 +1,16 @@
+/**
+ * Updates a user profile with new avatar and bio information.
+ *
+ * @param {Object} formData - Data used to update the profile.
+ * @param {string} formData.name - The profile name to update.
+ * @param {string} formData.url - URL of the new avatar image.
+ * @param {string} formData.alt - Alt text for the avatar image.
+ * @param {string} formData.bio - User biography text.
+ * @param {string} formData.token - Bearer token for authentication.
+ * @returns {Promise<Object>} The updated profile data.
+ * @throws {Error} Throws a user-friendly error if the update fails.
+ */
+
 import apiFetch from "../utils/apiFetch";
 import { friendlyError } from "../utils/errorMessages";
 

@@ -1,3 +1,22 @@
+/**
+ * VenueForm - A form component for creating or editing a venue listing.
+ *
+ * @component
+ * @param {Object} props
+ * @param {"create"|"edit"} [props.mode="create"] - Form mode: "create" for new venues or "edit" for updating.
+ * @param {Object} [props.venue={}] - Existing venue data to populate the form in edit mode.
+ * @param {string} [props.venueId] - The ID of the venue being edited (required in edit mode).
+ * @param {Function} [props.onVenueSaved] - Callback triggered after a venue is successfully created or updated.
+ * @returns {JSX.Element} A venue creation or update form with validation, image previews, and amenity toggles.
+ *
+ * Features:
+ * - Uses `react-hook-form` for validation and state management
+ * - Dynamically previews up to 4 venue images
+ * - Validates and formats numeric fields like rating, price, and guest count
+ * - Supports conditional logic based on mode (create or edit)
+ * - Handles API integration via `createVenue` and `updateVenue` services
+ */
+
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { createVenue, updateVenue } from "../../services/VenueService";

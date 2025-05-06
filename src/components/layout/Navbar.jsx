@@ -1,3 +1,18 @@
+/**
+ * Navbar - A responsive navigation component with a sidebar, user profile access,
+ * authentication controls, and contextual links based on user role.
+ *
+ * @component
+ * @returns {JSX.Element} A site-wide navigation bar with conditional rendering based on auth state.
+ *
+ * Features:
+ * - Responsive sidebar toggle for mobile and desktop
+ * - Displays user name, avatar, and role when authenticated
+ * - Navigation links adapt based on user role (manager/customer)
+ * - Includes login/register buttons or logout action
+ * - Uses `react-router-dom` for navigation and route matching
+ */
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";

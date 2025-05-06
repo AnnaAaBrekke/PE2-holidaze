@@ -1,3 +1,20 @@
+/**
+ * EditProfileForm - A form that allows the user to update their avatar and bio.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Function} [props.onClose] - Optional callback to close the form after a successful update.
+ * @returns {JSX.Element} A profile edit form with avatar preview, validation, and loading state.
+ *
+ * Features:
+ * - Uses `react-hook-form` for form state and validation
+ * - Pre-fills form with current user data from `useAuth`
+ * - Live preview of new avatar image
+ * - Validates avatar URL, alt text, and bio (max 200 characters)
+ * - Sends update to API and updates global user state on success
+ * - Shows errors and confirmation messages using alert utilities
+ */
+
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import updateProfile from "../../services/ProfileService";

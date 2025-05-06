@@ -1,3 +1,12 @@
+/**
+ * Custom React hook for fetching a list of venues.
+ *
+ * @returns {Object} An object containing:
+ * - venues {Array}: List of fetched venues.
+ * - loading {boolean}: Indicates if the data is currently being loaded.
+ * - error {string}: Error message if the fetch fails.
+ */
+
 import { useState, useEffect } from "react";
 import apiFetch from "../utils/apiFetch";
 import { friendlyError } from "../utils/errorMessages";

@@ -1,3 +1,13 @@
+/**
+ * SearchBar - A controlled input component for filtering venue listings by name or description.
+ *
+ * @component
+ * @param {Object} props
+ * @param {string} props.searchNameDesc - Current value of the search input.
+ * @param {Function} props.setSearchNameDesc - Function to update the search input value.
+ * @returns {JSX.Element} A styled search input with a clear button.
+ */
+
 const SearchBar = ({ setSearchNameDesc, searchNameDesc }) => {
   const handleVenueChange = (e) => {
     setSearchNameDesc(e.target.value);

@@ -1,3 +1,11 @@
+/**
+ * Profile - Displays the authenticated user's profile with options to edit info,
+ * manage venues or bookings, and logout. Shows a message if the user is not authenticated.
+ *
+ * @component
+ * @returns {JSX.Element} The user's profile page with conditional content and actions.
+ */
+
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";

@@ -1,3 +1,23 @@
+/**
+ * LoginForm - A user login form with validation and redirect based on user role.
+ *
+ * @component
+ * @returns {JSX.Element} A styled login form for authenticating users.
+ *
+ * Features:
+ * - Uses `react-hook-form` for form handling and validation
+ * - Validates:
+ *   - Email (must be a `stud.noroff.no` address)
+ *   - Password (minimum 8 characters)
+ * - Displays inline validation errors
+ * - Handles async login through `useAuth`
+ * - Shows loading spinner via `SkeletonLoader` while authenticating
+ * - Redirects:
+ *   - Venue Managers to `/manager`
+ *   - Customers to homepage `/`
+ * - Shows a link to the registration form
+ */
+
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";

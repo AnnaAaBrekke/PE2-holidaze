@@ -1,3 +1,18 @@
+/**
+ * SingleVenue - Displays detailed information for a specific venue including
+ * media carousel, details, amenities, pricing, and a booking form.
+ *
+ * @component
+ * @returns {JSX.Element} Venue detail view with booking form and calendar.
+ *
+ * Features:
+ * - Fetches venue by `id` from URL params
+ * - Image carousel using Swiper
+ * - Conditional booking form with scroll into view
+ * - Amenity badges and price display
+ * - Fallback for loading, error, or missing venue
+ */
+
 import { useParams } from "react-router-dom";
 import useVenue from "../../hooks/useVenue";
 import { FaParking, FaPaw, FaStar } from "react-icons/fa";
