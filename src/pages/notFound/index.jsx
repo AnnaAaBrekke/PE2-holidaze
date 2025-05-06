@@ -6,18 +6,9 @@ const NotFoundPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        textAlign: "center",
-      }}
-    >
-      <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>404</h1>
-      <p style={{ fontSize: "1.5rem", marginBottom: "2rem" }}>Page Not Found</p>
+    <div className="flex flex-col items-center justify-center h-screen text-center">
+      <h1 className="text-6xl font-bold mb-4">404</h1>
+      <p className="text-2xl mb-8">Page Not Found</p>
       <button onClick={() => navigate(-1)} className="button-primary-style">
         Go Back
       </button>

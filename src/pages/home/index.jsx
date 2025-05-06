@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import VenuesList from "../../components/Venue/VenueList";
+import VenuesList from "../../components/venue/VenueList";
 import Hero from "../../components/layout/Hero";
 
 const Home = () => {

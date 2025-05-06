@@ -3,7 +3,6 @@
 <img width="1415" alt="Home-Holidaze" src="https://github.com/user-attachments/assets/584c72dd-d867-48dc-b7c7-98554e0a1f7a" />
 <img width="1415" alt="Venue Manager-Holidaze" src="https://github.com/user-attachments/assets/4007de5d-a92e-475b-b825-6beeb9fa0fed" />
 
-
 ## Overview
 
 **Holidaze** is a modern, responsive accommodation booking application built as part of the Front-End Development 2 (FED2) course exam. This project demonstrates skills in project planning, responsive UI design, front-end development using React and Tailwind CSS, with Vite as the build tool for fast local development and optimized production builds.

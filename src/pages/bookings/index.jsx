@@ -1,12 +1,10 @@
 import React from "react";
-import UserBookings from "../../components/UserBookings";
+import UserBookings from "../../components/bookings/UserBookings";
 
-const CustomerBookingsPage = () => {
-  return (
-    <div>
-      <UserBookings />
-    </div>
-  );
-};
+const CustomerBookingsPage = () => (
+  <div>
+    <UserBookings />
+  </div>
+);
 
 export default CustomerBookingsPage;

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { useMemo, useState } from "react";
 import getBookedDates from "../../utils/getBookedDates";
+import SubmitFormButton from "../buttons/SubmitFormButton";
 import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
 import { createBooking } from "../../services/BookingService";
@@ -12,7 +13,6 @@ import {
 } from "../../utils/notifications";
 import "../../styles/form.css";
 import "../../styles/button.css";
-import SubmitFormButton from "../buttons/submitFormButton";
 
 const BookingForm = ({
   venueId,

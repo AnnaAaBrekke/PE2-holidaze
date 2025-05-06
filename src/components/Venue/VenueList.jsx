@@ -1,7 +1,7 @@
 import { useState } from "react";
-import VenueCard from "./VenueCard";
 import useVenues from "../../hooks/useVenues";
 import SkeletonLoader from "../SkeletonLoader";
+import VenueCard from "./VenueCard";
 import "../../styles/button.css";
 
 const VenuesList = ({ searchNameDesc }) => {

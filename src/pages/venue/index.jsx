@@ -1,12 +1,10 @@
 import React from "react";
-import SingleVenue from "../../components/Venue/SingleVenue";
+import SingleVenue from "../../components/venue/SingleVenue";
 
-const VenueDetailsPage = () => {
-  return (
-    <div>
-      <SingleVenue />
-    </div>
-  );
-};
+const VenueDetailsPage = () => (
+  <div>
+    <SingleVenue />
+  </div>
+);
 
 export default VenueDetailsPage;
