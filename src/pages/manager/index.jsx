@@ -1,5 +1,5 @@
 import React from "react";
-import ManagerDashboard from "../../views/ManagerDashboard";
+import ManagerDashboard from "../../components/manager/ManagerDashboard";
 
 const ManagerPage = () => (
   <div>
