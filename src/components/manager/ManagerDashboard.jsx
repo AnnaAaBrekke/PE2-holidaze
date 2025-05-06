@@ -20,7 +20,6 @@ import { deleteVenue, getManagerVenues } from "../../services/VenueService";
 import { useAuth } from "../../context/AuthContext";
 import VenueForm from "../forms/Venue";
 import VenueCard from "../venue/VenueCard";
-import VenueBookingsTable from "./Table";
 import {
   confirmAction,
   showAlert,
@@ -28,6 +27,7 @@ import {
 } from "../../utils/notifications";
 import SkeletonLoader from "../SkeletonLoader";
 import ManagerStats from "./ManagerStats";
+import ManagerBookingsTable from "./ManagerBookingsTable";
 import "../../styles/button.css";
 
 const ManagerDashboard = () => {
@@ -179,7 +179,7 @@ const ManagerDashboard = () => {
                   <h2 className="font-normal text-center">
                     Upcoming bookings for: <strong>{venue.name}</strong>
                   </h2>
-                  <VenueBookingsTable bookings={venue.bookings} />
+                  <ManagerBookingsTable bookings={venue.bookings} />
                 </div>
               </div>
             </div>

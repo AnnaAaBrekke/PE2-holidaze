@@ -1,5 +1,5 @@
 /**
- * VenueBookingsTable - Displays a table of bookings for a specific venue.
+ * ManagerBookingsTable - Displays a table of bookings for a specific venue.
  *
  * @component
  * @param {Object} props
@@ -12,7 +12,7 @@
  * - Renders fallback text if there are no bookings
  */
 
-const VenueBookingsTable = ({ bookings = [] }) => {
+const ManagerBookingsTable = ({ bookings = [] }) => {
   if (!bookings || bookings.length === 0) {
     return <p className="text-gray-500 mt-2">No bookings on this venue yet.</p>;
   }
@@ -58,4 +58,4 @@ const VenueBookingsTable = ({ bookings = [] }) => {
   );
 };
 
-export default VenueBookingsTable;
+export default ManagerBookingsTable;
