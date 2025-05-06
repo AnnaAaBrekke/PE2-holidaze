@@ -7,15 +7,15 @@ const Hero = ({ setSearchNameDesc, searchNameDesc }) => {
       <div className="absolute inset-0 z-0">
         <img
           src="./hero-bg.png"
-          alt="Beach aerial with palm trees"
-          className="w-full h-full object-cover "
+          alt="Sea view with a villa with palm trees on right"
+          className="w-full h-full object-cover"
         />
-        {/* Overlay Image */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
       </div>
 
       {/* Content */}
-      <div className="absolute left-0 z-10 text-center px-4 max-w-2xl w-full">
+      <div className="absolute left-0 md:left-40 z-10 text-center px-4 max-w-2xl w-full">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight drop-shadow-xl">
           Welcome to <span className="text-color-accent">Holidaze</span>
         </h1>
