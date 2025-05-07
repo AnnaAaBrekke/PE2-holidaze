@@ -4,20 +4,26 @@
 
 @layer components {
   .react-calendar {
-    @apply w-full rounded-lg border border-color-secondary p-4 bg-[#F4F4E8];
+    @apply w-full rounded-lg border border-color-secondary p-4 bg-[#F4F4E8] font-podkova !important;
   }
 
   .react-calendar__tile {
-    @apply rounded-full hover:bg-color-accent transition-colors;
+    @apply rounded-full transition-colors hover:bg-color-accent !important;
   }
 
-  .react-calendar__tile--active {
-    @apply bg-color-accent text-color-text-primary;
-  }
-
+  .react-calendar__tile--active,
   .react-calendar__tile--rangeStart,
   .react-calendar__tile--rangeEnd,
   .react-calendar__tile--range {
-    @apply bg-color-accent text-color-text-primary;
+    @apply bg-color-accent text-color-text-primary !important;
+  }
+
+  /* FIX: Ensure abbr text inside active/hovered tiles is readable */
+  .react-calendar__tile:hover abbr,
+  .react-calendar__tile--active abbr,
+  .react-calendar__tile--rangeStart abbr,
+  .react-calendar__tile--rangeEnd abbr,
+  .react-calendar__tile--range abbr {
+    @apply text-[#101010] font-semibold;
   }
 }

@@ -35,7 +35,6 @@ import {
   showBookingConfirmation,
 } from "../../utils/notifications";
 
-
 const BookingForm = ({
   venueId,
   bookings = [],
@@ -116,7 +115,7 @@ const BookingForm = ({
 
   return (
     <div className="container p-3 mt-4 border rounded">
-      <h4>Book This Venue</h4>
+      <h3 className="h3">Book This Venue</h3>
 
       {!user ? (
         <div className="text-center">
