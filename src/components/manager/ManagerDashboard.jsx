@@ -1,29 +1,33 @@
 /**
- * ManagerDashboard - The main dashboard for venue managers to manage their listings and view bookings.
+ * ManagerDashboard - Dashboard interface for venue managers to manage their venues and view bookings.
  *
  * @component
- * @returns {JSX.Element} A dashboard interface for venue managers with venue management and booking overview.
+ * @returns {JSX.Element} The rendered dashboard page for venue managers.
  *
  * Features:
- * - Checks if the logged-in user is a venue manager; restricts access otherwise
- * - Fetches and displays the manager's venues and their bookings
- * - Displays venue stats via `ManagerStats`
- * - Allows creation, editing, and deletion of venues using `VenueForm` and `VenueCard`
- * - Displays a table of upcoming bookings per venue using `VenueBookingsTable`
- * - Handles loading and error states with `SkeletonLoader` and messages
- * - Scrolls to the form on edit for better UX
+ * - Only accessible to users with `venueManager` role
+ * - Fetches and displays all venues managed by the current user
+ * - Displays booking statistics using `ManagerStats`
+ * - Allows creating and editing venues via `VenueForm`
+ * - Allows deleting venues with confirmation and error handling
+ * - Displays individual venue cards using `VenueCard`
+ * - Shows upcoming bookings per venue using `VenueBookingsTable`
+ * - Includes loading and empty states with `SkeletonLoader`
  */
 
 import { useEffect, useRef, useState } from "react";
-import { getManagerVenues, deleteVenue } from "../services/VenueService";
-import { useAuth } from "../context/AuthContext";
-import VenueForm from "../components/forms/Venue";
-import VenueCard from "../components/venue/VenueCard";
-import VenueBookingsTable from "../components/Table";
-import { confirmAction, showAlert, showSuccess } from "../utils/notifications";
-import SkeletonLoader from "../components/SkeletonLoader";
-import ManagerStats from "../components/ManagerStats";
-import "../styles/button.css";
+import { deleteVenue, getManagerVenues } from "../../services/VenueService";
+import { useAuth } from "../../context/AuthContext";
+import VenueForm from "../forms/Venue";
+import VenueCard from "../venue/VenueCard";
+import {
+  confirmAction,
+  showAlert,
+  showSuccess,
+} from "../../utils/notifications";
+import SkeletonLoader from "../common/SkeletonLoader";
+import ManagerStats from "./ManagerStats";
+import ManagerBookingsTable from "./ManagerBookingsTable";
 
 const ManagerDashboard = () => {
   const { user, token } = useAuth();
@@ -174,7 +178,7 @@ const ManagerDashboard = () => {
                   <h2 className="font-normal text-center">
                     Upcoming bookings for: <strong>{venue.name}</strong>
                   </h2>
-                  <VenueBookingsTable bookings={venue.bookings} />
+                  <ManagerBookingsTable bookings={venue.bookings} />
                 </div>
               </div>
             </div>

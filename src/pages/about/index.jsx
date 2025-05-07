@@ -4,7 +4,6 @@ const AboutPage = () => {
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">
       <div className="grid md:grid-cols-2 gap-12 items-center">
-        {/* Text Content */}
         <div className="text-center md:text-left">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">About Us</h1>
           <h2 className="text-xl text-gray-600 font-medium mb-6 ">
@@ -24,7 +23,6 @@ const AboutPage = () => {
           </p>
         </div>
 
-        {/* Image */}
         <div className="w-full h-[300px] md:h-[400px]">
           <img
             src="./hero-bg.png"

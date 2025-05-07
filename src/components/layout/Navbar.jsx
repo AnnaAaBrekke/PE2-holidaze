@@ -26,7 +26,6 @@ import {
 } from "react-icons/fa";
 import { GoSidebarCollapse } from "react-icons/go";
 import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
-import "../../styles/button.css";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -197,7 +196,6 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Footer: Logout or Create Account */}
         <div className="mt-auto pt-6 border-t mb-2">
           {!isAuthenticated ? (
             <Link

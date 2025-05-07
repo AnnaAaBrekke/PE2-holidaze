@@ -1,7 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.meta-tag {
-  @apply flex items-center gap-2 bg-color-tag px-3 py-2 rounded-md text-sm;
-}

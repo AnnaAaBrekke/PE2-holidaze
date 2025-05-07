@@ -15,22 +15,19 @@
 
 import { useParams } from "react-router-dom";
 import useVenue from "../../hooks/useVenue";
-import { FaParking, FaPaw, FaStar } from "react-icons/fa";
+import { FaParking, FaPaw } from "react-icons/fa";
 import { MdFreeBreakfast, MdLocationPin, MdWifi } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import BookingForm from "../forms/Booking";
+import StarRating from "../common/StarRating";
 import VenueCalendar from "./VenueCalendar";
-import SkeletonLoader from "../SkeletonLoader";
+import SkeletonLoader from "../common/SkeletonLoader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { RiCoinsFill } from "react-icons/ri";
-import "../../styles/button.css";
-import "../../styles/layout.css";
-import "../../styles/typography.css";
-import "../../styles/carousel.css";
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -59,14 +56,14 @@ const SingleVenue = () => {
             navigation
             pagination={{ clickable: true }}
             loop
-            className="h-full rounded-t-lg swiper-top-pagination"
+            className="swiper-carousel"
           >
             {venue.media.map((item, idx) => (
               <SwiperSlide key={`${item.url}-${idx}`}>
                 <img
                   src={item.url}
                   alt={item.alt || venue.name}
-                  className="w-full h-full object-cover rounded-t-lg"
+                  className="media-cover"
                 />
               </SwiperSlide>
             ))}
@@ -83,17 +80,8 @@ const SingleVenue = () => {
       {/* Name + Price + Rating */}
       <div className="flex justify-between items-start mb-2">
         <h1 className="heading-small truncate">{venue.name}</h1>
-        <div className="flex mt-4">
-          {[...Array(5)].map((_, i) => (
-            <FaStar
-              key={i}
-              className={`h-4 w-4 ${
-                i < Math.round(venue.rating)
-                  ? "text-yellow-400"
-                  : "text-gray-300"
-              }`}
-            />
-          ))}
+        <div className="mt-4">
+          <StarRating rating={venue.rating} />
         </div>
       </div>
 
@@ -150,7 +138,7 @@ const SingleVenue = () => {
       {/* Price */}
       <div className="flex items-center gap-2  bg-color-background px-4 py-2 rounded-md w-fit mb-6">
         <RiCoinsFill />
-        <span className="body-3 font-podkova text-[#101010]">
+        <span className="body-3 text-black]">
           Price p/night: ${venue.price}
         </span>
       </div>

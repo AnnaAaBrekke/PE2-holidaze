@@ -2,30 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-.heading-big {
-  @apply text-[40px] font-bold font-podkova leading-tight;
-}
+@layer components {
+  .heading-big {
+    @apply text-[40px] font-bold leading-tight;
+  }
 
-.heading-small {
-  @apply text-[32px] font-bold font-podkova leading-snug;
-}
+  .heading-small {
+    @apply text-[32px] font-bold  leading-snug;
+  }
 
-.h3 {
-  @apply text-[25px] font-semibold font-podkova leading-snug;
-}
+  .h3 {
+    @apply text-[25px] font-semibold leading-snug;
+  }
 
-.title {
-  @apply text-[23px] font-bold font-podkova underline;
-}
+  .title {
+    @apply text-[23px] font-bold  underline;
+  }
 
-.body {
-  @apply text-[20px] font-medium font-podkova;
-}
+  .body {
+    @apply text-[20px] font-medium;
+  }
 
-.body-2 {
-  @apply text-[18px] font-normal font-podkova;
-}
+  .body-2 {
+    @apply text-[18px] font-normal;
+  }
 
-.body-3 {
-  @apply text-[14px] font-normal font-podkova;
+  .body-3 {
+    @apply text-[14px] font-normal;
+  }
 }

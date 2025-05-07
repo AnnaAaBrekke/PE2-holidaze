@@ -1,17 +1,16 @@
 /**
- * ManagerStats - Displays total venue count, bookings, and estimated earnings
- * for a venue manager based on provided venue data.
+ * ManagerStats - Displays total statistics for a venue manager.
  *
  * @component
  * @param {Object} props
- * @param {Array<Object>} props.venues - List of venue objects managed by the user.
- * @param {number} props.venues[].price - Price per night for the venue.
- * @param {Array<Object>} [props.venues[].bookings] - List of bookings for the venue.
- * @param {string} props.venues[].bookings[].dateFrom - Booking start date.
- * @param {string} props.venues[].bookings[].dateTo - Booking end date.
- * @returns {JSX.Element} A display of total venues, bookings, and earnings.
+ * @param {Array<Object>} props.venues - Array of venues managed by the user, each with optional `bookings` and `price`.
+ * @returns {JSX.Element} A UI block showing total venues, bookings, and estimated earnings.
+ *
+ * Features:
+ * - Calculates total number of venues
+ * - Aggregates total bookings across all venues
+ * - Estimates earnings based on booking durations and venue price
  */
-
 const ManagerStats = ({ venues }) => {
   const totalVenues = venues.length;
 

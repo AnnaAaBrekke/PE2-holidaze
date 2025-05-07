@@ -16,13 +16,12 @@ const SwalWithReact = withReactContent(Swal);
 
 const baseSwal = SwalWithReact.mixin({
   customClass: {
-    confirmButton:
-      "bg-color-primary text-color-background font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none m-0.5",
+    confirmButton: "button-primary-style",
     cancelButton:
       "bg-[#A3CED6] text-color-primary font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#8FBAC2] focus:outline-none m-0.5",
     popup: "rounded-2xl p-6",
-    title: "text-xl font-bold",
-    htmlContainer: "text-base",
+    title: "heading-small text-color-text-primary",
+    htmlContainer: "body-2 text-color-text-body",
   },
   buttonsStyling: false,
 });
@@ -48,7 +47,7 @@ export async function showAlert(
     icon: "error",
     title: <strong>Something went wrong!</strong>,
     html: (
-      <div className="text-center font-podkova text-[#101010]">
+      <div className="text-center text-black">
         <p className="text-lg">{message}</p>
       </div>
     ),
@@ -62,7 +61,7 @@ export async function showSuccess(message = "Action completed successfully!") {
     icon: "success",
     title: "",
     html: (
-      <div className="text-center font-semibold font-podkova text-color-text-primary text-lg">
+      <div className="text-center font-semibold text-color-text-primary text-lg">
         {message}
       </div>
     ),
@@ -74,7 +73,7 @@ export async function showBookingConfirmation({ from, to }) {
   await baseSwal.fire({
     icon: "success",
     html: (
-      <div className="text-center font-podkova text-color-text-primary">
+      <div className="text-center text-color-text-primary">
         <h2 className="font-bold text-2xl text-color-text-primary text-center mb-2">
           Booking Confirmed!
         </h2>

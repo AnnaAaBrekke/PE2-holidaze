@@ -27,17 +27,14 @@ import {
   MdLocationPin,
   MdWifi,
 } from "react-icons/md";
-import { FaParking, FaPaw, FaStar } from "react-icons/fa";
-
+import { FaParking, FaPaw } from "react-icons/fa";
+import StarRating from "../common/StarRating";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { RiCoinsFill } from "react-icons/ri";
-import "../../styles/layout.css";
-import "../../styles/typography.css";
-import "../../styles/carousel.css";
 
 const VenueCard = ({
   venue,
@@ -58,14 +55,14 @@ const VenueCard = ({
               navigation
               pagination={{ clickable: true }}
               loop={true}
-              className="h-full rounded-t-lg swiper-top-pagination"
+              className="swiper-carousel"
             >
               {venue.media.map((item, idx) => (
                 <SwiperSlide key={`${item.url}-${idx}`}>
                   <img
                     src={item.url}
                     alt={item.alt || venue.name}
-                    className="w-full h-full object-cover rounded-t-lg"
+                    className="media-cover"
                   />
                   {/* Location Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 to-transparent px-3 py-2 text-white z-index">
@@ -84,7 +81,7 @@ const VenueCard = ({
             <img
               src={venue.media[0]?.url || "https://placehold.co/600x400"}
               alt={venue.media[0]?.alt || venue.name}
-              className="w-full h-full object-cover rounded-t-lg"
+              className="media-cover"
             />
           )}
           {/* Location Overlay */}
@@ -103,18 +100,7 @@ const VenueCard = ({
             <h1 className="title line-clamp-1">
               {venue?.name || "Venue Title"}
             </h1>
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <FaStar
-                  key={i}
-                  className={`h-4 w-4 ${
-                    i < Math.round(venue.rating)
-                      ? "text-yellow-400"
-                      : "text-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
+            <StarRating rating={venue.rating} />
           </div>
 
           <p className="text-xs mb-3">

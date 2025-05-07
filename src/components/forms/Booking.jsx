@@ -34,8 +34,6 @@ import {
   showAlert,
   showBookingConfirmation,
 } from "../../utils/notifications";
-import "../../styles/form.css";
-import "../../styles/button.css";
 
 const BookingForm = ({
   venueId,
@@ -117,7 +115,7 @@ const BookingForm = ({
 
   return (
     <div className="container p-3 mt-4 border rounded">
-      <h4>Book This Venue</h4>
+      <h3 className="h3">Book This Venue</h3>
 
       {!user ? (
         <div className="text-center">

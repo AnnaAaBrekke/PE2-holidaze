@@ -23,8 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import SubmitFormButton from "../buttons/SubmitFormButton";
 import { showSuccess } from "../../utils/notifications";
-import SkeletonLoader from "../SkeletonLoader";
-import "../../styles/form.css";
+import SkeletonLoader from "../common/SkeletonLoader";
 
 const LoginForm = () => {
   const { login, loading, error } = useAuth();

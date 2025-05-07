@@ -15,9 +15,8 @@
 
 import { useState } from "react";
 import useVenues from "../../hooks/useVenues";
-import SkeletonLoader from "../SkeletonLoader";
+import SkeletonLoader from "../common/SkeletonLoader";
 import VenueCard from "./VenueCard";
-import "../../styles/button.css";
 
 const VenueList = ({ searchNameDesc }) => {
   const [page, setPage] = useState(1);
