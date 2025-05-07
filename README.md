@@ -63,7 +63,7 @@ The application features two main user experiences:
 
 Ensure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (v18+)
+- [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/)
 
 ### Installation
