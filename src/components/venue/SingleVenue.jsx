@@ -60,7 +60,7 @@ const SingleVenue = () => {
             navigation
             pagination={{ clickable: true }}
             loop
-            className="h-full rounded-t-lg swiper-top-pagination"
+            className="swiper-carousel"
           >
             {venue.media.map((item, idx) => (
               <SwiperSlide key={`${item.url}-${idx}`}>

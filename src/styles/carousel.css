@@ -1,4 +1,6 @@
-/* Swiper Navigation */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .swiper-button-next,
 .swiper-button-prev {
@@ -32,4 +34,10 @@
 .swiper-pagination-bullet-active {
   background: white !important;
   opacity: 1;
+}
+
+@layer components {
+  .swiper-carousel {
+    @apply h-full rounded-t-lg swiper-top-pagination;
+  }
 }
