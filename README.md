@@ -1,6 +1,6 @@
 # Holidaze – Booking Venue Application
 
-<img width="1415" alt="Home-Holidaze" src="https://github.com/user-attachments/assets/584c72dd-d867-48dc-b7c7-98554e0a1f7a" />
+<img width="1428" alt="Home Page Holidaze" src="https://github.com/user-attachments/assets/fcc6de1b-b1b4-4e10-a172-58757be59314" />
 
 ## Overview
 
