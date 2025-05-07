@@ -16,13 +16,12 @@ const SwalWithReact = withReactContent(Swal);
 
 const baseSwal = SwalWithReact.mixin({
   customClass: {
-    confirmButton:
-      "bg-color-primary text-color-background font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#0d5665] focus:outline-none m-0.5",
+    confirmButton: "button-primary-style",
     cancelButton:
       "bg-[#A3CED6] text-color-primary font-medium text-lg px-6 py-2 rounded shadow-md hover:bg-[#8FBAC2] focus:outline-none m-0.5",
     popup: "rounded-2xl p-6",
-    title: "text-xl font-bold",
-    htmlContainer: "text-base",
+    title: "heading-small text-color-text-primary",
+    htmlContainer: "body-2 text-color-text-body",
   },
   buttonsStyling: false,
 });
