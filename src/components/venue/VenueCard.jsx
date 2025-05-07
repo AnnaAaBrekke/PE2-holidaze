@@ -97,7 +97,7 @@ const VenueCard = ({
         {/* Content */}
         <div className="p-4 flex flex-col justify-between">
           <div className="flex justify-between items-center mb-2">
-            <h1 className="title line-clamp-1">
+            <h1 className="title line-clamp-2">
               {venue?.name || "Venue Title"}
             </h1>
             <StarRating rating={venue.rating} />

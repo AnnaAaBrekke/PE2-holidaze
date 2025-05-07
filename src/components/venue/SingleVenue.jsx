@@ -79,7 +79,7 @@ const SingleVenue = () => {
 
       {/* Name + Price + Rating */}
       <div className="flex justify-between items-start mb-2">
-        <h1 className="heading-small truncate">{venue.name}</h1>
+        <h1 className="heading-small line-clamp-4">{venue.name}</h1>
         <div className="mt-4">
           <StarRating rating={venue.rating} />
         </div>
@@ -97,17 +97,10 @@ const SingleVenue = () => {
       {/* Description */}
       <div className="mb-6">
         <h2 className="body text-color-text-secondary mb-2">Description</h2>
-        <div className="relative group cursor-pointer w-full">
-          <p
-            className="line-clamp-3  text-color-text-body body-2"
-            title={venue.description}
-          >
+        <div className="relative w-full">
+          <p className="text-color-text-body body-2" title={venue.description}>
             {venue.description}
           </p>
-
-          <div className="absolute z-10 hidden group-hover:block body-3 text-color-text-body p-2 rounded shadow-lg w-72 top-full mt-1">
-            {venue.description}
-          </div>
         </div>
       </div>
 

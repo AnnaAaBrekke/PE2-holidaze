@@ -8,7 +8,7 @@
   }
 
   .heading-small {
-    @apply text-[32px] font-bold  leading-snug;
+    @apply text-[28px] font-bold leading-snug break-words;
   }
 
   .h3 {
@@ -16,7 +16,7 @@
   }
 
   .title {
-    @apply text-[23px] font-bold  underline;
+    @apply text-[22px] font-bold underline;
   }
 
   .body {
@@ -24,7 +24,7 @@
   }
 
   .body-2 {
-    @apply text-[18px] font-normal;
+    @apply text-[18px] font-normal leading-loose;
   }
 
   .body-3 {
