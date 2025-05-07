@@ -39,7 +39,7 @@ const ManagerBookingsTable = ({ bookings = [] }) => {
                   alt={booking.customer.avatar?.alt || "Customer Avatar"}
                   className="w-6 h-6 rounded-full object-cover border"
                 />
-                <span className="text-[11px] break-words max-w-[60px]">
+                <span className="text-[12px] break-words max-w-[60px] pr-2.5">
                   {booking.customer.name}
                 </span>
               </td>
