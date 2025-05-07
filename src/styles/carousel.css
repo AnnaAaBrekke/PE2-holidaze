@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Swiper core overrides — don't wrap in @layer */
 .swiper-button-next,
 .swiper-button-prev {
   color: white !important;
@@ -36,6 +37,7 @@
   opacity: 1;
 }
 
+/* Reusable class for Swiper instance styling */
 @layer components {
   .swiper-carousel {
     @apply h-full rounded-t-lg swiper-top-pagination;

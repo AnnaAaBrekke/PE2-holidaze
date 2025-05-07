@@ -28,10 +28,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { RiCoinsFill } from "react-icons/ri";
-import "../../styles/button.css";
-import "../../styles/layout.css";
-import "../../styles/typography.css";
-import "../../styles/carousel.css";
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -67,7 +63,7 @@ const SingleVenue = () => {
                 <img
                   src={item.url}
                   alt={item.alt || venue.name}
-                  className="w-full h-full object-cover rounded-t-lg"
+                  className="media-cover"
                 />
               </SwiperSlide>
             ))}
@@ -142,7 +138,7 @@ const SingleVenue = () => {
       {/* Price */}
       <div className="flex items-center gap-2  bg-color-background px-4 py-2 rounded-md w-fit mb-6">
         <RiCoinsFill />
-        <span className="body-3 font-podkova text-[#101010]">
+        <span className="body-3 text-black]">
           Price p/night: ${venue.price}
         </span>
       </div>

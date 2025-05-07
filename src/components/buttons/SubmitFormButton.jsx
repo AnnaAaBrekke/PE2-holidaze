@@ -11,7 +11,6 @@
  */
 
 import { ClipLoader } from "react-spinners";
-import "../../styles/button.css";
 
 const SubmitFormButton = ({
   loading,

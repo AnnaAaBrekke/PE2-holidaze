@@ -48,7 +48,7 @@ export async function showAlert(
     icon: "error",
     title: <strong>Something went wrong!</strong>,
     html: (
-      <div className="text-center font-podkova text-[#101010]">
+      <div className="text-center text-black">
         <p className="text-lg">{message}</p>
       </div>
     ),
@@ -62,7 +62,7 @@ export async function showSuccess(message = "Action completed successfully!") {
     icon: "success",
     title: "",
     html: (
-      <div className="text-center font-semibold font-podkova text-color-text-primary text-lg">
+      <div className="text-center font-semibold text-color-text-primary text-lg">
         {message}
       </div>
     ),
@@ -74,7 +74,7 @@ export async function showBookingConfirmation({ from, to }) {
   await baseSwal.fire({
     icon: "success",
     html: (
-      <div className="text-center font-podkova text-color-text-primary">
+      <div className="text-center text-color-text-primary">
         <h2 className="font-bold text-2xl text-color-text-primary text-center mb-2">
           Booking Confirmed!
         </h2>

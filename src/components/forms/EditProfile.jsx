@@ -21,8 +21,6 @@ import updateProfile from "../../services/ProfileService";
 import { useState } from "react";
 import SubmitFormButton from "../buttons/SubmitFormButton";
 import { showAlert, showSuccess } from "../../utils/notifications";
-import "../../styles/form.css";
-import "../../styles/button.css";
 
 const EditProfileForm = ({ onClose }) => {
   const [loading, setLoading] = useState(false);

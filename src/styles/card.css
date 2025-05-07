@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .meta-tag {
+    @apply flex items-center gap-2 bg-color-tag px-3 py-2 rounded-md text-sm;
+  }
+
+  .media-cover {
+    @apply w-full h-full object-cover rounded-t-lg;
+  }
+}

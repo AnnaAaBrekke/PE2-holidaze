@@ -2,20 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-.react-calendar {
-  @apply w-full rounded-lg border border-color-secondary p-4  bg-[#F4F4E8] font-podkova;
-}
+@layer components {
+  .react-calendar {
+    @apply w-full rounded-lg border border-color-secondary p-4 bg-[#F4F4E8];
+  }
 
-.react-calendar__tile {
-  @apply rounded-full hover:bg-color-accent transition-colors;
-}
+  .react-calendar__tile {
+    @apply rounded-full hover:bg-color-accent transition-colors;
+  }
 
-.react-calendar__tile--active {
-  @apply bg-color-accent text-color-text-primary !important;
-}
+  .react-calendar__tile--active {
+    @apply bg-color-accent text-color-text-primary;
+  }
 
-.react-calendar__tile--rangeStart,
-.react-calendar__tile--rangeEnd,
-.react-calendar__tile--range {
-  @apply bg-color-accent text-color-text-primary;
+  .react-calendar__tile--rangeStart,
+  .react-calendar__tile--rangeEnd,
+  .react-calendar__tile--range {
+    @apply bg-color-accent text-color-text-primary;
+  }
 }

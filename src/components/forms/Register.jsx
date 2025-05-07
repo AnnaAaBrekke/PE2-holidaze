@@ -22,8 +22,6 @@ import { useAuth } from "../../context/AuthContext";
 import SubmitFormButton from "../buttons/SubmitFormButton";
 import { showSuccess } from "../../utils/notifications";
 import SkeletonLoader from "../common/SkeletonLoader";
-import "../../styles/form.css";
-import "../../styles/button.css";
 
 const RegisterForm = () => {
   const { register: registerUser, loading, error } = useAuth();

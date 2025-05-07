@@ -26,7 +26,6 @@ import {
 } from "react-icons/fa";
 import { GoSidebarCollapse } from "react-icons/go";
 import { RiHomeGearLine, RiHomeHeartLine } from "react-icons/ri";
-import "../../styles/button.css";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

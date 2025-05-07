@@ -28,7 +28,6 @@ import {
 import SkeletonLoader from "../common/SkeletonLoader";
 import ManagerStats from "./ManagerStats";
 import ManagerBookingsTable from "./ManagerBookingsTable";
-import "../../styles/button.css";
 
 const ManagerDashboard = () => {
   const { user, token } = useAuth();
