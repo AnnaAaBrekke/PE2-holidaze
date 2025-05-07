@@ -18,7 +18,6 @@
     @apply bg-color-accent text-color-text-primary !important;
   }
 
-  /* FIX: Ensure abbr text inside active/hovered tiles is readable */
   .react-calendar__tile:hover abbr,
   .react-calendar__tile--active abbr,
   .react-calendar__tile--rangeStart abbr,

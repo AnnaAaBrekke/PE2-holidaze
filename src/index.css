@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Podkova:wght@400;500;700&display=swap");
 
-/* Import all custom component files FIRST */
 @import "./styles/typography.css";
 @import "./styles/card.css";
 @import "./styles/button.css";
@@ -8,7 +7,6 @@
 @import "./styles/carousel.css";
 @import "./styles/calendar.css";
 
-/* Then global styles */
 body {
   @apply font-podkova bg-color-background;
 }

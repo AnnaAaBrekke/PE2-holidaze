@@ -196,7 +196,6 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Footer: Logout or Create Account */}
         <div className="mt-auto pt-6 border-t mb-2">
           {!isAuthenticated ? (
             <Link
