@@ -9,8 +9,8 @@ const SkeletonLoader = ({ count = 6, layout = "grid", type = "card" }) => {
       case "card":
         return (
           <div className="w-72 bg-gray-200 animate-pulse rounded-lg flex flex-col gap-4 p-4">
-            <div className="h-60 bg-gray-300 rounded-md"></div> 
-            <div className="h-5 bg-gray-300 rounded"></div> 
+            <div className="h-60 bg-gray-300 rounded-md"></div>
+            <div className="h-5 bg-gray-300 rounded"></div>
             <div className="h-2.5 bg-gray-300 rounded w-1/3"></div>
             <div className="flex items-center gap-2">
               <div className="h-4 bg-gray-300 rounded-full w-1/3"></div>

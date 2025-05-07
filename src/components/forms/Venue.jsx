@@ -24,7 +24,6 @@ import { confirmAction, showSuccess } from "../../utils/notifications";
 import { useEffect, useState } from "react";
 import SubmitFormButton from "../buttons/SubmitFormButton";
 
-
 const VenueForm = ({ mode = "create", venue = {}, venueId, onVenueSaved }) => {
   const { token } = useAuth();
   const [loading, setLoading] = useState(false);
