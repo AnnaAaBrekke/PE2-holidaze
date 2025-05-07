@@ -20,7 +20,7 @@ import { MdFreeBreakfast, MdLocationPin, MdWifi } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import BookingForm from "../forms/Booking";
 import VenueCalendar from "./VenueCalendar";
-import SkeletonLoader from "../SkeletonLoader";
+import SkeletonLoader from "../common/SkeletonLoader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";

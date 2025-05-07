@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { getUserBookings } from "../../services/BookingService";
 import BookingCard from "./BookingCard";
-import SkeletonLoader from "../SkeletonLoader";
+import SkeletonLoader from "../common/SkeletonLoader";
 
 const UserBookings = () => {
   const { user, token } = useAuth();

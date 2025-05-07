@@ -25,7 +25,7 @@ import {
   showAlert,
   showSuccess,
 } from "../../utils/notifications";
-import SkeletonLoader from "../SkeletonLoader";
+import SkeletonLoader from "../common/SkeletonLoader";
 import ManagerStats from "./ManagerStats";
 import ManagerBookingsTable from "./ManagerBookingsTable";
 import "../../styles/button.css";
