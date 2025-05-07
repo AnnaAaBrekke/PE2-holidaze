@@ -20,8 +20,9 @@
 
 import { Link } from "react-router-dom";
 import { MdDateRange, MdLocationPin } from "react-icons/md";
-import { FaStar, FaUsers } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 import { BsCheckCircleFill } from "react-icons/bs";
+import StarRating from "../common/StarRating";
 
 const BookingCard = ({ booking, isPast = false }) => {
   const { venue } = booking;
@@ -44,18 +45,7 @@ const BookingCard = ({ booking, isPast = false }) => {
         <div className="p-4 flex flex-col gap-2">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-semibold line-clamp-1">{venue.name}</h3>
-            <div className="flex" title={`Rating: ${venue.rating}`}>
-              {[...Array(5)].map((_, i) => (
-                <FaStar
-                  key={i}
-                  className={`h-4 w-4 ${
-                    i < Math.round(venue.rating)
-                      ? "text-yellow-400"
-                      : "text-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
+            <StarRating rating={venue.rating} />
           </div>
 
           <div className="flex items-center text-gray-600">

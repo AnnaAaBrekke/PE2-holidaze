@@ -15,10 +15,11 @@
 
 import { useParams } from "react-router-dom";
 import useVenue from "../../hooks/useVenue";
-import { FaParking, FaPaw, FaStar } from "react-icons/fa";
+import { FaParking, FaPaw } from "react-icons/fa";
 import { MdFreeBreakfast, MdLocationPin, MdWifi } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import BookingForm from "../forms/Booking";
+import StarRating from "../common/StarRating";
 import VenueCalendar from "./VenueCalendar";
 import SkeletonLoader from "../common/SkeletonLoader";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -83,17 +84,8 @@ const SingleVenue = () => {
       {/* Name + Price + Rating */}
       <div className="flex justify-between items-start mb-2">
         <h1 className="heading-small truncate">{venue.name}</h1>
-        <div className="flex mt-4">
-          {[...Array(5)].map((_, i) => (
-            <FaStar
-              key={i}
-              className={`h-4 w-4 ${
-                i < Math.round(venue.rating)
-                  ? "text-yellow-400"
-                  : "text-gray-300"
-              }`}
-            />
-          ))}
+        <div className="mt-4">
+          <StarRating rating={venue.rating} />
         </div>
       </div>
 
